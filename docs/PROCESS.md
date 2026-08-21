@@ -150,7 +150,7 @@ Phase 0.1에서 **가장 먼저 요청 유형을 판별**하고, 아래 표에 �
 
 ## 현재 위치
 
-> **Phase 2 게이트 통과(2026-08-21 사용자 승인) → 슬라이스 0.5(스파이크 준비) 진행 중**
-> 게이트 확정: 스크립트 개정·스키마 권고 2줄·브랜치 운용(스파이크 통과 후 main 병합) + Karpathy 코딩 가이드라인 채택(GraphRAG_1st/CLAUDE.md·AGENTS.md) — DECISIONS.md 기록
-> 슬라이스 0.5 순서: **사용자 액션 ① AuraDB 무료 인스턴스 생성 → .env 입력** → inject-example.js + cjk 실측 → 도구 4종(kg_search·kg_cite·highlight_clear·kg_status) → MCP 등록(사용자 액션 ②③④) → 완료 조건: ROADMAP #0.5
+> **Phase 2 — 슬라이스 0.5 코드분 완료(2026-08-21), 사용자 액션 ②③④ 대기**
+> 완료: 착수 전 총감사(패널 8인 — 오너 결정 4건 반영, PRD v3.2·TECH-SPEC v2.2) → 사용자 액션 ①(AuraDB 인스턴스·접속·cjk 실측) → inject-example 실주입(29/55 멱등) → 도구 4종 구현·실호출 검증 → 평가 질문 세트 21문 — 검증 수치는 ROADMAP 완료 기록·DECISIONS 참조
+> 잔여: 사용자 액션 ② MCP 등록(Claude Code = GraphRAG_1st 루트 열기 / Codex = config.toml) ③ 구독 로그인 확인 ④ dev:all + 도구 "항상 허용" → **슬라이스 1(하이라이트 스파이크 — 제품 성립 판정)**
 > 사전 자료 검토 완료: req_node_relation.txt(KG 추출 프롬프트), KG_Demon Slayer_Draft_01.json(예시 그래프), 리디안_지식그래프/GraphRAG_1st(동작하는 3D 시각화 웹앱 — Vite+React+react-force-graph-3d, 테스트·린트·Vercel 배포 구성 보유)

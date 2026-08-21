@@ -34,3 +34,4 @@
 ## 완료 기록
 
 - 2026-08-21 — 슬라이스 0 스캐폴딩 완료 (브랜치 phase2-scaffolding, 검증 수치는 DECISIONS.md "스캐폴딩 전문가 패널 검수 반영 + 실행 검증 결과" 참조)
+- 2026-08-21 — 슬라이스 0.5 **코드분 완료**: inject-example 실주입(AuraDB에 29노드·55관계, 2회 연속 동일 = 멱등 판정 통과, 인덱스 2종 ONLINE) + 도구 4종 실호출 검증(tools/list 4종 노출, "탄지로" **T2 cjk 부분 일치 실증**·"귀살대" T1, kg_cite 교집합 검증 verified/none/partial 전 경로, keywords 누락 재호출 안내, 무-throw 푸시 delivered:false 정상) + 평가 질문 세트 21문 작성(spike-eval-questions.md) + 전 테스트 213케이스 통과. **잔여 = 사용자 액션 ②(MCP 등록) ③(구독 로그인 확인) ④(dev:all·항상 허용)**

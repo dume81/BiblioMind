@@ -23,7 +23,7 @@
   - 검증 수치: npm test 총 **203케이스**(기존 시각화 14파일·148케이스 무수정 포함), lint 통과, setup 2회 멱등, mcp:smoke에서 kg_status 응답, dev:all 8787·5173 HTTP 200.
   - 게이트 승인 대상 3건: §1.8 스크립트 개정(mcp:smoke·lint·-y) / instructions_ko 권고 2줄 / 브랜치 운용 — DECISIONS.md 말미 참조.
 - **2026-08-21 요구 변경 반영: Neo4j Desktop → AuraDB 클라우드** (PRD v3.1·TECH-SPEC v2.1·DECISIONS ADR). 핵심 리스크 = Free 3일 무쓰기 자동 일시정지·일시정지 30일 후 인스턴스 삭제 — 원본 진실이 로컬 Reviewed/라 재주입으로 완전 복구.
-- 슬라이스 0.5 진행 중 — **사용자 액션 ① 완료(2026-08-21)**: AuraDB Free 인스턴스 `bibliomind` 생성(사용자명·DB명 = 8자 ID 동일값, 신형 콘솔 방식), .env 접속 성공, **cjk 분석기 실측 확인(45종 중 존재 ✓)**. 남은 것: Claude가 inject-example + 도구 4종(kg_search·kg_cite·highlight_clear·kg_status) 구현 → 사용자 액션 ② MCP 등록+smoke ③ 구독 로그인 ④ dev:all → 슬라이스 1(하이라이트 스파이크)
+- **슬라이스 0.5 코드분 완료(2026-08-21)**: 사용자 액션 ①(AuraDB `bibliomind` 인스턴스·접속·cjk 실측 ✓) → inject-example 실주입(29노드/55관계, 2회 멱등 ✓, 인덱스 2종 ONLINE) → **도구 4종 구현·실호출 검증**("탄지로" T2 cjk 실증·"귀살대" T1·kg_cite verified/partial/none 전 경로·무-throw 푸시) → 평가 질문 세트 21문(docs/spike-eval-questions.md) → 테스트 213케이스. 잔여: **사용자 액션 ② MCP 등록(Claude Code = GraphRAG_1st 루트 열기 / Codex = config.toml + 재시작) ③ 구독 로그인 확인 ④ dev:all + 도구 "항상 허용"** → 슬라이스 1(하이라이트 스파이크 — 최소 허브 라우트·3상태 렌더도 이때 구현)
 - **미결(보류)**: GitHub 저장소명 변경 여부 / 부록 A 오너 확인 ①②③(PRD source_remove 문언 포함)
 
 ## 핵심 확정 사항 압축 (상세·근거는 DECISIONS.md)
