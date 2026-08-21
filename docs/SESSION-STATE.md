@@ -37,6 +37,15 @@
 7. 그래프 DB = **Neo4j AuraDB 클라우드** (2026-08-21 전환 — 코드는 URI 기반이라 로컬 병용 가능. **사용자명·DB명은 자격증명 .txt 값 그대로 — 신형 콘솔은 8자 생성 ID**. Free 한도 20만/40만 실측, 3일 무쓰기 일시정지·30일 삭제 정책 고지 의무)
 8. 총감사(2026-08-21, 패널 8인) 반영: 스파이크 Claude 표면 = **Claude Code(GraphRAG_1st 루트 열기)**, ChatGPT 데스크탑 미설치 — **Codex 표면으로 확정**, 부록 A 3건 전부 해소(승인은 source_remove만 매번 확인·나머지 항상 허용), kg_search 호출률·부정 대조 검증 신설(§1.14-6), bibliomind/ 로컬 git 관리 시작
 
+## 슬라이스 1 착수 브리핑 (압축 후 첫 작업 — 이사님 "착수해" 지시 후 시작)
+
+1. **구현 전 정독**: TECH-SPEC **§5 푸시 프로토콜(1173~1268행)** + **§7 시각화 확장(1485행~끝, §7.8 최소 수정 작업 목록이 파일별 지침)**. §5.2 메시지 4종 스키마·§5.1 보관/재생 규칙·§7.4 kgid 색인·§7.5 우선순위·§7.6 패널 문구(v2.2 정직화 반영)가 정본.
+2. **수정 대상(§7.8 — 이 목록 밖 수정 금지, 외과수술 원칙)**: `visualization-3d/server/localServer.js`(라우트 3종+SSE+보관·재생+본문 상한+127.0.0.1) / `server/core/mapper.js`(RKEntity 제외 1줄) / `src/hooks/useGraphLoader.js`(push 소스) / `src/App.jsx`(SSE 구독 훅) / 신규 3상태 오버라이드 모듈 / `src/components/HighlightPanel.jsx`(citation 문구·N/M·truncated) / 신규 단위 테스트(kgid 색인·3상태 우선순위·N/M).
+3. **완료 판정**: 기존 148케이스 무수정 통과 + 신규 테스트 + `dev:all` 켜고 kg_search 실호출 시 `delivered:true`·화면 하이라이트 실표시(mcp-server 쪽은 이미 완성 — 수신 측만 만들면 연결됨).
+4. **스파이크 판정 절차**: docs/spike-eval-questions.md 21문 × 클라이언트 2종. **순서: Codex 먼저 → Claude 쪽은 8/25(화) 한도 재설정 후**(2026-08-21 기준 Claude Max 76% 사용). 시작 전 `npm run setup`으로 Aura 상태 확인(8/24까지는 활성 보장 — inject 쓰기로 시계 리셋됨). 판정 표면: Claude Code(GraphRAG_1st 루트) + Codex 데스크탑.
+5. **git 상태**: GraphRAG_1st `phase2-scaffolding` 브랜치(커밋: 8b10e56 스캐폴딩 → 143e888 가이드라인 → 0c35f5a 정정 → 56fee39 슬라이스 0.5). bibliomind/ 로컬 git(ebfa10f → 8a9bc67 → 3effa1a). **main 병합·push는 스파이크 통과 후 이사님 승인**.
+6. **주의**: MCP 서버 코드를 고치면 챗 클라이언트가 다음 기동 시 자동 반영(stdio 스폰). Codex config.toml·Claude Code .mcp.json 등록은 이미 완료·검증됨 — 재등록 불요.
+
 ## 산출물·자산 링크
 
 - **도해 아티팩트** (유저 플로우·정보구조도·아키텍처, 검증 반영 v2): https://claude.ai/code/artifact/b02684d0-9743-4480-a8ce-cb3722145b3d
