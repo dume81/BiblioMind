@@ -150,7 +150,7 @@ Phase 0.1에서 **가장 먼저 요청 유형을 판별**하고, 아래 표에 �
 
 ## 현재 위치
 
-> **Phase 2 — 슬라이스 0.5 코드분 완료(2026-08-21), 사용자 액션 ②③④ 대기**
-> 완료: 착수 전 총감사(패널 8인 — 오너 결정 4건 반영, PRD v3.2·TECH-SPEC v2.2) → 사용자 액션 ①(AuraDB 인스턴스·접속·cjk 실측) → inject-example 실주입(29/55 멱등) → 도구 4종 구현·실호출 검증 → 평가 질문 세트 21문 — 검증 수치는 ROADMAP 완료 기록·DECISIONS 참조
-> 잔여: 사용자 액션 ② MCP 등록(Claude Code = GraphRAG_1st 루트 열기 / Codex = config.toml) ③ 구독 로그인 확인 ④ dev:all + 도구 "항상 허용" → **슬라이스 1(하이라이트 스파이크 — 제품 성립 판정)**
+> **Phase 2 — 슬라이스 0.5 완료(✅ 2026-08-21) → 슬라이스 1(하이라이트 스파이크) 착수**
+> 0.5 완료 증빙: AuraDB 주입 29/55 멱등 · 도구 4종 **Codex·Claude Code 양쪽 실호출 성공** · 평가 세트 21문 · 테스트 213케이스 (ROADMAP 완료 기록·DECISIONS 참조)
+> 슬라이스 1 순서: Claude 구현(허브 라우트 4종+SSE(§5) → 3D 3상태 렌더·N/M·HighlightPanel(§7) → 기존 테스트 무수정 유지) → 사용자 액션 ④(dev:all+크롬 5173+항상 허용) → **스파이크 판정**(평가 세트 21문 × 클라이언트 2종 — spike-eval-questions.md 집계표)
 > 사전 자료 검토 완료: req_node_relation.txt(KG 추출 프롬프트), KG_Demon Slayer_Draft_01.json(예시 그래프), 리디안_지식그래프/GraphRAG_1st(동작하는 3D 시각화 웹앱 — Vite+React+react-force-graph-3d, 테스트·린트·Vercel 배포 구성 보유)
