@@ -1,0 +1,431 @@
+<!doctype html>
+<html lang="ko">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>*,*::before,*::after{box-sizing:border-box}body{margin:0}</style>
+<title>비블리오마인드 도해</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<style>
+:root{
+  --paper:#fbfaf7; --panel:#ffffff; --ink:#1d2a44; --ink-soft:#4a5670; --line:#1d2a4426;
+  --chat:#6d4fe0; --chat-bg:#6d4fe014;
+  --screen:#0e8a8b; --screen-bg:#0e8a8b12;
+  --engine:#2e7d4f; --engine-bg:#2e7d4f12;
+  --store:#c07414; --store-bg:#c0741414;
+  --alert:#c2453a; --alert-bg:#c2453a12;
+  --mark:#ffdf7a55;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --paper:#10141d; --panel:#171d29; --ink:#e7eaf2; --ink-soft:#a8b1c5; --line:#e7eaf226;
+    --chat:#a390ff; --chat-bg:#a390ff1c;
+    --screen:#4fc6c7; --screen-bg:#4fc6c71a;
+    --engine:#6fbe8f; --engine-bg:#6fbe8f1a;
+    --store:#e8a14e; --store-bg:#e8a14e1c;
+    --alert:#ee7e74; --alert-bg:#ee7e741c;
+    --mark:#ffdf7a2e;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#10141d; --panel:#171d29; --ink:#e7eaf2; --ink-soft:#a8b1c5; --line:#e7eaf226;
+  --chat:#a390ff; --chat-bg:#a390ff1c;
+  --screen:#4fc6c7; --screen-bg:#4fc6c71a;
+  --engine:#6fbe8f; --engine-bg:#6fbe8f1a;
+  --store:#e8a14e; --store-bg:#e8a14e1c;
+  --alert:#ee7e74; --alert-bg:#ee7e741c;
+  --mark:#ffdf7a2e;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:"IBM Plex Sans KR",-apple-system,"Malgun Gothic",sans-serif;line-height:1.6;font-size:15px}
+.wrap{max-width:1060px;margin:0 auto;padding:40px 20px 80px}
+code,.mono{font-family:"IBM Plex Mono","Consolas",monospace;font-size:.86em}
+h1{font-size:clamp(28px,5vw,42px);font-weight:700;letter-spacing:-.02em;margin:0 0 6px;text-wrap:balance}
+.sub{color:var(--ink-soft);margin:0 0 8px;font-size:16px}
+.prov{font-size:12.5px;color:var(--ink-soft);border:1px dashed var(--line);border-radius:8px;padding:8px 12px;display:inline-block;margin-top:10px}
+.legend{display:flex;flex-wrap:wrap;gap:10px 22px;align-items:center;border:1.5px solid var(--line);border-radius:12px;background:var(--panel);padding:12px 18px;margin:26px 0 34px;font-size:13px}
+.legend .it{display:flex;align-items:center;gap:7px}
+.dot{width:13px;height:13px;border-radius:4px;flex:none}
+.legend svg{flex:none}
+section{border:1.5px solid var(--line);border-radius:16px;background:var(--panel);padding:24px 26px 28px;margin-bottom:34px}
+.sec-head{display:flex;align-items:center;gap:14px;margin-bottom:6px}
+.badge{width:38px;height:38px;border-radius:50%;background:var(--ink);color:var(--paper);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:19px;flex:none}
+.sec-head h2{margin:0;font-size:22px;font-weight:700;letter-spacing:-.01em}
+.sec-head .en{color:var(--ink-soft);font-size:12.5px;letter-spacing:.08em;text-transform:uppercase;font-weight:600}
+.sec-note{color:var(--ink-soft);font-size:13.5px;margin:0 0 18px;max-width:72ch}
+figure{margin:0}
+figcaption{font-size:12.5px;color:var(--ink-soft);margin-top:10px}
+.scrollbox{overflow-x:auto;padding-bottom:6px}
+.flow-svg{min-width:820px;width:100%;height:auto;display:block}
+.arch-svg{min-width:860px;width:100%;height:auto;display:block}
+/* SVG shared */
+svg text{font-family:"IBM Plex Sans KR",sans-serif;fill:var(--ink)}
+svg .mono-t{font-family:"IBM Plex Mono",monospace}
+svg .soft{fill:var(--ink-soft)}
+svg .lane-line{stroke:var(--line);stroke-dasharray:3 5;stroke-width:1.2}
+svg .box{fill:var(--panel);stroke-width:1.6;rx:10}
+svg .b-chat{stroke:var(--chat);fill:var(--chat-bg)}
+svg .b-screen{stroke:var(--screen);fill:var(--screen-bg)}
+svg .b-engine{stroke:var(--engine);fill:var(--engine-bg)}
+svg .b-store{stroke:var(--store);fill:var(--store-bg)}
+svg .b-alert{stroke:var(--alert);fill:var(--alert-bg)}
+svg .b-plain{stroke:var(--ink);fill:var(--panel)}
+svg .edge{stroke:var(--ink);stroke-width:1.6;fill:none}
+svg .edge-push{stroke:var(--screen);stroke-width:1.6;fill:none;stroke-dasharray:5 4}
+svg .edge-alert{stroke:var(--alert);stroke-width:1.6;fill:none}
+svg .edge-out{stroke:var(--ink-soft);stroke-width:1.4;fill:none;stroke-dasharray:2 4}
+svg .lbl{font-size:11.5px}
+svg .ttl{font-size:13px;font-weight:600}
+svg .tag{font-size:10.5px}
+svg .diamond{fill:var(--mark);stroke:var(--ink);stroke-width:1.5}
+/* IA tree */
+.ia-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:18px}
+.ia-col{border:1.5px solid var(--line);border-radius:12px;padding:16px 18px;background:var(--paper)}
+.ia-col h3{margin:0 0 4px;font-size:15.5px;display:flex;gap:8px;align-items:center}
+.ia-col .cnt{font-size:11.5px;color:var(--ink-soft);font-weight:500}
+.ia-col ul{list-style:none;margin:10px 0 0;padding:0;font-size:13.5px}
+.ia-col li{padding:3px 0 3px 14px;position:relative}
+.ia-col li::before{content:"";position:absolute;left:0;top:13px;width:7px;height:1.5px;background:var(--line)}
+.ia-col li.grp{font-weight:600;padding-left:0;margin-top:9px}
+.ia-col li.grp::before{display:none}
+.ia-col li .d{color:var(--ink-soft)}
+.pill{display:inline-block;font-size:10.5px;font-weight:600;border-radius:20px;padding:1px 8px;vertical-align:1px;margin-left:5px}
+.p-new{background:var(--screen-bg);color:var(--screen);border:1px solid var(--screen)}
+.p-old{background:var(--chat-bg);color:var(--chat);border:1px solid var(--chat)}
+.p-danger{background:var(--alert-bg);color:var(--alert);border:1px solid var(--alert)}
+.p-nogit{background:var(--store-bg);color:var(--store);border:1px solid var(--store)}
+.foot{color:var(--ink-soft);font-size:12.5px;border-top:1px solid var(--line);padding-top:16px;margin-top:8px}
+.marker{background:var(--mark);padding:0 3px;border-radius:3px}
+</style>
+
+<div class="wrap">
+  <h1>비블리오마인드 도해</h1>
+  <p class="sub">BiblioMind — 유저 플로우 · 정보구조도 · 아키텍처. 확정 설계 문서를 사실 그대로 옮긴 3장의 그림</p>
+  <div class="prov">출처: PRD v3(승인본) · TECH-SPEC v2(무손실 검증 통과본) · DECISIONS.md — 2026-08-21 기준. 일부 화면 요소(시각화 스타일 18종·관계 필터·전체 화면)는 기존 앱 실코드(vizStyles.js 등)로 확인한 사실이며, 그 외 문서에 없는 내용은 그리지 않았습니다.</div>
+
+  <div class="legend" role="group" aria-label="범례">
+    <strong style="letter-spacing:.06em;font-size:12px">범례</strong>
+    <span class="it"><span class="dot" style="background:var(--chat)"></span>챗 = 조종석 (Claude 앱 · Codex)</span>
+    <span class="it"><span class="dot" style="background:var(--screen)"></span>크롬 3D 앱 = 화면</span>
+    <span class="it"><span class="dot" style="background:var(--engine)"></span>파이프라인 · AI 엔진</span>
+    <span class="it"><span class="dot" style="background:var(--store)"></span>저장 · 데이터</span>
+    <span class="it"><span class="dot" style="background:var(--alert)"></span>반려 · 파괴적 동작</span>
+    <span class="it"><svg width="34" height="12" viewBox="0 0 34 12" aria-hidden="true"><line x1="0" y1="6" x2="26" y2="6" stroke="currentColor" stroke-width="1.6"/><polygon points="26,2 34,6 26,10" fill="currentColor"/></svg>흐름</span>
+    <span class="it"><svg width="34" height="12" viewBox="0 0 34 12" aria-hidden="true"><line x1="0" y1="6" x2="26" y2="6" stroke="currentColor" stroke-width="1.6" stroke-dasharray="5 4"/><polygon points="26,2 34,6 26,10" fill="currentColor"/></svg>자동 푸시</span>
+    <span class="it"><svg width="20" height="16" viewBox="0 0 20 16" aria-hidden="true"><polygon points="10,1 19,8 10,15 1,8" fill="var(--mark)" stroke="currentColor" stroke-width="1.3"/></svg>사용자 판정</span>
+  </div>
+
+  <!-- ① USER FLOW -->
+  <section>
+    <div class="sec-head"><span class="badge">1</span><div><h2>유저 플로우</h2><span class="en">User Flow — 두 표면을 오가는 9단계 여정</span></div></div>
+    <p class="sec-note">이 앱의 조작은 전부 챗에서 말로 하고(조종석), 크롬 3D 앱은 결과를 보여주기만 합니다(화면). 파일 복붙·드래그앤드롭·Neo4j 수동 작업은 없습니다 — 1회성 설치만 예외.</p>
+    <div class="scrollbox">
+    <figure>
+    <svg class="flow-svg" viewBox="0 0 980 1180" role="img" aria-label="챗 조종석과 크롬 3D 화면 사이의 9단계 사용자 흐름: 수집, 생성, 검수 표시, 승인 또는 반려 판정, 주입, 질문과 2계층 하이라이트, 의미 검수 판정, 반복 성장">
+      <!-- lanes -->
+      <line class="lane-line" x1="480" y1="52" x2="480" y2="1130"/>
+      <text x="235" y="34" text-anchor="middle" class="ttl" style="fill:var(--chat)">💬 챗 — 조종석 (Claude 앱 · Codex)</text>
+      <text x="730" y="34" text-anchor="middle" class="ttl" style="fill:var(--screen)">🖥 크롬 3D 앱 — 화면</text>
+
+      <defs>
+        <marker id="a-ink" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="var(--ink)"/></marker>
+        <marker id="a-scr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="var(--screen)"/></marker>
+        <marker id="a-al" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="var(--alert)"/></marker>
+      </defs>
+
+      <!-- S1 수집 -->
+      <rect class="box b-chat" x="60" y="60" width="350" height="74" rx="10"/>
+      <text x="76" y="84" class="ttl">① 자료 수집 지시</text>
+      <text x="76" y="103" class="lbl mono-t">collect_web · collect_docs</text>
+      <text x="76" y="121" class="lbl soft">URL 크롤(BFS·상한, 기본 10) / PDF·이미지 로컬 추출</text>
+      <rect class="box b-store" x="250" y="152" width="160" height="30" rx="8"/>
+      <text x="330" y="172" text-anchor="middle" class="lbl mono-t">data/Input/ 저장</text>
+      <line class="edge" x1="235" y1="134" x2="235" y2="196" marker-end="url(#a-ink)"/>
+      <line class="edge" x1="330" y1="134" x2="330" y2="152"/>
+      <text x="245" y="150" class="tag soft">결과 요약 보고(성공·실패·사유)</text>
+
+      <!-- S2 생성 -->
+      <rect class="box b-chat" x="60" y="200" width="350" height="96" rx="10"/>
+      <text x="76" y="224" class="ttl">② 지식그래프 생성 지시</text>
+      <text x="76" y="243" class="lbl mono-t">kg_generate <tspan class="soft">(Input 1파일 = JSON 1개)</tspan></text>
+      <text x="76" y="261" class="lbl soft">핵심·도메인 분석 → 스키마 재사용 우선·부족분 AI 신규 도출</text>
+      <text x="76" y="279" class="lbl soft">→ 추출 · 신규 유형은 보고 후 전역 스키마 자동 등재</text>
+      <rect class="box b-engine" x="620" y="212" width="330" height="72" rx="10"/>
+      <text x="636" y="236" class="ttl">AI 엔진 (Codex / Claude)</text>
+      <text x="636" y="255" class="lbl soft">시작 엔진으로 생성, 한도 소진 시</text>
+      <text x="636" y="272" class="lbl"><tspan class="marker">다른 엔진으로 자동 전환</tspan> <tspan class="soft">— 전환은 반드시 보고</tspan></text>
+      <line class="edge" x1="410" y1="248" x2="620" y2="248" marker-end="url(#a-ink)"/>
+      <text x="515" y="240" text-anchor="middle" class="tag soft">엔진 호출</text>
+      <rect class="box b-store" x="250" y="312" width="160" height="30" rx="8"/>
+      <text x="330" y="332" text-anchor="middle" class="lbl mono-t">data/Generated/</text>
+      <line class="edge" x1="235" y1="296" x2="235" y2="360" marker-end="url(#a-ink)"/>
+      <line class="edge" x1="330" y1="296" x2="330" y2="312"/>
+
+      <!-- S3 검수 표시 -->
+      <rect class="box b-chat" x="60" y="364" width="350" height="72" rx="10"/>
+      <text x="76" y="388" class="ttl">③ 검수 요청 (구조 검수)</text>
+      <text x="76" y="407" class="lbl mono-t">review_list → review_show</text>
+      <text x="76" y="425" class="lbl soft">대기 목록 제시 → 파일 1개 단위로 표시</text>
+      <rect class="box b-screen" x="620" y="372" width="330" height="58" rx="10"/>
+      <text x="636" y="396" class="ttl">그래프 자동 표시</text>
+      <text x="636" y="415" class="lbl soft">드래그앤드롭 불필요 — 눈으로 구조 확인</text>
+      <line class="edge-push" x1="410" y1="400" x2="620" y2="400" marker-end="url(#a-scr)"/>
+      <text x="515" y="392" text-anchor="middle" class="tag" style="fill:var(--screen)">푸시 graph.show</text>
+
+      <!-- S4 판정 -->
+      <polygon class="diamond" points="235,462 320,510 235,558 150,510"/>
+      <text x="235" y="505" text-anchor="middle" class="ttl">승인?</text>
+      <text x="235" y="523" text-anchor="middle" class="tag soft">챗에서 말로 판정</text>
+      <line class="edge" x1="235" y1="436" x2="235" y2="462" marker-end="url(#a-ink)"/>
+      <rect class="box b-store" x="60" y="596" width="180" height="52" rx="10"/>
+      <text x="76" y="618" class="ttl" style="font-size:12.5px">승인 → Reviewed/</text>
+      <text x="76" y="636" class="lbl mono-t">review_approve</text>
+      <line class="edge" x1="200" y1="546" x2="160" y2="596" marker-end="url(#a-ink)"/>
+      <text x="150" y="570" class="tag" style="fill:var(--engine)">예</text>
+      <rect class="box b-alert" x="270" y="588" width="196" height="68" rx="10"/>
+      <text x="284" y="608" class="ttl" style="font-size:12.5px;fill:var(--alert)">반려 → Rejected/ 보관</text>
+      <text x="284" y="625" class="lbl mono-t">review_reject</text>
+      <text x="284" y="642" class="lbl soft">재생성 1회 자동 · 3회 누적 시 보류</text>
+      <line class="edge-alert" x1="290" y1="540" x2="330" y2="588" marker-end="url(#a-al)"/>
+      <text x="326" y="566" class="tag" style="fill:var(--alert)">아니오</text>
+      <path class="edge-alert" d="M 466 622 C 560 622 560 268 415 250" marker-end="url(#a-al)" fill="none"/>
+      <text x="560" y="470" class="tag" style="fill:var(--alert)">같은 자료 재생성</text>
+
+      <!-- S5 주입 -->
+      <rect class="box b-chat" x="60" y="690" width="350" height="74" rx="10"/>
+      <text x="76" y="714" class="ttl">④ 주입 지시</text>
+      <text x="76" y="733" class="lbl mono-t">kg_rebuild <tspan class="soft">(항상 전체 재조립 = 멱등)</tspan></text>
+      <text x="76" y="751" class="lbl soft">동일 엔티티 병합(유형+정규화 이름) · 출처 기록 · kgid 부여</text>
+      <line class="edge" x1="150" y1="648" x2="150" y2="690" marker-end="url(#a-ink)"/>
+      <rect class="box b-store" x="620" y="700" width="330" height="54" rx="10"/>
+      <text x="636" y="722" class="ttl">Neo4j (도구 전용 DB)</text>
+      <text x="636" y="740" class="lbl soft">이 도구가 주입한 데이터만 지우고 다시 씀 — 되돌리기 안전</text>
+      <line class="edge" x1="410" y1="727" x2="620" y2="727" marker-end="url(#a-ink)"/>
+      <text x="515" y="719" text-anchor="middle" class="tag soft">주입·재빌드</text>
+
+      <!-- S6 질문 -->
+      <rect class="box b-chat" x="60" y="800" width="350" height="70" rx="10"/>
+      <text x="76" y="824" class="ttl">⑤ 질문 (의미 검수 겸함 — 필수 절차)</text>
+      <text x="76" y="843" class="lbl mono-t">kg_search <tspan class="soft">— Neo4j 그래프 검색</tspan></text>
+      <text x="76" y="861" class="lbl soft">"탄지로의 스승은 누구야?"</text>
+      <line class="edge" x1="235" y1="764" x2="235" y2="800" marker-end="url(#a-ink)"/>
+      <rect class="box b-screen" x="620" y="792" width="330" height="86" rx="10"/>
+      <text x="636" y="814" class="ttl">3상태 하이라이트</text>
+      <text x="636" y="833" class="lbl soft">밖 = 어둡게(dim)</text>
+      <text x="636" y="850" class="lbl">1층 = 검색 참고분 <tspan class="marker">은은하게 · 무조건 표시</tspan></text>
+      <text x="636" y="867" class="lbl soft">"N개 중 M개 표시" 안내 (N = 1층 기준)</text>
+      <line class="edge-push" x1="410" y1="830" x2="620" y2="830" marker-end="url(#a-scr)"/>
+      <text x="515" y="822" text-anchor="middle" class="tag" style="fill:var(--screen)">1층 무조건 푸시</text>
+
+      <rect class="box b-chat" x="60" y="906" width="350" height="70" rx="10"/>
+      <text x="76" y="930" class="ttl">⑥ 답변 + 근거 인용</text>
+      <text x="76" y="949" class="lbl mono-t">kg_cite <tspan class="soft">— 인용을 1층과 교집합 검증</tspan></text>
+      <text x="76" y="967" class="lbl soft">인용 없거나 검증 탈락 시 → 1층만 표시 + 그 사실 안내</text>
+      <line class="edge" x1="235" y1="870" x2="235" y2="906" marker-end="url(#a-ink)"/>
+      <rect class="box b-screen" x="620" y="914" width="330" height="58" rx="10"/>
+      <text x="636" y="938" class="ttl">2층 = 실제 인용 경로 강조</text>
+      <text x="636" y="956" class="lbl soft">경로 위 이동 파티클 · 이웃 확장 없음</text>
+      <line class="edge-push" x1="410" y1="941" x2="620" y2="941" marker-end="url(#a-scr)"/>
+      <text x="515" y="933" text-anchor="middle" class="tag" style="fill:var(--screen)">2층 푸시</text>
+
+      <!-- S7 의미검수 판정 -->
+      <polygon class="diamond" points="235,1002 330,1050 235,1098 140,1050"/>
+      <text x="235" y="1043" text-anchor="middle" class="ttl">경로가 원문과</text>
+      <text x="235" y="1060" text-anchor="middle" class="ttl">일치?</text>
+      <text x="235" y="1078" text-anchor="middle" class="tag soft">검색 실패는 반려 사유 아님</text>
+      <line class="edge" x1="235" y1="976" x2="235" y2="1002" marker-end="url(#a-ink)"/>
+      <rect class="box b-plain" x="500" y="1024" width="270" height="52" rx="10"/>
+      <text x="516" y="1046" class="ttl">반복 · 지식그래프 성장</text>
+      <text x="516" y="1064" class="lbl soft">새 자료 추가 → ①부터 다시</text>
+      <line class="edge" x1="330" y1="1050" x2="500" y2="1050" marker-end="url(#a-ink)"/>
+      <text x="405" y="1042" text-anchor="middle" class="tag" style="fill:var(--engine)">예</text>
+      <path class="edge-alert" d="M 140 1050 C 20 1050 20 650 268 640" marker-end="url(#a-al)" fill="none"/>
+      <text x="36" y="860" class="tag" style="fill:var(--alert)" transform="rotate(-90 36 860)">아니오 — 반려 → 해당분 제외 재빌드 → 재생성</text>
+    </svg>
+    <figcaption>그림 1. 조작은 전부 챗 명령(보라), 표시는 전부 3D 앱 자동 푸시(틸 점선). 반려 경로(빨강)는 Rejected/ 보관 후 같은 자료를 다시 생성한다.</figcaption>
+    </figure>
+    </div>
+  </section>
+
+  <!-- ② IA -->
+  <section>
+    <div class="sec-head"><span class="badge">2</span><div><h2>정보구조도</h2><span class="en">Information Architecture — 명령 · 화면 · 데이터의 계층</span></div></div>
+    <p class="sec-note">전통적 메뉴 트리 대신, 이 앱의 "메뉴"는 챗 명령 15종이고 "콘텐츠"는 3D 화면 요소와 데이터 폴더입니다. <span class="pill p-old">기존</span>은 이미 동작하는 것, <span class="pill p-new">신설</span>은 이번 설계로 추가되는 것.</p>
+    <div class="ia-grid">
+      <div class="ia-col">
+        <h3><span class="dot" style="background:var(--chat)"></span>챗 명령 15종 <span class="cnt">MCP 도구 — 조종석</span></h3>
+        <ul>
+          <li class="grp">수집 (2)</li>
+          <li><code>collect_web</code> <span class="d">— URL → 크롤 → Input/</span></li>
+          <li><code>collect_docs</code> <span class="d">— PDF·이미지 → 로컬 추출</span></li>
+          <li class="grp">생성 (1)</li>
+          <li><code>kg_generate</code> <span class="d">— KG JSON 생성 · 체크포인트 · 스키마 자동 도출</span></li>
+          <li class="grp">검수 (4)</li>
+          <li><code>review_list</code> <span class="d">— 대기 목록·반려 이력</span></li>
+          <li><code>review_show</code> <span class="d">— 3D 앱에 표시</span></li>
+          <li><code>review_approve</code> <span class="d">— Reviewed/ 이동</span></li>
+          <li><code>review_reject</code> <span class="d">— Rejected/ + 재생성 1회/3회 보류</span></li>
+          <li class="grp">주입 (1)</li>
+          <li><code>kg_rebuild</code> <span class="d">— 전체 재조립(멱등)</span></li>
+          <li class="grp">제거 (1)</li>
+          <li><code>source_remove</code> <span class="pill p-danger">파괴적 — 매번 확인</span></li>
+          <li class="grp">스키마 (2)</li>
+          <li><code>schema_get</code> · <code>schema_update</code> <span class="d">— 조회·수동 조정</span></li>
+          <li class="grp">질의·하이라이트 (3)</li>
+          <li><code>kg_search</code> <span class="d">— 검색 + 1층 무조건 푸시</span></li>
+          <li><code>kg_cite</code> <span class="d">— 인용 검증(∩1층) + 2층 푸시</span></li>
+          <li><code>highlight_clear</code> <span class="d">— 해제</span></li>
+          <li class="grp">상태 (1)</li>
+          <li><code>kg_status</code> <span class="d">— 파이프라인·DB·연결 진단</span></li>
+        </ul>
+      </div>
+      <div class="ia-col">
+        <h3><span class="dot" style="background:var(--screen)"></span>크롬 3D 앱 화면 <span class="cnt">visualization-3d</span></h3>
+        <ul>
+          <li class="grp">데이터 입력 소스</li>
+          <li>JSON 붙여넣기 <span class="pill p-old">기존</span></li>
+          <li>JSON 파일 (드래그앤드롭) <span class="pill p-old">기존</span> <span class="d">— 수동 대체 수단으로 유지</span></li>
+          <li>Neo4j 연결 <span class="pill p-old">기존</span></li>
+          <li>푸시 수신 (챗 명령이 표시) <span class="pill p-new">신설</span></li>
+          <li class="grp">보기 · 탐색</li>
+          <li>시각화 스타일 18종 <span class="pill p-old">기존</span> <span class="d">— 이웃 하이라이트·파티클 등</span></li>
+          <li>하이라이트 패널 (유형·속성) <span class="pill p-old">기존</span></li>
+          <li>관계 필터 · 전체 화면 <span class="pill p-old">기존</span></li>
+          <li class="grp">쿼리 하이라이트 레이어 <span class="pill p-new">신설</span></li>
+          <li>3상태: 밖 dim / 1층 은은 / 2층 강조+파티클</li>
+          <li>"N개 중 M개 표시" 안내 (N=1층)</li>
+          <li>하이라이트 상태 문구 <span class="d">— "1층만 표시 중" 등</span></li>
+          <li>Neo4j 소스 자동 전환 <span class="d">— 안내 1줄 표시</span></li>
+          <li class="grp">수신 통로 <span class="pill p-new">신설</span></li>
+          <li><code>SSE /api/events</code> <span class="d">— 메시지 4종: graph.show · graph.refresh · highlight.set · highlight.clear</span></li>
+        </ul>
+      </div>
+      <div class="ia-col">
+        <h3><span class="dot" style="background:var(--store)"></span>저장소 · 데이터 구조 <span class="cnt">GraphRAG_1st 모노레포</span></h3>
+        <ul>
+          <li class="grp">패키지 4 + 스크립트</li>
+          <li><code>visualization-3d/</code> <span class="d">— 기존 앱 + 허브·레이어 확장</span></li>
+          <li><code>pipeline/</code> <span class="d">— 수집·추출·생성·주입 실행 엔진</span></li>
+          <li><code>mcp-server/</code> <span class="d">— 챗 조종석 (도구 15종)</span></li>
+          <li><code>shared/</code> <span class="d">— 정규화·검증·스키마 시드 단일 진실</span></li>
+          <li><code>scripts/setup.js</code> <span class="d">— 최초 1회 부트스트랩</span></li>
+          <li><code>examples/</code> <span class="d">— 커밋되는 유일한 데이터(예시 JSON)</span></li>
+          <li class="grp">data/ <span class="pill p-nogit">커밋 금지 — 로컬 전용</span></li>
+          <li><code>Input/</code> <span class="d">— 수집·추출된 MD</span></li>
+          <li><code>Generated/</code> <span class="d">— 생성된 KG JSON (완전한 것만)</span></li>
+          <li><code>Reviewed/</code> <span class="d">— 승인분 = 재빌드의 원본 진실</span></li>
+          <li><code>Rejected/</code> <span class="d">— 반려분 보관 (삭제 아님)</span></li>
+          <li><code>ledger.json</code> <span class="d">— 원장: 수집 상태·차단·반려 횟수</span></li>
+          <li><code>schema.json</code> <span class="d">— 전역 스키마 (AI 자동 등재 대상)</span></li>
+          <li><code>runtime/ · tmp/ · .tmp/ · ocr-cache/</code> <span class="d">— 검색 상태·엔진 임시·원자 쓰기 스테이징·OCR 캐시</span></li>
+          <li class="grp">데이터 수명주기</li>
+          <li><span class="mono">Input → Generated → Reviewed → Neo4j</span></li>
+          <li><span class="d">반려는 Rejected/로, 되돌리기는 Reviewed/ 기준 재조립</span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ③ ARCHITECTURE -->
+  <section>
+    <div class="sec-head"><span class="badge">3</span><div><h2>아키텍처</h2><span class="en">Architecture — 컴포넌트와 데이터 흐름</span></div></div>
+    <p class="sec-note">챗 클라이언트 2종이 같은 MCP 서버 하나에 꽂히고, MCP 서버가 파이프라인·Neo4j·시각화 허브를 조종합니다. 점선 테두리는 데이터가 밖으로 나가는 외부 서비스입니다.</p>
+    <div class="scrollbox">
+    <figure>
+    <svg class="arch-svg" viewBox="0 0 980 620" role="img" aria-label="아키텍처: 챗 클라이언트 2종이 stdio로 로컬 MCP 서버에 연결되고, MCP 서버가 파이프라인 모듈과 Neo4j를 다루며, 푸시 허브를 거쳐 크롬 3D 앱으로 SSE 전달. 파이프라인은 외부의 Jina Reader API와 AI 엔진 클라우드를 호출">
+      <defs>
+        <marker id="b-ink" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="var(--ink)"/></marker>
+        <marker id="b-scr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="var(--screen)"/></marker>
+        <marker id="b-soft" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="var(--ink-soft)"/></marker>
+      </defs>
+
+      <!-- clients -->
+      <rect class="box b-chat" x="20" y="80" width="180" height="56" rx="10"/>
+      <text x="36" y="104" class="ttl">Claude 앱</text>
+      <text x="36" y="122" class="lbl soft">구독으로 사용</text>
+      <rect class="box b-chat" x="20" y="170" width="180" height="56" rx="10"/>
+      <text x="36" y="194" class="ttl">ChatGPT 데스크탑</text>
+      <text x="36" y="212" class="lbl soft">Codex 화면 · 구독</text>
+      <text x="110" y="66" text-anchor="middle" class="tag soft">이사님이 말로 명령</text>
+
+      <!-- MCP server -->
+      <rect class="box b-chat" x="270" y="70" width="190" height="170" rx="12"/>
+      <text x="286" y="98" class="ttl">MCP 서버 (조종석)</text>
+      <text x="286" y="118" class="lbl mono-t">mcp-server/</text>
+      <text x="286" y="140" class="lbl soft">도구 15종 · 결과 요약 보고</text>
+      <text x="286" y="158" class="lbl soft">파이프라인 in-process 호출</text>
+      <text x="286" y="176" class="lbl soft">한도 전환(failover) 보고</text>
+      <text x="286" y="194" class="lbl soft">1층 하이라이트 결정적 푸시</text>
+      <line class="edge" x1="200" y1="108" x2="270" y2="120" marker-end="url(#b-ink)"/>
+      <line class="edge" x1="200" y1="198" x2="270" y2="182" marker-end="url(#b-ink)"/>
+      <text x="232" y="96" text-anchor="middle" class="tag soft">stdio</text>
+      <text x="232" y="212" text-anchor="middle" class="tag soft">stdio</text>
+
+      <!-- pipeline -->
+      <rect class="box b-engine" x="530" y="40" width="230" height="200" rx="12"/>
+      <text x="546" y="66" class="ttl">파이프라인</text>
+      <text x="546" y="84" class="lbl mono-t">pipeline/</text>
+      <text x="546" y="106" class="lbl">크롤러 <tspan class="soft">— BFS·상한·robots 존중</tspan></text>
+      <text x="546" y="126" class="lbl">추출기 <tspan class="soft">— PDF·이미지 로컬 전용</tspan></text>
+      <text x="546" y="146" class="lbl">KG 생성기 <tspan class="soft">— 스키마 자동 도출</tspan></text>
+      <text x="546" y="166" class="lbl">주입기 <tspan class="soft">— 병합·kgid·출처 기록</tspan></text>
+      <text x="546" y="192" class="lbl soft">data/ 폴더 읽고 씀</text>
+      <text x="546" y="210" class="lbl soft">(Input→Generated→Reviewed)</text>
+      <line class="edge" x1="460" y1="120" x2="530" y2="120" marker-end="url(#b-ink)"/>
+      <text x="495" y="112" text-anchor="middle" class="tag soft">실행</text>
+
+      <!-- externals -->
+      <rect x="810" y="40" width="150" height="64" rx="10" fill="none" stroke="var(--ink-soft)" stroke-width="1.4" stroke-dasharray="4 4"/>
+      <text x="826" y="64" class="ttl" style="font-size:12.5px">Jina Reader API</text>
+      <text x="826" y="82" class="lbl soft">웹 → 마크다운</text>
+      <rect x="810" y="130" width="150" height="86" rx="10" fill="none" stroke="var(--ink-soft)" stroke-width="1.4" stroke-dasharray="4 4"/>
+      <text x="826" y="154" class="ttl" style="font-size:12.5px">AI 엔진 클라우드</text>
+      <text x="826" y="172" class="lbl soft">Codex ↔ Claude</text>
+      <text x="826" y="190" class="lbl soft">한도 시 상호 전환</text>
+      <text x="826" y="207" class="lbl soft">⚠ 자료 본문 전송됨</text>
+      <line class="edge-out" x1="760" y1="80" x2="810" y2="74" marker-end="url(#b-soft)"/>
+      <line class="edge-out" x1="760" y1="160" x2="810" y2="166" marker-end="url(#b-soft)"/>
+      <text x="885" y="30" text-anchor="middle" class="tag soft">외부 (점선 = 데이터가 PC 밖으로)</text>
+
+      <!-- Neo4j -->
+      <rect class="box b-store" x="530" y="290" width="230" height="88" rx="12"/>
+      <text x="546" y="316" class="ttl">Neo4j — 도구 전용 DB</text>
+      <text x="546" y="336" class="lbl soft">보조 라벨 RKEntity · kgid · name_key</text>
+      <text x="546" y="354" class="lbl soft">full-text 인덱스(kg_fulltext, 한국어 cjk)</text>
+      <text x="546" y="372" class="lbl soft">재빌드 = 도구 주입분만 지우고 재구성</text>
+      <line class="edge" x1="620" y1="240" x2="620" y2="290" marker-end="url(#b-ink)"/>
+      <text x="630" y="268" class="tag soft">주입·재빌드</text>
+      <path class="edge" d="M 460 220 C 500 260 500 300 530 318" marker-end="url(#b-ink)" fill="none"/>
+      <text x="470" y="278" class="tag soft">검색(읽기)</text>
+
+      <!-- hub -->
+      <rect class="box b-screen" x="270" y="420" width="230" height="110" rx="12"/>
+      <text x="286" y="446" class="ttl">푸시 허브 (127.0.0.1)</text>
+      <text x="286" y="464" class="lbl mono-t">localServer.js :8787</text>
+      <text x="286" y="484" class="lbl soft">POST /api/show · /api/highlight · /api/refresh</text>
+      <text x="286" y="502" class="lbl soft">최신 상태 보관 → 늦게 연 화면에 재생</text>
+      <text x="286" y="520" class="lbl soft">앱 닫힘 시: 챗으로 안내</text>
+      <line class="edge" x1="365" y1="240" x2="365" y2="420" marker-end="url(#b-ink)"/>
+      <text x="375" y="336" class="tag soft">그래프 표시·하이라이트 POST</text>
+
+      <!-- 3D app -->
+      <rect class="box b-screen" x="610" y="430" width="290" height="96" rx="12"/>
+      <text x="626" y="456" class="ttl">크롬 3D 앱 (화면)</text>
+      <text x="626" y="474" class="lbl mono-t">visualization-3d/ · React + 3D 그래프</text>
+      <text x="626" y="493" class="lbl soft">3상태 쿼리 하이라이트 레이어(신설)</text>
+      <text x="626" y="511" class="lbl soft">Neo4j 소스 조회 · 기존 스타일 18종</text>
+      <line class="edge-push" x1="500" y1="475" x2="610" y2="475" marker-end="url(#b-scr)"/>
+      <text x="555" y="467" text-anchor="middle" class="tag" style="fill:var(--screen)">SSE /api/events</text>
+      <line class="edge" x1="610" y1="505" x2="500" y2="505" marker-end="url(#b-ink)"/>
+      <text x="555" y="519" text-anchor="middle" class="tag soft">/api/graph 조회</text>
+      <path class="edge" d="M 460 420 C 490 402 510 396 532 382" marker-end="url(#b-ink)" fill="none"/>
+      <text x="498" y="412" class="tag soft">preset Cypher (읽기)</text>
+    </svg>
+    <figcaption>그림 2. 하나의 MCP 서버가 두 챗 클라이언트를 동시에 지원한다. 로컬 우선 구조 — PC 밖으로 나가는 것은 점선 상자 2곳(웹 변환, AI 엔진 호출)뿐이다.</figcaption>
+    </figure>
+    </div>
+  </section>
+
+  <p class="foot">비블리오마인드(BiblioMind) · GraphRAG_1st 확장 · 도해 기준일 2026-08-21 · 근거: docs/PRD.md v3(승인) · docs/TECH-SPEC.md v2(무손실 검증 통과) · docs/DECISIONS.md — 독립 검증자의 문서 대조(결함 4건 수정 반영)를 거친 도해입니다.</p>
+</div>
+
+</html>
