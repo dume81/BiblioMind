@@ -37,7 +37,13 @@
 7. 그래프 DB = **Neo4j AuraDB 클라우드** (2026-08-21 전환 — 코드는 URI 기반이라 로컬 병용 가능. **사용자명·DB명은 자격증명 .txt 값 그대로 — 신형 콘솔은 8자 생성 ID**. Free 한도 20만/40만 실측, 3일 무쓰기 일시정지·30일 삭제 정책 고지 의무)
 8. 총감사(2026-08-21, 패널 8인) 반영: 스파이크 Claude 표면 = **Claude Code(GraphRAG_1st 루트 열기)**, ChatGPT 데스크탑 미설치 — **Codex 표면으로 확정**, 부록 A 3건 전부 해소(승인은 source_remove만 매번 확인·나머지 항상 허용), kg_search 호출률·부정 대조 검증 신설(§1.14-6), bibliomind/ 로컬 git 관리 시작
 
-## 슬라이스 1 착수 브리핑 (압축 후 첫 작업 — 이사님 "착수해" 지시 후 시작)
+## 슬라이스 1 진행 상태 (2026-08-21 갱신 — 구현분 완료 ✅, 판정 대기)
+
+**구현 완료(커밋 GraphRAG_1st 1ef89f0)**: 아래 브리핑의 §7.8 목록 전부 구현 + 검수 패널(4렌즈 18에이전트+반박 검증) 확정 13건 반영 + 테스트 248케이스(기존 148 무수정+신규 35) + 실왕복 검증(kg_search 실호출 → `delivered:true` → 크롬 자동 전환·질문·citation 문구 DOM 확인, 부정 대조 "무잔"→"검색 결과 없음", highlight_clear 소거). 상세·소결정은 DECISIONS 말미 "슬라이스 1 구현 완료" 항목이 정본.
+
+**남은 것(이사님 몫)**: ① 사용자 액션 ④ — `npm run dev:all` + 크롬 http://localhost:5173 열어 하이라이트 육안 확인(허브가 마지막 verified 하이라이트를 보관 중 — 열면 자동 재생) + 챗 클라이언트에서 도구 "항상 허용" ② 스파이크 판정 — spike-eval-questions.md 21문 × Codex 먼저·Claude Code는 8/25(화) 이후 ③ 판정 통과 시 main 병합 승인.
+
+## 슬라이스 1 착수 브리핑 (원본 보존 — 위 진행 상태가 최신)
 
 1. **구현 전 정독**: TECH-SPEC **§5 푸시 프로토콜(1173~1268행)** + **§7 시각화 확장(1485행~끝, §7.8 최소 수정 작업 목록이 파일별 지침)**. §5.2 메시지 4종 스키마·§5.1 보관/재생 규칙·§7.4 kgid 색인·§7.5 우선순위·§7.6 패널 문구(v2.2 정직화 반영)가 정본.
 2. **수정 대상(§7.8 — 이 목록 밖 수정 금지, 외과수술 원칙)**: `visualization-3d/server/localServer.js`(라우트 3종+SSE+보관·재생+본문 상한+127.0.0.1) / `server/core/mapper.js`(RKEntity 제외 1줄) / `src/hooks/useGraphLoader.js`(push 소스) / `src/App.jsx`(SSE 구독 훅) / 신규 3상태 오버라이드 모듈 / `src/components/HighlightPanel.jsx`(citation 문구·N/M·truncated) / 신규 단위 테스트(kgid 색인·3상태 우선순위·N/M).

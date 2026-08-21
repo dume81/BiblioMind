@@ -150,7 +150,7 @@ Phase 0.1에서 **가장 먼저 요청 유형을 판별**하고, 아래 표에 �
 
 ## 현재 위치
 
-> **Phase 2 — 슬라이스 0.5 완료(✅ 2026-08-21) → 슬라이스 1(하이라이트 스파이크) 착수**
-> 0.5 완료 증빙: AuraDB 주입 29/55 멱등 · 도구 4종 **Codex·Claude Code 양쪽 실호출 성공** · 평가 세트 21문 · 테스트 213케이스 (ROADMAP 완료 기록·DECISIONS 참조)
-> 슬라이스 1 순서: Claude 구현(허브 라우트 4종+SSE(§5) → 3D 3상태 렌더·N/M·HighlightPanel(§7) → 기존 테스트 무수정 유지) → 사용자 액션 ④(dev:all+크롬 5173+항상 허용) → **스파이크 판정**(평가 세트 21문 × 클라이언트 2종 — spike-eval-questions.md 집계표)
+> **Phase 3 — 슬라이스 1 구현분 완료(🔨 2026-08-21, 커밋 1ef89f0) → 스파이크 판정 대기**
+> 구현 증빙: 허브+SSE+3상태 수신 구현 · 검수 패널 확정 13건 반영 · 테스트 248케이스(기존 148 무수정) · **kg_search 실호출 → delivered:true → 크롬 화면 표시 DOM 검증** (ROADMAP 완료 기록·DECISIONS 참조)
+> 남은 순서: **사용자 액션 ④**(`npm run dev:all` + 크롬 5173 육안 확인 + 도구 "항상 허용") → **스파이크 판정**(평가 세트 21문 × 클라이언트 2종 — spike-eval-questions.md 집계표. 순서: Codex 먼저, Claude는 8/25 한도 재설정 후) → 판정 결과 DECISIONS 기록 → 통과 시 main 병합(이사님 승인) 후 슬라이스 1.5
 > 사전 자료 검토 완료: req_node_relation.txt(KG 추출 프롬프트), KG_Demon Slayer_Draft_01.json(예시 그래프), 리디안_지식그래프/GraphRAG_1st(동작하는 3D 시각화 웹앱 — Vite+React+react-force-graph-3d, 테스트·린트·Vercel 배포 구성 보유)
