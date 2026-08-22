@@ -22,7 +22,7 @@
 
 ### 한 줄 요약
 
-슬라이스 1 스파이크 **판정 통과(Claude 표면 21/21)** → **유지보수 사이클 진행 중**. M0·M1 **달성**, **M2 구현 배선만 남음**. 오너 결정은 **전건 마감** — 이사님 조치 없이 바로 이어서 구현하면 된다.
+슬라이스 1 스파이크 **판정 통과(Claude 표면 21/21)** → **유지보수 사이클 진행 중**. M0·M1·**M2 전부 달성**(2026-08-22 배선 완료, 완료 조건 6/6 · 수용 판정 33/33 · 테스트 287). 다음은 **M2 게이트 승인(이사님)** 이며, 승인 후 M3는 M2에 동승한다.
 
 ### 재개 절차 (압축 후 이 순서로)
 
@@ -32,22 +32,24 @@
 
 1. 이 절을 읽는다 → `docs/MAINTENANCE-PLAN.md`(유지보수 정본) → **`docs/M2-DESIGN.md` §8 구현 순서**(그대로 코딩하는 설계 정본).
 2. 상시 규칙이 **8조로 발효 중**이다 — 워크스페이스 루트 `CLAUDE.md` 말미 절 + `~/.claude/CLAUDE.md`(사용자 전역 최우선 규칙). 매 턴 `[착수]`/`[비착수]` 라벨, 완료 보고는 대조표, 주장에는 `[실측]`·`[문서]`·`[추정]`·`[미확인]` 등급.
-3. **M2 구현 배선**을 이어서 한다(아래). **단계 번호는 M2-DESIGN §8(0~8단계)이 정본**이고, 아래 표는 남은 일의 요약이다.
+3. **M2는 배선까지 끝났다**(아래 표). 다음 행동은 **M2 게이트 보고 → 이사님 승인**이고, 승인 후 **M3 문구 2건**(kg_status "0.5 스파이크 준비" 소멸 · 과잉 인용 경고 서술형)이 M2에 동승한다.
 
-### M2 구현 — 남은 배선 (설계서 §3~§6에 의사코드까지 확정됨)
+### M2 구현 — **배선 완료 (2026-08-22 · 커밋 `532b151`)**
 
-> ⚠️ **순서 주의**: `capture-golden.js` **계측 확장(2패스화)은 코드 변경 *전*에 해야 한다** — M2-DESIGN §8 **1단계**. 먼저 확장한 캡처로 `pre1.json`을 떠서 기존 픽스처와 전건 대조해야 *"계측 확장이 기준선을 오염시키지 않았다"* 를 증명할 수 있다. 아래 표의 마지막 행(재캡처·대조)만 코드 변경 *후*다. 순서를 바꾸면 이 증명이 **영구히 불가능**해진다.
+M2-DESIGN §8의 0~8단계를 순서대로 이행했다. **재작업 금지 — 아래는 이미 저장소에 있다.**
 
-| 순서 | 대상 | 내용 |
+| 단계 | 대상 | 결과 |
 |---|---|---|
-| **먼저** | `scripts/capture-golden.js` | **2패스화**(`--out` 옵션 · `PROBE_QUESTIONS`/`anchorQuestion` · `digest`에 `restoredFrom` 조건부) → `pre1.json` 캡처 → 기존 `golden-searches.json`과 **전건 대조**. `[실측]` 현재 미착수(`--out`·`anchorQuestion`·`restoredFrom`·`anchoredCases` 전부 없음) |
-| 1 | `mcp-server/src/lib/searchEngine.js` | `matchKeyword` 헬퍼 추출 + **T2 하한 배선** — `if (kept.length > 0) { tier='T2'; … }` 형태로, **tier 확정보다 먼저** 적용(빈 records로 tier 굳히면 T3 폴백을 건너뛰는 조용한 미적중) |
-| 2 | 같은 파일 | `runSearch` 시그니처에 `question` 추가 + `records.length === 0` 분기에서만 `pickAnchorCandidate` 호출(적중 경로 무개입). 복원어는 **T1 → T2까지만, T3 배제** |
-| 3 | `mcp-server/src/tools/kgSearch.js` | `question` describe 개정(신뢰 경계) · `question` 전달 · `restorationLines()` 신설(교정 공개는 `restoredFrom && matched.length > 0`일 때만) · stderr NDJSON 관측 로그 |
-| 4 | 신규 테스트 | `anchorRestore.test.js` **21케이스** + `seedFloor.test.js` **4케이스** = **25케이스 추가** → 전 워크스페이스 **262 → 287** |
-| 5 | 재캡처·대조 | 코드 변경 **후** 재캡처 → `golden-searches-postM2.json` → M2-DESIGN §6-6 수용 판정표와 대조 |
+| 1 | `scripts/capture-golden.js` 2패스화 | `--out` · `PROBE_QUESTIONS`/`anchorQuestion` · `digest`의 조건부 `restoredFrom` · `anchoredCases` 신규 필드. **코드 변경 전에** 캡처해 기존 `cases` 25건 전건 동일 확인(계측 확장 무오염 자체 증명) |
+| 2 | `shared/src/hangul.js` | 이미 완료(커밋 `59ed6a3`) — shared 64케이스 |
+| 3 | `anchorRestore.test.js` #1~#19 | mcp-server 13 → 32 |
+| 4 | `searchEngine.js` | `matchKeyword` 헬퍼 추출 + T2 하한(tier 확정보다 먼저 적용) + `seedFloorCuts` + `question` 시그니처 + `records.length===0` 분기에서만 앵커 복원(복원어는 T1→T2까지, T3 배제) + `seedsReport`의 조건부 `restoredFrom`. `seedFloor.test.js` 4케이스 |
+| 5 | `kgSearch.js` | `question` describe 개정·전달 · `restorationLines()` 신설 · stderr 한 줄 JSON 관측 로그 · `data.seedFloorCuts` 조건부. `anchorRestore.test.js` #20·#21 → **287케이스** |
+| 6 | 재캡처·대조 | `golden-searches-postM2.json` 생성 → §6-6 수용 판정표 **33/33 통과** |
+| 7 | 문구 육안 확인 | 실호출로 상태 **'부분 성공'→'성공'** 반전, 재검색 공개 2줄 출력, `delivered:true` |
 
-**이미 끝난 것(재작업 금지)**: `shared/src/hangul.js`(+테스트 14케이스), `searchEngine.js`의 상수 3개와 `pickAnchorCandidate` 순수 함수 — **배선만 안 됐고 코드는 있다.** `scripts/check-keywords.js`, `mcp-server/fixtures/keyword-probes.json`, `golden-searches.json`, `scripts/capture-golden.js`.
+**대조표는 `MAINTENANCE-PLAN.md`의 "M2 실행 결과" 절이 정본**(완료 조건 6/6 달성).
+**픽스처 2종의 역할**: `golden-searches.json` = 개선 **전** 기준선(M4까지 보존 — 덮어쓰지 말 것, 재캡처는 반드시 `--out`) / `golden-searches-postM2.json` = 개선 **후** 실측.
 
 ### 오너 결정 — 전건 마감 (다시 묻지 말 것)
 
@@ -71,11 +73,12 @@
   1. **E2E 테스트 도구(Playwright) 도입** — 오너 제안: *"만들고 있는 프로덕트가 웹이므로 생성·품질·완성도·버그 검출에 유용한 플러그인이 필요할 것 같다."* **판단: 도입 찬성, 시점은 슬라이스 2.** 근거 = ① 오늘의 백그라운드 탭 밀집 동결 버그는 탭 가시성·CPU 스로틀링 제어로 자동 재현 가능한 유형이었으나 오너 육안으로 발견됐다 ② 슬라이스 1 하이라이트 왕복(kg_search→SSE→3D)을 매번 수동 검증 중 ③ ROADMAP Phase 4(4.1 엣지·4.2 로딩/에러/빈 상태·4.6 접근성)의 수행 수단이 현재 없다. **지금 도입하지 않는 이유** = M2 구현 중 도입하면 원인 분리 불가(한글화를 뒤로 미룬 것과 같은 논리). **선행 절차** = 의존성 최소주의 철칙(`bibliomind/CLAUDE.md:47`)에 따라 **TECH-SPEC §1.3 개정 → 오너 승인 → 도입**. **한계 인지** = 3D/WebGL은 E2E로도 비결정론적이라 노드 색·위치는 단언 불가. 현실적 사정거리는 **HTML 오버레이·콘솔 에러·네트워크·N/M 카운트**.
   2. **3D 앱이 현재 하이라이트 상태(1층·2층 kgid 집합)를 DOM/전역에 노출** — 판정 ④(3상태 표시)를 **육안 → 기계 대조**로 전환하는 근본 해법. 푸시한 집합 ↔ 화면 집합을 결정론적으로 비교하므로 픽셀 추측이 불필요해진다. **M4 재판정 전에 넣으면 재판정 정확도가 오르지만 3D 표면 변경이라 재판정 범위가 넓어진다**(잔상 C안을 미룬 것과 같은 상충) — 오너 결정 대기.
 - **집계자 브라우저 도구 실측(2026-08-22)**: 이사님이 이미지를 보낼 필요 없이 Claude가 `localhost:5173`에 **직접 진입해 DOM 전문을 읽을 수 있음이 실증됨**(하이라이트 패널 질문 원문·인용 검증 문구·라벨 카운트·관계 유형 48종 전부 읽힘, 페이지 내 JS 실행 가능). **한계 2건**: ① 스크린샷은 브라우저 패널이 화면에 표시돼야 함(미표시 시 5초 타임아웃 — 실측) ② `document.querySelector('canvas')`가 null이라 WebGL 내부(노드 색·위치·파티클)는 DOM으로 못 읽음(패널 미표시 영향 여부 `[미확인]`). ⇒ 판정 ①호출 ②시드 ③인용은 도구 반환값+DOM으로 완결, ④의 시각 증거만 미해결이며 위 제안 2가 그 해법.
+  - **재측정(2026-08-22 M2 배선 후)**: 스크린샷은 `tabs_select`로 탭을 앞으로 가져오면 성공 — 한계 ①은 **회피 가능**으로 정정. 한계 ②는 재현됨(`canvas` 0개). 새 관찰: **`window.scene`(THREE)과 `window.__THREE__`가 전역에 노출**돼 있어 제안 2의 구현 난이도가 낮을 가능성 — 단 확인 시점에 `scene.children === 0`(JSON 입력 화면 상태)이라 **그래프 로드 상태에서 노드 색·kgid가 실제로 읽히는지는 `[미확인]`**. 검증하려면 3D 뷰가 마운트된 상태에서 같은 조회를 1회 더 해야 한다.
 
 ### 2026-08-22 커밋 (양 저장소)
 
 - `bibliomind`: `8419046` 유지보수 계획 → `6068415` M0 결정 → `c5b6306` 규칙 18조·시뮬레이션·7조안 → `65b9b59` 7조 채택 → `fb3a9ea` **TECH-SPEC v2.3(M0 완료)** → `1f3fdb8` **전문가 투입 제1조(8조)** → `6db4d46` 문서 정정
-- `GraphRAG_1st`: `3358353` **골든 픽스처·캡처 도구** → `59ed6a3` **hangul.js·앵커 복원 순수 함수·키워드 계측기**
+- `GraphRAG_1st`: `3358353` **골든 픽스처·캡처 도구** → `59ed6a3` **hangul.js·앵커 복원 순수 함수·키워드 계측기** → `532b151` **M2 배선(앵커 복원 + T2 하한 50% · 287케이스 · 수용 판정 33/33)**
 - 브랜치: `GraphRAG_1st` = `phase2-scaffolding`(**main 병합·push는 M5 통과 + 이사님 승인 후**) / `bibliomind` = `main`
 
 ### 집계자(Claude) 실수 기록 — 재발 방지 (DECISIONS 말미 상세)
