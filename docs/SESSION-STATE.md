@@ -262,7 +262,7 @@ M2-DESIGN §8의 0~8단계를 순서대로 이행했다. **재작업 금지 — 
 
 ## 슬라이스 3 — **완료 (2026-08-22, 합격선 8/8)** · 커밋 `a1e7670`
 
-**대상 URL은 오너 지정 `https://readians.com/`.** 신규: `shared/src/atomicWrite.js`(§2.5) · `pipeline/src/ledger.js` 전체 구현 · `pipeline/src/crawl/index.js` `collectWeb` · `bin/collect.js` CLI. 의존성 3종(`robots-parser`·`tldts`·`gray-matter`)은 **§1.3 승인 6종 안**이라 문서 개정 불요. 테스트 **297 → 328**.
+**대상 URL은 오너 지정 `https://readians.com/`.** 신규: `shared/src/atomicWrite.js`(§2.5) · `pipeline/src/ledger.js` 전체 구현 · `pipeline/src/crawl/index.js` `collectWeb` · `bin/collect.js` CLI. 의존성 3종(`robots-parser`·`tldts`·`gray-matter`)은 **§1.3 승인 6종 안**이라 문서 개정 불요. 테스트 **297 → 334**.
 
 **실측이 잡은 결함 3건** (단위 테스트만으로는 전부 안 보였다):
 
