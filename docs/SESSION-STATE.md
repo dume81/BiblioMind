@@ -320,3 +320,24 @@ CLI 2종 설치·로그인 후 각 엔진을 **1회씩 실호출**해 KG JSON을
 2. **`--output-schema`(Codex) 미채택 확정** — structured output이 모든 object에 `additionalProperties:false`를 강제해 400. KG 노드의 `properties`는 자유 객체여야 하므로 **§2.1 스키마 자동 도출과 구조적 비호환**. 없이도 백틱 없는 순수 JSON이 나왔다.
 
 **슬라이스 5 입력**: 어댑터 `timeoutMs` 기본값은 **codex 기준**(3배 이상 느림). 부작용 0건 실측. 같은 입력에서 **엔진별 추출 밀도가 다르다**(6n·5r vs 9n·15r) — 성공 기준 3의 품질 비교 근거.
+
+## 슬라이스 5-A — **완료 (2026-08-22, 합격선 7/7)** · 커밋 `9307f9c`
+
+**실 엔진 CLI 호출 0회 · 구독 소모 0**으로 S3 생성기를 구현·검증했다. 테스트 343 → **383**.
+
+| 산출 | 내용 |
+|---|---|
+| `resolveEngine.js` | 시작 엔진 선택(인자 > `.env` > codex) + `otherEngine` |
+| `engines/run.js` | 공용 spawn·stdin 전달·실패 분류 **5종** |
+| `engines/{codex,claude}.js` | 슬라이스 1.5에서 확정한 플래그 그대로 |
+| `generate/index.js` | 스킵 판정 · 프롬프트 조립 · **한도 전환** · `bad_output` 교정 1회 · 검증 통과분만 원자 이동 · 실행 단위 스키마 등재 |
+| `tools/kgGenerate.js` | MCP 도구 `kg_generate`(`limit` 기본 1) — `tools/list` 노출 확인 |
+| `fixtures/fake-engine.js` | 8개 시나리오 가짜 엔진 |
+
+**가짜 엔진이 강제하는 것**: stdin으로 프롬프트가 안 오면 **종료 코드 4로 항의**한다 — *"본문을 argv로 넘기지 않는다"*(§1.13-2)가 시험으로 굳었다.
+
+**구현 중 잡은 결함 2건**: ①`parseEngineJson`이 최상위 배열에서 **첫 객체만 몰래 가져갔다** → 거부로 변경 ②`smoke.test`의 스텁 시험 대상이 낡음 → `rebuildGraph`로 이동.
+
+**남은 것**: **5-B**(실엔진 준수율 5건×2엔진, 약 15분 [추정]) · **5-C**(오너: MCP 타임아웃 상향 + 챗 연속 호출 실측).
+
+**미등재 한계**: 어댑터의 **argv 조립 자체는 계약 테스트가 덮지 않는다**(가짜 spawn으로 대체). 슬라이스 1.5 실호출로 확인했고 5-B에서 다시 확인된다.
