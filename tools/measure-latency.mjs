@@ -8,6 +8,7 @@
 // 사용: node bibliomind/tools/measure-latency.mjs [--all] [--since <ISO|YYYY-MM-DD>] [--fresh A3,D1] [--continuous B1]
 //   --all        평가 세트 21문 외의 호출도 포함
 //   --since      그 시각 **이후**의 질문만 — 회차 분리용. 없으면 과거 판정 회차가 한 표에 섞인다.
+//                **로컬 시각으로 해석한다**(예: 2026-08-22T16:00). 픽스처의 capturedStamp는 UTC이므로 혼동 주의.
 //   --fresh      새 컨텍스트 첫 질문으로 **강제 분류**할 문항(자동 분류를 덮어씀)
 //   --continuous 연속 대화로 강제 분류할 문항
 //
@@ -150,9 +151,16 @@ const rows = all
   .filter((r) => (SINCE === null ? true : r.t0 >= SINCE))
   .sort((a, b) => a.t0 - b.t0);
 
-// 모집단 분류 — 세션 파일의 첫 측정 질문 = 새 컨텍스트 첫 질문(§7-5).
+// 모집단 분류 — **필터를 적용한 뒤** 세션 파일별로 첫 질문을 다시 고른다.
+// extract() 시점의 seqInSession은 필터 전 기준이라, --since로 앞부분이 잘리면
+// 그 회차에는 seq 0인 행이 하나도 남지 않아 전 행이 '연속'으로 분류된다(오염 재현).
+const firstSeen = new Set();
 for (const r of rows) {
-  const auto = r.seqInSession === 0 ? 'fresh' : 'cont';
+  r.firstInScope = !firstSeen.has(r.session);
+  firstSeen.add(r.session);
+}
+for (const r of rows) {
+  const auto = r.firstInScope ? 'fresh' : 'cont';
   if (r.item && FORCE_FRESH.has(r.item)) r.pop = 'fresh';
   else if (r.item && FORCE_CONT.has(r.item)) r.pop = 'cont';
   else r.pop = auto;
@@ -214,4 +222,6 @@ if (SINCE === null) {
   console.log('⚠ --since 미지정 — 과거 판정 회차가 함께 집계됐을 수 있습니다. 회차별 판정에는 --since를 쓰세요.');
 }
 
-process.exitCode = cont && cont.median <= BUDGET_MS ? 0 : 1;
+// 종료코드: 0 달성 · 1 미달 · 2 미측정 — 상시 규칙 8조 제4조의 4값 판정과 맞춘다.
+if (!cont) process.exitCode = 2;
+else process.exitCode = cont.median <= BUDGET_MS ? 0 : 1;
