@@ -45,7 +45,7 @@
 
 > **B·C의 위험 1건**: 재생성은 **Q6를 다시 열 수 있다** — 새 표기 변형이 나오면 정본 사전(`data/schema.json`의 `canonical_entities`)에 추가해야 한다.
 
-> **⚠️ 백업 없음 — 오늘 작업분은 이 PC에만 있다** `[실측] 2026-08-23 git remote -v`: `bibliomind`는 **원격 저장소가 아예 없고**, `GraphRAG_1st`는 현재 브랜치 `phase2-scaffolding`이 **origin에 올라간 적이 없다**(no upstream). 전원 차단·재부팅으로는 잃지 않으나 **디스크 고장 시 전부 소실**. 공개 push는 오너 승인 사항이라 임의로 하지 않았다 — **A/B/C 회신과 함께 백업 방식을 정할 것**.
+> **백업 상태 [실측] 2026-08-23**: `bibliomind`는 **`dume81/BiblioMind.git` main에 push 완료**(공개 저장소 · 원격=로컬 `cdc8854` 일치 · 차이 0). ⚠️ **`GraphRAG_1st`의 `phase2-scaffolding` 브랜치는 여전히 백업 없음** — origin에 올라간 적이 없다(no upstream). 코드 전량이 이 PC에만 있다. **오너 결정 대기**: 보관용 `GraphRAG_1st.git`에 브랜치 push할지. 상세는 `DECISIONS.md` 말미 *"공개 push 실행"* 항목.
 
 **이사님 몫(대기)**: ①**5-C** MCP 타임아웃 상향 + 챗 연속 호출 실측 ②**M5** Codex 데스크탑 21문. 둘 다 1차 완성 선언 전 필수.
 
