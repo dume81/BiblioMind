@@ -11,6 +11,9 @@
 //                **로컬 시각으로 해석한다**(예: 2026-08-22T16:00). 픽스처의 capturedStamp는 UTC이므로 혼동 주의.
 //   --fresh      새 컨텍스트 첫 질문으로 **강제 분류**할 문항(자동 분류를 덮어씀)
 //   --continuous 연속 대화로 강제 분류할 문항
+//                ※ 위 둘은 **호출 회차**를 지정할 수 있다(2026-08-22 수리): `A3` = 그 문항 전 회차 /
+//                  `A3#2` = 2번째 호출만. 같은 문항이 2회 이상인데 회차 없이 지정하면 **경고**가 뜬다.
+//                  (M4 실발현: 판정 중 다른 질문이 끼어들어 A3를 재질문했고 --fresh A3 가 두 행 모두에 걸렸다.)
 //
 // 모집단 분리(2026-08-22 M4 실행표 v2): 같은 세트라도 **새 컨텍스트 첫 질문은 12~16초, 연속 대화는 5~7초**로
 // 계통 차이가 있다(개선 전 실측 — 예산 초과 4건이 전부 새 컨텍스트 첫 질문이었다). 섞어서 중앙값을 내면
@@ -159,12 +162,39 @@ for (const r of rows) {
   r.firstInScope = !firstSeen.has(r.session);
   firstSeen.add(r.session);
 }
+// 문항별 **호출 회차**를 매긴다(2026-08-22 수리 — 이전에는 문항 단위라 같은 문항을
+// 두 번 물으면 두 행이 구분되지 않았다. M4에서 실제 발현: 판정 중 다른 질문이 끼어들어
+// 같은 문항을 재질문했고 --fresh A3 가 두 행 모두에 걸렸다).
+// 지정 문법: `A3` = 그 문항 전 회차 / `A3#2` = 2번째 호출만.
+const occCount = new Map();
+for (const r of rows) {
+  if (!r.item) continue;
+  const n = (occCount.get(r.item) ?? 0) + 1;
+  occCount.set(r.item, n);
+  r.occ = n;
+}
+const totalOcc = new Map(occCount);
+
+/** `A3` 또는 `A3#2` 지정이 이 행에 걸리는가. */
+const forced = (set, r) => r.item && (set.has(`${r.item}#${r.occ}`) || set.has(r.item));
+
 for (const r of rows) {
   const auto = r.firstInScope ? 'fresh' : 'cont';
-  if (r.item && FORCE_FRESH.has(r.item)) r.pop = 'fresh';
-  else if (r.item && FORCE_CONT.has(r.item)) r.pop = 'cont';
+  if (forced(FORCE_FRESH, r)) r.pop = 'fresh';
+  else if (forced(FORCE_CONT, r)) r.pop = 'cont';
   else r.pop = auto;
   r.popForced = r.pop !== auto;
+}
+
+// 맨눈으로는 안 보이는 모호성을 **경고로 드러낸다** — 빈칸을 추론으로 채우지 않는다.
+const ambiguous = [];
+for (const [flag, set] of [['--fresh', FORCE_FRESH], ['--continuous', FORCE_CONT]]) {
+  for (const spec of set) {
+    if (spec.includes('#')) continue;                    // 회차를 명시했으면 모호하지 않다
+    const n = totalOcc.get(spec) ?? 0;
+    if (n > 1) ambiguous.push({ flag, spec, n });
+    else if (n === 0) ambiguous.push({ flag, spec, n: 0 });
+  }
 }
 
 if (rows.length === 0) {
@@ -185,10 +215,26 @@ const stats = (list) => {
   };
 };
 
+if (ambiguous.length > 0) {
+  console.log('');
+  for (const a of ambiguous) {
+    if (a.n === 0) {
+      console.log(`⚠ ${a.flag} ${a.spec} — 이 범위에 해당 문항 호출이 **0건**입니다(오타이거나 --since 밖).`);
+    } else {
+      console.log(`⚠ ${a.flag} ${a.spec} — 이 문항이 **${a.n}회** 호출됐고 지정이 ${a.n}건 전부에 걸렸습니다.`);
+      const list = rows.filter((r) => r.item === a.spec)
+        .map((r) => `${a.spec}#${r.occ}(${new Date(r.t0).toLocaleTimeString('ko-KR', { hour12: false })})`);
+      console.log(`   회차를 나누려면: ${list.join(' · ')} 중 하나를 골라 ${a.flag} ${a.spec}#2 처럼 지정하세요.`);
+    }
+  }
+  console.log('');
+}
+
 console.log('문항  모집단  질문                                  모델판단  도구왕복  합계(질문→1층)  재검색');
 console.log('─'.repeat(96));
 for (const r of rows) {
-  const label = (r.item || '-').padEnd(5);
+  // 같은 문항이 여러 번 나오면 회차를 붙여 어느 행인지 식별 가능하게 한다.
+  const label = (r.item ? ((totalOcc.get(r.item) ?? 1) > 1 ? `${r.item}#${r.occ}` : r.item) : '-').padEnd(5);
   const pop = (r.pop === 'fresh' ? '새컨텍스트' : '연속') + (r.popForced ? '*' : '');
   const q = (r.question.length > 34 ? r.question.slice(0, 33) + '…' : r.question).padEnd(36);
   const extra = r.extraSearches ? `  +${r.extraSearches}회` : '';
