@@ -562,7 +562,7 @@ export function restorationLines(seeds) {
 
 ## 5. 신규 테스트 (36케이스, 기존 248은 파일 무수정)
 
-### 5-1. `shared/tests/hangul.test.js` — 11케이스
+### 5-1. `shared/tests/hangul.test.js` — **14케이스(작성 완료 · 커밋 59ed6a3)**
 
 **절대경로**: `C:\Users\DUME\Desktop\Claude Code Workspace\GraphRAG_1st\shared\tests\hangul.test.js`
 
@@ -751,7 +751,7 @@ node scripts/capture-golden.js
 ```powershell
 npm test -w @bibliomind/shared
 ```
-→ 확인: shared 50 → 61 통과.
+→ 확인: shared 50 → **64** 통과(2026-08-22 실측).
 
 **3단계 — `searchEngine.js` 상수 3개 + `pickAnchorCandidate`(순수만) + `anchorRestore.test.js`의 #1~#19**
 ```powershell
@@ -769,7 +769,7 @@ npm test ; npm run lint
 ```powershell
 npm test ; npm run lint ; npm run mcp:smoke
 ```
-→ 확인: 284케이스 통과, lint 클린, tools/list 정상 응답(stdout 오염 없음).
+→ 확인: **287케이스** 통과(현재 262 + anchorRestore 21 + seedFloor 4), lint 클린, tools/list 정상 응답(stdout 오염 없음).
 
 **6단계 — 개선 후 캡처와 대조 (M2 수용 판정)**
 ```powershell
@@ -814,7 +814,12 @@ node scripts/capture-golden.js --out mcp-server/fixtures/golden-searches-postM2.
 
 ---
 
-## 10. 오너 결정이 필요한 잔여 항목 (4건)
+## 10. 오너 결정 4건 — **2026-08-22 전건 마감 (다시 묻지 말 것)**
+
+> **회신 결과**: ① 일륜도 동반 소실 **승인** · ② 정탐 3건→4건 정정 **승인** · ③ 두 글자 키워드 복원 제외(MIN=3) **승인** · ④ 복원 실패 표기 **안 함(현행 유지)**.
+> 근거·미채택 대안은 `DECISIONS.md` 2026-08-22 M2 항목. 아래 원문은 판단 근거 보존용이며 **재질의 대상이 아니다.**
+
+### (원문 — 결정 근거 보존용)
 
 > 이사님, 아래 4건만 결정해 주시면 M2 착수합니다. 나머지는 전부 설계에서 확정했습니다.
 

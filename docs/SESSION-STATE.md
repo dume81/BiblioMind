@@ -26,18 +26,26 @@
 
 ### 재개 절차 (압축 후 이 순서로)
 
+**0. `cd GraphRAG_1st && npm run setup`으로 Aura 활성부터 확인한다.** Free 인스턴스는 **3일 무쓰기면 자동 일시정지**되고 마지막 쓰기가 **2026-08-21 주입**이므로, **8/24 이후 재개하면 첫 단계부터 막힌다.** 일시정지 시 Aura 콘솔에서 resume 또는 `node pipeline/bin/inject-example.js` 재실행(멱등). M2-DESIGN §8의 1·6·7단계는 전부 살아 있는 Aura를 요구한다.
+
+**0-b. 개발 서버는 이미 기동 중일 수 있다** — 2026-08-22 마감 시점 기준 허브 8787·Vite 5173이 살아 있었다. `npm run dev:all`을 무턱대고 다시 돌리지 말고 포트 점유를 먼저 확인할 것. `EADDRINUSE`는 고장이 아니라 **이미 켜져 있다는 뜻**이다. 허브는 마지막 verified 하이라이트를 메모리에 보관 중이므로 재기동하면 그 상태를 잃는다.
+
 1. 이 절을 읽는다 → `docs/MAINTENANCE-PLAN.md`(유지보수 정본) → **`docs/M2-DESIGN.md` §8 구현 순서**(그대로 코딩하는 설계 정본).
 2. 상시 규칙이 **8조로 발효 중**이다 — 워크스페이스 루트 `CLAUDE.md` 말미 절 + `~/.claude/CLAUDE.md`(사용자 전역 최우선 규칙). 매 턴 `[착수]`/`[비착수]` 라벨, 완료 보고는 대조표, 주장에는 `[실측]`·`[문서]`·`[추정]`·`[미확인]` 등급.
-3. **M2 구현 배선 4단계**를 이어서 한다(아래).
+3. **M2 구현 배선**을 이어서 한다(아래). **단계 번호는 M2-DESIGN §8(0~8단계)이 정본**이고, 아래 표는 남은 일의 요약이다.
 
-### M2 구현 — 남은 배선 4단계 (설계서 §3~§6에 의사코드까지 확정됨)
+### M2 구현 — 남은 배선 (설계서 §3~§6에 의사코드까지 확정됨)
 
-| # | 대상 | 내용 |
+> ⚠️ **순서 주의**: `capture-golden.js` **계측 확장(2패스화)은 코드 변경 *전*에 해야 한다** — M2-DESIGN §8 **1단계**. 먼저 확장한 캡처로 `pre1.json`을 떠서 기존 픽스처와 전건 대조해야 *"계측 확장이 기준선을 오염시키지 않았다"* 를 증명할 수 있다. 아래 표의 마지막 행(재캡처·대조)만 코드 변경 *후*다. 순서를 바꾸면 이 증명이 **영구히 불가능**해진다.
+
+| 순서 | 대상 | 내용 |
 |---|---|---|
+| **먼저** | `scripts/capture-golden.js` | **2패스화**(`--out` 옵션 · `PROBE_QUESTIONS`/`anchorQuestion` · `digest`에 `restoredFrom` 조건부) → `pre1.json` 캡처 → 기존 `golden-searches.json`과 **전건 대조**. `[실측]` 현재 미착수(`--out`·`anchorQuestion`·`restoredFrom`·`anchoredCases` 전부 없음) |
 | 1 | `mcp-server/src/lib/searchEngine.js` | `matchKeyword` 헬퍼 추출 + **T2 하한 배선** — `if (kept.length > 0) { tier='T2'; … }` 형태로, **tier 확정보다 먼저** 적용(빈 records로 tier 굳히면 T3 폴백을 건너뛰는 조용한 미적중) |
 | 2 | 같은 파일 | `runSearch` 시그니처에 `question` 추가 + `records.length === 0` 분기에서만 `pickAnchorCandidate` 호출(적중 경로 무개입). 복원어는 **T1 → T2까지만, T3 배제** |
 | 3 | `mcp-server/src/tools/kgSearch.js` | `question` describe 개정(신뢰 경계) · `question` 전달 · `restorationLines()` 신설(교정 공개는 `restoredFrom && matched.length > 0`일 때만) · stderr NDJSON 관측 로그 |
-| 4 | 테스트·픽스처 | 신규 22케이스(`anchorRestore.test.js` 21 + `seedFloor.test.js` 4 중 잔여) + `capture-golden.js` 2패스화 + 재캡처 후 `golden-searches-postM2.json` 대조 |
+| 4 | 신규 테스트 | `anchorRestore.test.js` **21케이스** + `seedFloor.test.js` **4케이스** = **25케이스 추가** → 전 워크스페이스 **262 → 287** |
+| 5 | 재캡처·대조 | 코드 변경 **후** 재캡처 → `golden-searches-postM2.json` → M2-DESIGN §6-6 수용 판정표와 대조 |
 
 **이미 끝난 것(재작업 금지)**: `shared/src/hangul.js`(+테스트 14케이스), `searchEngine.js`의 상수 3개와 `pickAnchorCandidate` 순수 함수 — **배선만 안 됐고 코드는 있다.** `scripts/check-keywords.js`, `mcp-server/fixtures/keyword-probes.json`, `golden-searches.json`, `scripts/capture-golden.js`.
 
@@ -107,7 +115,7 @@
 
 **유지보수 진행(2026-08-22~)**: 슬라이스 1 스파이크 **Claude 표면 21/21 통과**(시드 14/15·인용 73건 verified·부정대조 3/3·소요 중앙값 6.1초). 오너가 **B안**(개선 먼저→재판정→Codex) 채택 → **docs/MAINTENANCE-PLAN.md가 유지보수 정본**(목표 5개·Phase M0~M5·Phase N 별건·오너 결정 3건). 현재 위치 = **M0 게이트 대기**(설계 문서화 + 오너 결정 ①T2 하한 50% ②잔상 A안 ③한글화 Phase N 편성). 다음 = M1 계측기 → M2 검색 정확도 → M3 문구 → M4 재판정 → M5 Codex.
 
-**판정 진행 실기록(2026-08-21 밤 확정)**: **docs/spike-judgment-log.md가 유일 정본** — 문항별 판정표(**완료 11/21문**: A1·A4·A5·B5·C1·D1·D2·D3·E1·E2·E3), 시드 5/5·E군 3/3, D2 침묵 실패 2회 재현 → 공백 가시화 질의 규칙 **적용 완료(GraphRAG_1st 커밋 e362d35 — [A]~[E] 실코드 검증됨)** → 재측정 통과. 오너 확정 원칙(공백 가시화 = 품질 루프)·판정 후 처리 목록 6건 포함. **주의: 이 문서의 다른 절에 남은 판정 이전 서술("Codex 먼저·8/25 이후"·"사용자 액션 ②③④ 잔여" 등)은 낡음 — 상충 시 spike-judgment-log.md가 우선.** 8/22 재개 = 이 대화창 모델을 Opus 5로 바꾸고 "spike-judgment-log.md 읽고 이어서".
+**판정 진행 실기록(2026-08-21 밤 확정)**: **docs/spike-judgment-log.md가 유일 정본** — 문항별 판정표(**완료 21/21문(2026-08-22 완주)**: A1·A4·A5·B5·C1·D1·D2·D3·E1·E2·E3), 시드 5/5·E군 3/3, D2 침묵 실패 2회 재현 → 공백 가시화 질의 규칙 **적용 완료(GraphRAG_1st 커밋 e362d35 — [A]~[E] 실코드 검증됨)** → 재측정 통과. 오너 확정 원칙(공백 가시화 = 품질 루프)·판정 후 처리 목록 6건 포함. **주의: 이 문서의 다른 절에 남은 판정 이전 서술("Codex 먼저·8/25 이후"·"사용자 액션 ②③④ 잔여" 등)은 낡음 — 상충 시 spike-judgment-log.md가 우선.** 8/22 재개 = 이 대화창 모델을 Opus 5로 바꾸고 "spike-judgment-log.md 읽고 이어서".
 
 ## 슬라이스 1 착수 브리핑 (원본 보존 — 위 진행 상태가 최신)
 
