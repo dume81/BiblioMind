@@ -150,7 +150,7 @@ Phase 0.1에서 **가장 먼저 요청 유형을 판별**하고, 아래 표에 �
 
 ## 현재 위치
 
-> **Phase 3 — 슬라이스 1 스파이크 판정 진행 중 (2026-08-21 밤 기준 Claude Code 표면 11/21문 완료)**
-> **판정 실기록 정본 = docs/spike-judgment-log.md** (문항별 판정표·집계 규칙·재개 절차 — 다른 문서와 상충 시 이 파일이 우선). 완료: A1·A4·A5·B5·C1·D1·D2·D3·E1·E2·E3 — 시드 5/5, E군(부정 대조) 3/3, D2 침묵 실패 2회 → 질의 규칙 반영(§1.14 사다리 1단, 커밋 e362d35) 후 재측정 통과.
-> 남은 순서: **8/22 Opus 5로 잔여 10문**(A2·A3, B1~B4, C2~C5 — ⑤ 소요 기록 필수) → 집계 확정·DECISIONS 기록 → **Codex 표면 21문** → 통과 시 main 병합 승인(범위: 1ef89f0→e362d35 전 커밋) 후 슬라이스 1.5
+> **Phase 3 — 슬라이스 1 스파이크 판정 통과(Claude 표면 21/21, 2026-08-22) → 유지보수 사이클 진행 중**
+> **정본 2종**: 판정 실기록 = docs/spike-judgment-log.md · 유지보수 계획 = **docs/MAINTENANCE-PLAN.md**(Phase M0~M5, 현재 M0 게이트 대기).
+> 남은 순서: **M0 게이트(오너 결정 3건)** → M1 계측기 → M2 검색 정확도 수정 → M3 문구 → M4 재판정 → M5 Codex 21문 → main 병합 승인 → Phase N(관계 한글화)
 > 사전 자료 검토 완료: req_node_relation.txt(KG 추출 프롬프트), KG_Demon Slayer_Draft_01.json(예시 그래프), 리디안_지식그래프/GraphRAG_1st(동작하는 3D 시각화 웹앱 — Vite+React+react-force-graph-3d, 테스트·린트·Vercel 배포 구성 보유)
