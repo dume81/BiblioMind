@@ -534,3 +534,41 @@
 
 - 합격선 4의 "외부 전송 0건"은 **우리 코드에 대해서만 [실측]**이다. `tesseract.js` 내부가 캐시 히트 시 네트워크를 쓰지 않는다는 것은 `cachePath` 옵션의 목적에 근거한 **[문서]** 수준이며, 패킷 수준으로 관측하지 않았다.
 - 테스트 픽스처(PDF·이미지)는 **scratchpad에 있고 저장소에 없다.** `check-absence`·`hub-e2e`에서 저장소로 승격했던 것과 달리, 이번 픽스처는 재현 스크립트(`make-pdf.mjs` + PowerShell 1회)로 언제든 다시 만들 수 있어 승격하지 않았다. **다만 그 재현 스크립트도 저장소 밖이다** — 같은 유형의 미승격이므로 등재한다.
+
+## 2026-08-22: 슬라이스 1.5 (엔진 스모크) — **합격선 6/6 달성 · 플래그 세트 확정**
+
+- **선행**: 오너가 두 CLI를 설치·로그인했다. **[실측]** `claude 2.1.239` `loggedIn:true/claude.ai` · `codex-cli 0.149.0` `auth is configured/chatgpt`. `npm run setup` 전 항목 ✓.
+- **목적**: `TECH-SPEC §1.4`가 명시한 플래그는 *"2026-08 기준 지식"* 이라 정본 스스로 미확정으로 표시해 뒀다. 이 슬라이스가 그것을 **실측으로 확정**한다.
+
+| # | 명제 | 임계값 (단위·분모) | 직전 실적 | 실측값 | 판정 |
+|---|---|---|---|---|---|
+| 1 | Codex 플래그 실재 | 설계 명시 **5개 전건** | [미확인] | **5/5 실재** + `--output-schema`도 실재 | **달성** |
+| 2 | Claude 플래그 실재 | 설계 명시 **3개 전건** | [미확인] | `-p`·`--output-format` 실재 · **`--max-turns` 부재** | **달성**(부재 확인이 성과) |
+| 3 | Codex 실호출 | KG JSON 1건 · 스키마 검증 통과 | 0건 | **노드 6 · 관계 5 · 검증 통과** · 48.9초 | **달성** |
+| 4 | Claude 실호출 | KG JSON 1건 · 스키마 검증 통과 | 0건 | **노드 9 · 관계 15 · 검증 통과** · 15.3초 | **달성** |
+| 5 | 본문 argv 미전달 | stdin 전달 | 미구현 | 프롬프트 **2,196자 stdin 파이프** | **달성** |
+| 6 | 플래그 세트 확정 기록 | DECISIONS 1건 | 없음 | 이 항목 | **달성** |
+
+### 확정 플래그 세트 (슬라이스 5 구현이 이대로 쓴다)
+
+| | Codex | Claude |
+|---|---|---|
+| **명령** | `cmd /c codex exec --skip-git-repo-check -s read-only -C <data/tmp> -o <출력파일> -` | `cmd /c claude -p --output-format json` |
+| **프롬프트** | stdin(`-`) | stdin |
+| **cwd** | `data/tmp` | `data/tmp` |
+| **결과 수취** | `-o` 파일 | stdout JSON 봉투의 `result` 필드 |
+| **실패 판별** | 종료 코드 | 봉투의 `is_error` |
+| **모델** | `-m <model>` | `--model <model>` |
+| **부작용 차단** | `-s read-only` | `-p` 헤드리스 기본 차단 |
+
+### 정본과 달랐던 것 2건 — **이것이 이 슬라이스의 산출물이다**
+
+1. **`--max-turns`는 claude CLI에 존재하지 않는다.** 설계는 `--max-turns 1`을 쓰려 했다. **제거한다.** 실측상 그 플래그 없이도 `num_turns: 1`로 1턴에 끝났다(봉투 확인).
+2. **`--output-schema`는 채택하지 않는다.** 실측: OpenAI structured output 스펙이 **모든 object에 `additionalProperties: false`를 강제**해 400을 돌려준다 — `invalid_json_schema: 'additionalProperties' is required to be supplied and to be false`. 그런데 KG 노드의 `properties`는 **자유 형태 객체**여야 하고, 속성 키를 미리 열거하면 **§2.1의 "도메인 스키마 AI 자동 도출" 원칙과 정면 충돌**한다. ⇒ **구조적 비호환.** 없이도 두 엔진 모두 **백틱 펜스 없는 순수 JSON**을 반환했고, 안전망으로 §1.4의 `bad_output` 교정 재호출 1회 규칙이 이미 있다.
+
+### 부수 실측 (슬라이스 5의 입력)
+
+- **소요 격차**: codex **48.9초** vs claude **15.3초**(동일 프롬프트 2,196자). 어댑터 `timeoutMs` 기본값은 **codex 기준**으로 잡아야 한다.
+- **부작용 0건**: 두 엔진 모두 `data/tmp`에 지정한 출력 파일 외 아무것도 만들지 않았다.
+- **신규 유형 경고 0**: 기존 전역 스키마 유형만 재사용했다(작은 표본 기준).
+- **추출 결과 대조**: codex는 노드 6·관계 5(`OLDER_BROTHER_OF`·`IS_A`·`PARTICIPATED_IN`·`HAS_AGENT`·`MEMBER_OF`), claude는 노드 9·관계 15로 **더 조밀하게** 뽑았다. 같은 입력에서 엔진별 밀도 차이가 있다 — 성공 기준 3의 "두 엔진 각각 검증"에서 품질 비교의 근거가 된다.
