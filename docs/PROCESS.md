@@ -150,9 +150,9 @@ Phase 0.1에서 **가장 먼저 요청 유형을 판별**하고, 아래 표에 �
 
 ## 현재 위치
 
-> **Phase 3 — 유지보수 M0~M4 전건 달성 + M4 게이트 조건부 승인(2026-08-22) → 재발 방지 3건 완료 → 슬라이스 2 완료(5/5)**
+> **Phase 3 — 유지보수 M0~M4 전건 달성 + M4 게이트 조건부 승인(2026-08-22) → 재발 방지 3건 완료 → 슬라이스 2·3 완료(5/5 · 8/8)**
 > **정본 6종**: 판정 실기록 = docs/spike-judgment-log.md · M4 실기록 = docs/M4-JUDGMENT-LOG.md · 유지보수 계획 = docs/MAINTENANCE-PLAN.md · **재발 방지 기전 = docs/PREVENTION-MECHANISM.md** · 결정 이력 = docs/DECISIONS.md · 이어받기 스냅샷 = docs/SESSION-STATE.md.
 > **M5(Codex 21문)는 오너 지시로 보류 중** — Codex가 장시간 작업 중. `PRD.md:96`이 *"병목 시 순서 조정은 가능하나 범위 축소 아님"* 이라 **defer는 허용·skip은 금지**다. **1차 완성 선언 전 반드시 완주**한다.
-> 남은 순서: **슬라이스 3(웹 크롤러)** → 슬라이스 4~9 → **M5 Codex 21문(이사님 직접, 여유 생기는 대로)** → main 병합·공개 push 승인(`dume81/BiblioMind.git`, 코드+문서) → Phase N(관계 한글화)
+> 남은 순서: **슬라이스 4(S2 문서 추출)** → 슬라이스 5~9 → **M5 Codex 21문(이사님 직접, 여유 생기는 대로)** → main 병합·공개 push 승인(`dume81/BiblioMind.git`, 코드+문서) → Phase N(관계 한글화)
 > **상시 규칙 8조 발효 중**(2026-08-22) — 정본은 워크스페이스 루트 `CLAUDE.md` 말미, 최우선 규칙은 `~/.claude/CLAUDE.md`(사용자 전역). 이 PROCESS.md는 **범위·게이트 충돌 시 8조보다 우선**한다.
 > 사전 자료 검토 완료: req_node_relation.txt(KG 추출 프롬프트), KG_Demon Slayer_Draft_01.json(예시 그래프), 리디안_지식그래프/GraphRAG_1st(동작하는 3D 시각화 웹앱 — Vite+React+react-force-graph-3d, 테스트·린트·Vercel 배포 구성 보유)
