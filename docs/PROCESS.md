@@ -150,7 +150,9 @@ Phase 0.1에서 **가장 먼저 요청 유형을 판별**하고, 아래 표에 �
 
 ## 현재 위치
 
-> **Phase 3 — 슬라이스 1 스파이크 판정 통과(Claude 표면 21/21, 2026-08-22) → 유지보수 사이클 진행 중**
-> **정본 2종**: 판정 실기록 = docs/spike-judgment-log.md · 유지보수 계획 = **docs/MAINTENANCE-PLAN.md**(Phase M0~M5, 현재 M0 게이트 대기).
-> 남은 순서: **M0 게이트(오너 결정 3건)** → M1 계측기 → M2 검색 정확도 수정 → M3 문구 → M4 재판정 → M5 Codex 21문 → main 병합 승인 → Phase N(관계 한글화)
+> **Phase 3 — 슬라이스 1 스파이크 판정 통과(Claude 표면 21/21, 2026-08-22) → 유지보수 M0·M1 달성, M2 구현 배선 단계**
+> **정본 4종**: 판정 실기록 = docs/spike-judgment-log.md · 유지보수 계획 = docs/MAINTENANCE-PLAN.md · **M2 구현 설계 = docs/M2-DESIGN.md(§8 구현 순서 그대로 코딩)** · 이어받기 스냅샷 = docs/SESSION-STATE.md("현재 위치와 다음 행동 — 2026-08-22 마감 시점" 절이 최신).
+> **오너 결정 전건 마감** — 조치 없이 바로 M2 배선 4단계로 이어간다.
+> 남은 순서: **M2 구현 배선 4단계** → M2 게이트 → M3 문구(M2에 동승) → M4 재판정(3단) → M5 Codex 21문 → main 병합 승인 → Phase N(관계 한글화)
+> **상시 규칙 8조 발효 중**(2026-08-22) — 정본은 워크스페이스 루트 `CLAUDE.md` 말미, 최우선 규칙은 `~/.claude/CLAUDE.md`(사용자 전역). 이 PROCESS.md는 **범위·게이트 충돌 시 8조보다 우선**한다.
 > 사전 자료 검토 완료: req_node_relation.txt(KG 추출 프롬프트), KG_Demon Slayer_Draft_01.json(예시 그래프), 리디안_지식그래프/GraphRAG_1st(동작하는 3D 시각화 웹앱 — Vite+React+react-force-graph-3d, 테스트·린트·Vercel 배포 구성 보유)

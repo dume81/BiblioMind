@@ -16,7 +16,65 @@
 | COLLABORATION.md | R&R (사용자/Claude/사용자 전용 액션) |
 | interview-round1.md | 인터뷰·웹 검증 기록 (역사 문서) |
 
-## 현재 위치와 다음 행동
+## 현재 위치와 다음 행동 — **2026-08-22 마감 시점 (최신)**
+
+> 이 절이 최신이다. 아래 "이전 이력"은 참고용.
+
+### 한 줄 요약
+
+슬라이스 1 스파이크 **판정 통과(Claude 표면 21/21)** → **유지보수 사이클 진행 중**. M0·M1 **달성**, **M2 구현 배선만 남음**. 오너 결정은 **전건 마감** — 이사님 조치 없이 바로 이어서 구현하면 된다.
+
+### 재개 절차 (압축 후 이 순서로)
+
+1. 이 절을 읽는다 → `docs/MAINTENANCE-PLAN.md`(유지보수 정본) → **`docs/M2-DESIGN.md` §8 구현 순서**(그대로 코딩하는 설계 정본).
+2. 상시 규칙이 **8조로 발효 중**이다 — 워크스페이스 루트 `CLAUDE.md` 말미 절 + `~/.claude/CLAUDE.md`(사용자 전역 최우선 규칙). 매 턴 `[착수]`/`[비착수]` 라벨, 완료 보고는 대조표, 주장에는 `[실측]`·`[문서]`·`[추정]`·`[미확인]` 등급.
+3. **M2 구현 배선 4단계**를 이어서 한다(아래).
+
+### M2 구현 — 남은 배선 4단계 (설계서 §3~§6에 의사코드까지 확정됨)
+
+| # | 대상 | 내용 |
+|---|---|---|
+| 1 | `mcp-server/src/lib/searchEngine.js` | `matchKeyword` 헬퍼 추출 + **T2 하한 배선** — `if (kept.length > 0) { tier='T2'; … }` 형태로, **tier 확정보다 먼저** 적용(빈 records로 tier 굳히면 T3 폴백을 건너뛰는 조용한 미적중) |
+| 2 | 같은 파일 | `runSearch` 시그니처에 `question` 추가 + `records.length === 0` 분기에서만 `pickAnchorCandidate` 호출(적중 경로 무개입). 복원어는 **T1 → T2까지만, T3 배제** |
+| 3 | `mcp-server/src/tools/kgSearch.js` | `question` describe 개정(신뢰 경계) · `question` 전달 · `restorationLines()` 신설(교정 공개는 `restoredFrom && matched.length > 0`일 때만) · stderr NDJSON 관측 로그 |
+| 4 | 테스트·픽스처 | 신규 22케이스(`anchorRestore.test.js` 21 + `seedFloor.test.js` 4 중 잔여) + `capture-golden.js` 2패스화 + 재캡처 후 `golden-searches-postM2.json` 대조 |
+
+**이미 끝난 것(재작업 금지)**: `shared/src/hangul.js`(+테스트 14케이스), `searchEngine.js`의 상수 3개와 `pickAnchorCandidate` 순수 함수 — **배선만 안 됐고 코드는 있다.** `scripts/check-keywords.js`, `mcp-server/fixtures/keyword-probes.json`, `golden-searches.json`, `scripts/capture-golden.js`.
+
+### 오너 결정 — 전건 마감 (다시 묻지 말 것)
+
+| 결정 | 결과 |
+|---|---|
+| T2 점수 하한 | **50%** 확정. 20종 실측에서 탈락 1건(오탐 39.2%), **정답 손실 0** |
+| 잔상 처리 | **결정 대상 아님** — 소거 3경로가 이미 확정·구현·실증. 집계자 오상정을 오너가 적발 |
+| 관계 한글화 | **실행 확정 · Phase N 별건 · 유지보수 이후.** 48종 중 42종(87.5%) 1회성이라 "정리 + 번역" 공사 |
+| 기준선 캡처 | **완료**(GraphRAG_1st `3358353`) |
+| 일륜도 동반 소실 | **승인** — 오탐 제거 시 그 노드 경유 1홉이던 일륜도도 1층에서 빠짐(13n·21r → 11n·18r) |
+| 2글자 키워드 복원 제외 | **승인**(`ANCHOR_MIN_KEYWORD_CHARS=3`). 2글자 허용 시 마음→마을 등 오복원 5종 |
+| 복원 실패 표기 | **표기 안 함**(현행 유지) — E1 부정 대조 표면을 흔들지 않기 위함 |
+| 상시 규칙 | **축소 7조 채택 → 전문가 투입 제1조 신설로 8조** |
+
+### 남은 게이트·이사님 몫
+
+- **M2 게이트**(구현 후) · **M4 재판정**(3단 구조: 챗 11문 + 서버 프로브 회귀 + 손상 프로브 2문) · **M5 Codex 21문 → main 병합 승인**(공개 저장소, 이사님 승인 필수)
+- **이사님이 직접 해야 하는 것**: Codex 데스크탑에서 21문 판정 실행 / `codex`·`claude` CLI 설치(현재 둘 다 미설치) / Jina 키 발급(슬라이스 3) / GitHub 저장소명 확정(슬라이스 9)
+- **다음 게이트 이월**: 훅 설치 승인(실수 원장 3조의 선행 조건) · 유예 조문 3건(계획 선별 / 실수 축적 / 심플하게) · 점수 척도 불일치(슬라이스 2 관찰) · Phase N 착수 시 "48종을 정리할 것인가"
+
+### 2026-08-22 커밋 (양 저장소)
+
+- `bibliomind`: `8419046` 유지보수 계획 → `6068415` M0 결정 → `c5b6306` 규칙 18조·시뮬레이션·7조안 → `65b9b59` 7조 채택 → `fb3a9ea` **TECH-SPEC v2.3(M0 완료)** → `1f3fdb8` **전문가 투입 제1조(8조)** → `6db4d46` 문서 정정
+- `GraphRAG_1st`: `3358353` **골든 픽스처·캡처 도구** → `59ed6a3` **hangul.js·앵커 복원 순수 함수·키워드 계측기**
+- 브랜치: `GraphRAG_1st` = `phase2-scaffolding`(**main 병합·push는 M5 통과 + 이사님 승인 후**) / `bibliomind` = `main`
+
+### 집계자(Claude) 실수 기록 — 재발 방지 (DECISIONS 말미 상세)
+
+1. 이미 결정·구현된 사안을 미결정으로 상정 → 결정 상정 전 DECISIONS·TECH-SPEC·코드 대조(8조 제7조 ⑦로 조문화)
+2. 확정 실행과 미결정 순서를 뭉쳐 질문 → 확정분·미결정분 분리(제7조 ⑧)
+3. 단일 표본으로 임계값 권고 → 표본 수 명시
+4. 외부 도구 UI 명칭 단정 → 외부 화면 기본값 `[미확인]`(제5조)
+5. **셸 서식 사고 2회**(`printf`의 `%`, 스크립트 이스케이프) → **한글 텍스트 치환은 heredoc 또는 Edit 도구.** 담당 조문 없음 — 8조가 못 막는 유일한 유형
+
+### 이전 이력(2026-08-21 시점 — 참고용)
 
 - **Phase 2 게이트 통과(2026-08-21 승인) → 슬라이스 0.5(스파이크 준비) 진행 중.** 게이트 확정 3건 + Karpathy 가이드라인 채택(GraphRAG_1st/CLAUDE.md·AGENTS.md 신설, 플러그인 미설치). 브랜치 운용 = 스파이크 통과 후 main 병합. 스캐폴딩 완료 내역(참고):
   - 구현: GraphRAG_1st를 npm workspaces 모노레포로 확장(`@bibliomind/shared|pipeline|mcp-server` + visualization-3d), shared 순수 함수 전부 구현+테스트, kg_status 스텁 1종, scripts/setup.js, .mcp.json, .env.example, ROADMAP 작성. **브랜치 `phase2-scaffolding` 로컬 커밋 — main 병합·push는 이사님 승인 후.**
