@@ -5,8 +5,17 @@
 //   판정 지표 "질문→1층 표시" = t2 - t0
 //   내역: 모델 판단 시간(t1-t0) + 시스템 시간(t2-t1)
 //
-// 사용: node bibliomind/tools/measure-latency.mjs [--all]
-//   기본 = 평가 세트 21문과 일치하는 질문만, --all = 전체 kg_search 호출
+// 사용: node bibliomind/tools/measure-latency.mjs [--all] [--since <ISO|YYYY-MM-DD>] [--fresh A3,D1] [--continuous B1]
+//   --all        평가 세트 21문 외의 호출도 포함
+//   --since      그 시각 **이후**의 질문만 — 회차 분리용. 없으면 과거 판정 회차가 한 표에 섞인다.
+//   --fresh      새 컨텍스트 첫 질문으로 **강제 분류**할 문항(자동 분류를 덮어씀)
+//   --continuous 연속 대화로 강제 분류할 문항
+//
+// 모집단 분리(2026-08-22 M4 실행표 v2): 같은 세트라도 **새 컨텍스트 첫 질문은 12~16초, 연속 대화는 5~7초**로
+// 계통 차이가 있다(개선 전 실측 — 예산 초과 4건이 전부 새 컨텍스트 첫 질문이었다). 섞어서 중앙값을 내면
+// 개선과 무관한 이유로 미달이 뜨므로, 합격 판정은 **연속 대화 모집단의 중앙값**으로만 한다.
+// 자동 분류 규칙: 세션 파일 안에서 **처음 측정된 질문 = 새 컨텍스트 첫 질문**, 나머지 = 연속.
+// (/clear가 같은 파일 안에서 일어나면 자동 분류가 틀릴 수 있다 — 그때는 --fresh로 명시할 것.)
 
 import { readFileSync, readdirSync, existsSync } from 'node:fs';
 import { join } from 'node:path';
@@ -45,6 +54,24 @@ const EVAL = {
 
 const onlyEval = !process.argv.includes('--all');
 const norm = (s) => String(s).replace(/\s+/g, ' ').trim();
+
+const argValue = (name) => {
+  const i = process.argv.indexOf(name);
+  return i > -1 ? process.argv[i + 1] : null;
+};
+const csv = (name) => (argValue(name) || '').split(',').map((x) => x.trim()).filter(Boolean);
+
+const sinceRaw = argValue('--since');
+const SINCE = sinceRaw ? Date.parse(sinceRaw.length <= 10 ? `${sinceRaw}T00:00:00` : sinceRaw) : null;
+if (sinceRaw && Number.isNaN(SINCE)) {
+  console.error(`✗ --since 값을 해석할 수 없습니다: ${sinceRaw} (예: 2026-08-22 또는 2026-08-22T16:00)`);
+  process.exit(2);
+}
+const FORCE_FRESH = new Set(csv('--fresh'));
+const FORCE_CONT = new Set(csv('--continuous'));
+
+/** 연속 대화 모집단의 합격 예산(§7-5). 새 컨텍스트 첫 질문에는 적용하지 않는다. */
+const BUDGET_MS = 10_000;
 
 function readSession(file) {
   const rows = [];
@@ -100,6 +127,7 @@ function extract(rows, sessionFile) {
           totalMs: ts - pending.t0,   // 질문 → 1층 표시 (판정 지표)
           extraSearches: 0,
           session: sessionFile.slice(0, 8),
+          seqInSession: results.length, // 0 = 그 세션 파일의 첫 측정 질문
         };
         results.push(current);
       }
@@ -119,28 +147,71 @@ for (const dir of PROJECT_DIRS) {
 
 const rows = all
   .filter((r) => (onlyEval ? r.item : true))
+  .filter((r) => (SINCE === null ? true : r.t0 >= SINCE))
   .sort((a, b) => a.t0 - b.t0);
+
+// 모집단 분류 — 세션 파일의 첫 측정 질문 = 새 컨텍스트 첫 질문(§7-5).
+for (const r of rows) {
+  const auto = r.seqInSession === 0 ? 'fresh' : 'cont';
+  if (r.item && FORCE_FRESH.has(r.item)) r.pop = 'fresh';
+  else if (r.item && FORCE_CONT.has(r.item)) r.pop = 'cont';
+  else r.pop = auto;
+  r.popForced = r.pop !== auto;
+}
 
 if (rows.length === 0) {
   console.log('측정 가능한 kg_search 호출이 없습니다. (판정 세션에서 질문을 실행한 뒤 다시 실행하세요)');
+  if (SINCE !== null) console.log(`  — --since ${sinceRaw} 이후로 한정한 결과입니다. 범위를 넓혀 보세요.`);
   process.exit(0);
 }
 
 const sec = (ms) => (ms / 1000).toFixed(1) + 's';
-console.log('문항  질문                                    모델판단  도구왕복  합계(질문→1층)  재검색');
-console.log('─'.repeat(88));
+const stats = (list) => {
+  if (list.length === 0) return null;
+  const sorted = [...list].sort((a, b) => a - b);
+  return {
+    n: sorted.length,
+    median: sorted[Math.floor(sorted.length / 2)],
+    avg: Math.round(sorted.reduce((s, v) => s + v, 0) / sorted.length),
+    max: sorted[sorted.length - 1],
+  };
+};
+
+console.log('문항  모집단  질문                                  모델판단  도구왕복  합계(질문→1층)  재검색');
+console.log('─'.repeat(96));
 for (const r of rows) {
   const label = (r.item || '-').padEnd(5);
-  const q = (r.question.length > 36 ? r.question.slice(0, 35) + '…' : r.question).padEnd(38);
+  const pop = (r.pop === 'fresh' ? '새컨텍스트' : '연속') + (r.popForced ? '*' : '');
+  const q = (r.question.length > 34 ? r.question.slice(0, 33) + '…' : r.question).padEnd(36);
   const extra = r.extraSearches ? `  +${r.extraSearches}회` : '';
-  console.log(`${label} ${q} ${sec(r.modelMs).padStart(7)} ${sec(r.toolMs).padStart(8)} ${sec(r.totalMs).padStart(10)}${extra}`);
+  console.log(`${label} ${pop.padEnd(7)} ${q} ${sec(r.modelMs).padStart(7)} ${sec(r.toolMs).padStart(8)} ${sec(r.totalMs).padStart(10)}${extra}`);
+}
+console.log('─'.repeat(96));
+
+const cont = stats(rows.filter((r) => r.pop === 'cont').map((r) => r.totalMs));
+const fresh = stats(rows.filter((r) => r.pop === 'fresh').map((r) => r.totalMs));
+const avgOf = (key) => Math.round(rows.reduce((s, r) => s + r[key], 0) / rows.length);
+
+console.log(`측정 ${rows.length}건${SINCE === null ? '' : ` (--since ${sinceRaw} 이후)`} · 평균 내역: 모델판단 ${sec(avgOf('modelMs'))} + 도구왕복 ${sec(avgOf('toolMs'))}`);
+console.log('* 도구왕복은 클라이언트 관측치(MCP 전송 오버헤드 포함) — 서버 순수 구간 직접 측정치는 약 0.45s');
+if (rows.some((r) => r.popForced)) console.log("* '*' 표시는 --fresh/--continuous로 강제 분류한 문항");
+console.log('');
+
+// ── 합격 판정: 연속 대화 모집단의 **중앙값**만 예산과 대조한다 ──
+if (cont) {
+  const ok = cont.median <= BUDGET_MS;
+  console.log(`[합격 판정] 연속 대화 ${cont.n}건 — 중앙값 ${sec(cont.median)} · 평균 ${sec(cont.avg)} · 최대 ${sec(cont.max)}`);
+  console.log(`            예산 ${sec(BUDGET_MS)} 대비 중앙값 ${ok ? '충족 ✓' : '초과 ✗'}`);
+} else {
+  console.log('[합격 판정] 연속 대화 모집단이 비어 있어 **미측정** — 문항마다 새 컨텍스트로 돌리면 이 지표는 산출되지 않는다.');
+}
+if (fresh) {
+  console.log(`[참고]      새 컨텍스트 첫 질문 ${fresh.n}건 — 중앙값 ${sec(fresh.median)} · 최대 ${sec(fresh.max)}`);
+  console.log('            이 모집단은 컨텍스트·규칙 로드 시간이 포함돼 개선 전에도 12~16초였다. **합격 판정에 쓰지 않는다.**');
+}
+if (SINCE === null) {
+  console.log('');
+  console.log('⚠ --since 미지정 — 과거 판정 회차가 함께 집계됐을 수 있습니다. 회차별 판정에는 --since를 쓰세요.');
 }
 
-const avg = (key) => Math.round(rows.reduce((s, r) => s + r[key], 0) / rows.length);
-const max = Math.max(...rows.map((r) => r.totalMs));
-console.log('─'.repeat(88));
-const sorted = rows.map((r) => r.totalMs).sort((a, b) => a - b);
-const median = sorted[Math.floor(sorted.length / 2)];
-console.log(`측정 ${rows.length}건 · 평균: 모델판단 ${sec(avg('modelMs'))} + 도구왕복 ${sec(avg('toolMs'))} = 합계 ${sec(avg('totalMs'))} (중앙값 ${sec(median)})`);
-console.log('* 도구왕복은 클라이언트 관측치(MCP 전송 오버헤드 포함) — 서버 순수 구간 직접 측정치는 약 0.45s');
-console.log(`최대 ${sec(max)} · 예산 10초 대비 ${max <= 10000 ? '전건 충족 ✓' : '초과 있음 ✗'}`);
+process.exitCode = cont && cont.median <= BUDGET_MS ? 0 : 1;
