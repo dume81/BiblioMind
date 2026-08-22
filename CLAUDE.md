@@ -52,3 +52,5 @@
 - **커밋 규칙**: 슬라이스 단위로 작게, 작업 브랜치(`phase2-scaffolding` 등)에 로컬 커밋. **main 병합·push는 사용자 승인 후에만**(공개 저장소).
 - **Windows 주의**: 외부 CLI spawn은 `shared/src/winSpawn.js`(cmd /c 래퍼) 경유, CLI 부재 = 종료 코드 9009. 포트 점검 시 Vite는 IPv6(::1) 바인딩임에 유의.
 - **GSD 방법론(.planning) 미사용**: 프로세스 정본은 docs/PROCESS.md. `/gsd-*` 스킬은 사용자 명시 호출 시에만(2026-08-21 스킬 조정 A안 — DECISIONS.md).
+
+- **오너 상시 규칙 7조**는 워크스페이스 루트 `CLAUDE.md` 말미가 정본이다(2026-08-22 채택). 상위에서 열지 않아 로드되지 않았다면 그 절을 먼저 읽는다 — 근거·유예 목록은 `docs/OPERATING-RULES-7.md`.
