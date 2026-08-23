@@ -1145,3 +1145,33 @@ Q6는 정본 사전(결정론적 정규화)으로 엔진 호출 0회에 해결�
 - **집계자 절차 결함 1건 — 자진 기재**: 제7조 ⑦(기결정 확인)을 **push 전이 아니라 push 후에** 수행했다. 결과적으로 기결정과 모순은 없었으나 **순서가 틀렸다** — 되돌리기 어려운 행위는 기결정 검색이 **선행**해야 한다.
 - **되돌리기**: 저장소 비공개 전환 또는 삭제(둘 다 **사용자 액션 필요** — GitHub 설정). **이미 공개됐으므로 캐시·인덱싱은 되돌릴 수 없다.**
 - **미채택**: ① **push 보류** — 오너가 명시 지시했고 백업 부재가 실위험(오늘 확인: 오늘 작업분 전량이 이 PC에만 존재)이라 미채택 ② **GraphRAG_1st 동시 push** — 별개 저장소이며 지시 범위 밖이라 미채택하고 **결정 요청 1건으로 분리**.
+
+## 2026-08-23: 코드 품질 5조 축소(1·3번 삭제) + superpowers 설치 (오너 지시)
+
+- **오너 지시**: *"`2번 · 4번 · 5번 — 🟢 이사님 고유` 이 내용만 남기고 `## 개발 시 — 코드 품질 5조` 내용의 나머지는 제거해줘. 그리고 superpowers를 설치해줘. 설치 후 상시 활성화되게 해줘."*
+- **판단 배경**: 직전 턴에서 5조 5개 조문을 superpowers 14개 스킬 전문(138,578 B)과 대조해 **1·3번만 겹친다**고 보고했다(1번 ↔ `verification-before-completion`, 3번 ↔ `YAGNI` 10줄). 오너가 겹치는 2개를 삭제하고 superpowers로 대체하기로 결정했다.
+- **실행 [실측]**: `~/.claude/CLAUDE.md` **65행 → 46행**. 제거 = 판정 문법 서문 · 1번 · 3번 · 말미 주석(기계가 보는 것은 1번뿐 / 채택 근거). 2·4·5번은 **원 번호 유지**(제4조 — 이미 선언된 이름을 바꾸지 않는다. `DECISIONS.md`의 기존 "5조 N번" 참조를 살리기 위함).
+
+### ⚠️ 삭제분 중 **superpowers가 대체하지 못하는** 조항 3개 — 원문 보존
+
+`~/.claude/CLAUDE.md`는 **git 관리 밖**이라 여기가 유일한 복구 경로다. 직전 턴의 전수 검색에서 대응물 0건으로 확인된 것들이다.
+
+1. (1번) *"검증은 **경계에서** 한다 — 상대가 실제로 쓰는 스키마·프로토콜·파일 경로. 내가 손으로 쓴 형식 단언은 그 다음이다."* — superpowers는 `end-to-end|integration|real path` 적중이 2줄뿐이고 둘 다 일반론.
+2. (1번) *"새 검사기를 붙이면 **고의 결함을 한 번 심어 본다.** 그래도 통과하면 통과한 것은 코드가 아니라 검사기다. **주입이 실제로 적용됐는지 먼저 확인한다** — 주입이 조용히 실패하면 정반대 결론이 나온다."* — superpowers의 *"watch it fail"* 은 **TDD의 RED 단계**이지 뮤테이션이 아니다. **대응물 0.**
+3. (3번) *"내가 만든 고아는 치운다. **남의 죽은 코드는 말만 하고 지우지 않는다.** 범위 밖에서 발견한 결함은 **고치지 않더라도 반드시 보고한다.**"* — superpowers 리뷰어는 제거를 **제안**하는 쪽이고, 자타 구분·보고 의무 조문이 없다.
+
+### superpowers 설치 결과 [실측]
+
+- 마켓플레이스: `obra/superpowers-marketplace`(v1.0.13) — **저자 본인 저장소**. `anthropics/claude-plugins`·`claude-code-plugins`는 **HTTP 404**로 실재하지 않아 미채택.
+- 플러그인: **superpowers 6.3.0** · scope `user` · **Status: enabled**
+- 구성: **스킬 14 · 훅 1(SessionStart) · 에이전트 0 · MCP 0**
+- 상시 비용: **~688 토큰/세션**(`claude plugin details` 실측)
+- 상시 활성화 근거: `~/.claude/settings.json`의 `enabledPlugins["superpowers@superpowers-marketplace"] = true` + `extraKnownMarketplaces`
+- **이번 세션에는 미적용** — `ListSkills` 조회 **0건**. SessionStart 훅은 세션 시작 시점에 이미 지나갔다. **다음 세션(재시작·`/clear`·`/compact`)부터 발동.**
+
+### 남은 충돌 1건 — 오너 인지 사항
+
+`using-superpowers`가 주입하는 문구는 *"어떤 응답보다 **먼저** 스킬을 발동하라 — 협상 불가"* 이고, 전역 최우선 규칙도 *"다른 무엇보다 **먼저** 발동"* 이다. **로딩 우선순위상 전역 `CLAUDE.md`가 이기지만**, 실무에서는 매 턴 판단이 필요하다. 문제가 되면 `claude plugin disable superpowers` 1회로 끌 수 있다.
+
+- **되돌리기**: ①규칙 = 위 3개 조항을 `~/.claude/CLAUDE.md`에 복원 ②플러그인 = `claude plugin uninstall superpowers` + `claude plugin marketplace remove superpowers-marketplace`
+- **미채택**: ① **1·3번 유지** — 오너가 중복을 이유로 삭제를 명시 지시해 미채택하되, 대체 불가 3개 조항을 위에 보존 ② **`claude-plugins-official` 경로** — 마켓플레이스가 등록돼 있지 않고(`No marketplaces configured`) 추정 GitHub 경로가 전부 404라 미채택.
