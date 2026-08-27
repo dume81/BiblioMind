@@ -1380,3 +1380,10 @@ Q6는 정본 사전(결정론적 정규화)으로 엔진 호출 0회에 해결�
 - **TECH-SPEC v2.13**: §4.3-1 상태 판정 규칙·저장 목록 표기 / §4.3-2 폴더 배치·차단 스킵 안내·절대경로 — **문서 먼저** 개정 후 코드.
 - **미반영 2건(정직 기재)**: ①destructiveHint:false vs force 덮어쓰기의 어노테이션 경계 사례(패널 minor — §4.2 정본이 '쓰기'로 분류해 스펙 위반 아님, 오너 판정감으로만 보고) ②toolShape #1의 자기 확인 구조(기왕 패턴 — tools/list 실왕복 실측이 보완 게이트로 이번 판정에 포함됨).
 - **잔여**: 커밋은 `phase2-scaffolding` 로컬 — main 병합·push는 오너 승인 대기(공개 저장소 규칙).
+
+## 2026-08-27: 슬라이스 8.5 push 집행 (오너 승인) — 이후 5-C 진행 예고
+
+- **오너 회신**: *"push 승인 완료 후 보고해. 보고 내용 확인 후 5-C 이거 진행할게."*
+- **위생(증분 — 전량 감사는 같은 날 기수행이라 표적 스캔으로 축약)**: GraphRAG_1st 증분 1커밋 diff + bibliomind 증분 1커밋 diff 비밀 패턴 스캔 — **실비밀 0건** [실측]. 적중 4건 전부 무해(커밋 author 이메일은 기존 전 커밋에 기공개된 git 메타데이터 · 안내 문구 · 감사 기록 재서술).
+- **집행 [실측]**: GraphRAG_1st ff 병합 `044f4f7`→**`0304334`** → push, `ls-remote` 일치·격차 0. bibliomind는 이 항목 커밋 포함 push(격차 0은 push 직후 확인).
+- **5-C 근거 확보(종전 [미확인] 해소 — 1차 출처)**: Codex `config.toml` `[mcp_servers.<이름>]`의 **`tool_timeout_sec`(도구 호출 — 기본 60초)** · `startup_timeout_sec`(기동 — 기본 10초, 별칭 startup_timeout_ms) [문서] learn.chatgpt.com/docs/config-file/config-reference (developers.openai.com/codex/config-reference 리다이렉트). Claude Code 쪽 키는 공식 문서 조사 별건 진행.
