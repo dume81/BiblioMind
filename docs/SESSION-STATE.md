@@ -33,7 +33,8 @@
 - **Q6 재개봉 3건 → 해소**: 신 p04의 약칭 `Product/R-TAPs`·`R-DACS`·`K-Pack`을 canonical_entities 변형으로 등재(씨앗·런타임) — 병합 후 약칭 잔존 노드 0. **미해결 충돌 12건·유사 이름 쌍 8건이 재빌드 요약에 상시 노출 중**(품질 루프 — 신규 1건 `GRC K-PACK.full_name`은 약칭 병합이 드러낸 것).
 - **신설 큐**: Q11(관계 속성 병합) · Q12(registerNewTypes updated_at) · Q13(review_reject 안내문). 정본 = MAINTENANCE-PLAN 말미(큐 가드에 "오너 승인 시 예외" 단서 추가됨).
 - ~~다음 행동①②~~ **완료(2026-08-26 같은 날)**: p04 게이트 승인·집행 완료 + 오너 "8" 택일 → **슬라이스 8 완료(합격선 7/7)** — MCP 도구 **13종** 가동(`source_remove`·`schema_get`·`schema_update` 신설 + `kg_status` 실수치 완성), GET `/api/health` 신설, `hub:e2e` 9/9, 테스트 **559**. TECH-SPEC **v2.12**. 3렌즈 반박 패널 blocker 2건(쌍둥이 원장 전수 처리·kg_status 테스트 심) 반영. 신설 큐 Q14(first_seen 미기록)·Q15(reject 후 refresh 미푸시), Q13은 자연 해소.
-- **다음 행동**: ① **D4 귀속 결정**(collect_web·collect_docs — 잔여 미구현 2종의 슬라이스 편성, 오너) → ② 슬라이스 9(README) 또는 5-C(오너 몫) → M5. 상세 순서는 ROADMAP.
+- **M5 착수(2026-08-26 오너 지시 — 순서 M5 → D4)**: 실행표 정본 = **`docs/M5-JUDGMENT.md`**(신규 — M4-REJUDGMENT는 무수정 보존). 준비 완료 [실측]: 예시 그래프 전환(29·55, buildId `20260827T044116`) · dev:all 기동(허브 health ok) · Codex config.toml 등재 확인. **⚠ 지금 DB는 예시 그래프(귀멸의 칼날)다** — 판정 종료 후 `kg_rebuild` 1회로 실자료(readians 132·207) 복원, 그 전까지 실자료 질의 불가. 소요 계측기는 Codex 미지원[실측] → 육안 폴백. 이사님 몫: Codex 재시작 → kg_status 실수치 확인(29·55) → 21문(문항마다 이 창에 결과 공유 → 집계자가 ④ 자동 대조).
+- **다음 행동**: ① **M5 21문 판정**(진행 중) → ② main 병합·공개 push 결정 → ③ D4 귀속 결정 → ④ 5-C·슬라이스 9.
 
 ### 한 줄 요약
 
