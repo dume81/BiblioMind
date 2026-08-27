@@ -1387,3 +1387,11 @@ Q6는 정본 사전(결정론적 정규화)으로 엔진 호출 0회에 해결�
 - **위생(증분 — 전량 감사는 같은 날 기수행이라 표적 스캔으로 축약)**: GraphRAG_1st 증분 1커밋 diff + bibliomind 증분 1커밋 diff 비밀 패턴 스캔 — **실비밀 0건** [실측]. 적중 4건 전부 무해(커밋 author 이메일은 기존 전 커밋에 기공개된 git 메타데이터 · 안내 문구 · 감사 기록 재서술).
 - **집행 [실측]**: GraphRAG_1st ff 병합 `044f4f7`→**`0304334`** → push, `ls-remote` 일치·격차 0. bibliomind는 이 항목 커밋 포함 push(격차 0은 push 직후 확인).
 - **5-C 근거 확보(종전 [미확인] 해소 — 1차 출처)**: Codex `config.toml` `[mcp_servers.<이름>]`의 **`tool_timeout_sec`(도구 호출 — 기본 60초)** · `startup_timeout_sec`(기동 — 기본 10초, 별칭 startup_timeout_ms) [문서] learn.chatgpt.com/docs/config-file/config-reference (developers.openai.com/codex/config-reference 리다이렉트). Claude Code 쪽 키는 공식 문서 조사 별건 진행.
+
+## 2026-08-27: 5-C 완료 — Codex MCP 타임아웃 상향 (오너 집행·왕복 확인)
+
+- **경위**: 오너 질의 *"사용하는데 전혀 느끼지 못했는데 필요해?"* → 원인 설명(못 느낀 것이 정상 — 60초를 넘는 유일 도구 `kg_generate`가 Codex에서 실행된 적 없음. 충돌은 §4.3-3 v2가 설계 시점에 예측·등재한 것) → 오너가 즉시 적용 선택.
+- **집행 [실측 — 오너]**: `%USERPROFILE%\.codex\config.toml` `[mcp_servers.bibliomind]`에 **`tool_timeout_sec = 900`** 추가 → Codex 데스크탑 재시작 → `kg_status` 왕복 — **Input 28·승인 6·Neo4j 132n·207r·buildId 20260827T200950·스키마 v3 전항 기대값 일치**. "부분 성공"은 허브 꺼짐(dev:all 미기동)의 §4.3-15 정직 보고 — 정상.
+- **판정 갈림(1차 출처 조사 결과)**: 종전 상정 "두 클라이언트 상향"에서 **Codex만 필요**로 정정 — Claude Code는 기본값(도구 벽시계 ~28시간 `MCP_TOOL_TIMEOUT`·stdio 유휴 30분)이 최악 10분을 이미 덮는다 [문서, 공식 mcp.md — claude-code-guide 조회]. limit 3+(한 호출 30분 초과) 계획 시에만 유휴 타임아웃 상향.
+- **잔여 검증 이월(정직 기재)**: 이번 확인은 설정 반영·왕복까지 — **900초 실효**(60초 초과 호출 생존)는 슬라이스 5 첫 `kg_generate` 실호출이 겸한다(합격선 반영).
+- **미채택**: 슬라이스 5 직전 이월안 — 오너가 즉시 적용을 택해 미채택.

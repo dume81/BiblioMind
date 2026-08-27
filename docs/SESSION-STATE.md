@@ -39,7 +39,8 @@
 - **공개 push 완료(2026-08-27 오너 A안)**: 3렌즈 감사(blocker 0) → GraphRAG_1st ff 병합·push(origin/main=`044f4f7`, 39커밋 백업) + bibliomind push. **오너 방향 확정 2건**: ①최종 프로덕트는 `dume81/BiblioMind.git`으로 통합(방식은 미결 — 슬라이스 9와 묶어 설계) ②타 PC 클론 실행 가능 요건(정적 감사 blocker 0 — README가 남은 몫).
 - **슬라이스 8.5 ✅ 완료(2026-08-27 오너 A안 → 같은 턴 완주)**: D4 해소 — `collect_web`·`collect_docs` 표면 2종으로 **설계 15종 전 도구 가동**. TDD·3렌즈 반박 패널(major 3 반영: robots 차단=실패 판정·blocked force 거짓 안내 제거·§4.1 5건 상한)·왕복 e2e 7/7·테스트 **580**·TECH-SPEC **v2.13**. 커밋 `0304334`(phase2-scaffolding 로컬 — **push는 오너 승인 대기**).
 - **8.5 push 완료(2026-08-27 오너 승인)**: 증분 위생 스캔(실비밀 0) → ff 병합 → 양측 push·격차 0 — GraphRAG_1st `0304334` · bibliomind `b06e0a4`. **5-C 키 확보(종전 [미확인] 해소)**: Codex `tool_timeout_sec`(기본 60초 — **상향 필수**) [문서] / Claude Code `MCP_TOOL_TIMEOUT` 벽시계 기본 ~28시간·stdio 유휴 30분 — **limit 기본 1에서는 상향 불요** [문서, claude-code-guide 조회].
-- **다음 행동**: ① **5-C 집행(오너)** — Codex config.toml `[mcp_servers.<이름>]`에 `tool_timeout_sec = 900` + 재시작(안내 전달됨. Claude Code는 기본값 충분 — limit 3+ 계획 시에만 유휴 타임아웃 상향) → ② 슬라이스 9(README + 통합 방식 설계) 또는 슬라이스 5(S3 생성기 — 5-C 후 개방) → ③ 슬라이스 10.
+- **5-C ✅ 완료(2026-08-27 오너 집행)**: Codex `[mcp_servers.bibliomind]` `tool_timeout_sec=900` + 재시작 + `kg_status` 왕복 전항 기대값 일치(부분 성공 = 허브 꺼짐의 정직 보고). Claude Code는 기본값 충분 판명 — 상향 불요. 900초 실효는 슬라이스 5 첫 kg_generate가 겸검증(ROADMAP 반영).
+- **다음 행동**: ① **다음 슬라이스 택일(오너 — 8요소 상신됨)**: 슬라이스 5(S3 생성기 검증·측정 — 선행 조건 충족) vs 슬라이스 9(README + BiblioMind.git 통합 방식 설계) → ② 남은 쪽 → ③ 슬라이스 10(통합 검증 — MVP 완료).
 
 ### 한 줄 요약
 
