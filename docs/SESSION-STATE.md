@@ -36,7 +36,8 @@
 - **M5 착수(2026-08-26 오너 지시 — 순서 M5 → D4)**: 실행표 정본 = **`docs/M5-JUDGMENT.md`**(신규 — M4-REJUDGMENT는 무수정 보존). 준비 완료 [실측]: 예시 그래프 전환(29·55, buildId `20260827T044116`) · dev:all 기동(허브 health ok) · Codex config.toml 등재 확인. **⚠ 지금 DB는 예시 그래프(귀멸의 칼날)다** — 판정 종료 후 `kg_rebuild` 1회로 실자료(readians 132·207) 복원, 그 전까지 실자료 질의 불가. 소요 계측기는 Codex 미지원[실측] → 육안 폴백. 이사님 몫: Codex 재시작 → kg_status 실수치 확인(29·55) → 21문(문항마다 이 창에 결과 공유 → 집계자가 ④ 자동 대조).
 - **M5 완주(2026-08-27)**: Codex 표면 **21/21문** — 합격선 **6 달성 + 1 오너판정대기**(부정 대조 E군 — 판정 주체 규정). 정본 = `M5-JUDGMENT.md`(§3 사초·§3-b 검증 실행·감사 정정·§4-b 최종 판정표). 기록 감사 패널이 잡은 blocker·major는 §3-b로 해소. **DB는 실자료로 복원 완료**(132n·207r·headquarters 유지·buildId `20260827T200950`) — 예시 그래프 아님. 검증 스크립트 import 회귀 2건 수리(GraphRAG_1st `044f4f7`).
 - **M5 완료 확정(2026-08-27 오너 "승인.")**: E군 만점 확정 + 인용 격차 5건 해명 수용 → 합격선 **7/7 = "완료"**(`M5-JUDGMENT.md` §4-c) → **슬라이스 1 ✅**(ROADMAP 갱신 — 판정축 M1~M5 완결). 기록 = DECISIONS.md 말미.
-- **다음 행동**: ① **main 병합·공개 push 결정**(오너 — 8요소 상신됨. 실측: GraphRAG_1st `phase2-scaffolding` **39커밋이 main 미병합·원격 무백업**(이 PC에만 존재) + bibliomind main **6커밋 미push**) → ② D4 귀속 결정 → ③ 5-C(MCP 타임아웃)·슬라이스 9(README).
+- **공개 push 완료(2026-08-27 오너 A안)**: 3렌즈 감사(blocker 0) → GraphRAG_1st ff 병합·push(origin/main=`044f4f7`, 39커밋 백업) + bibliomind push. **오너 방향 확정 2건**: ①최종 프로덕트는 `dume81/BiblioMind.git`으로 통합(방식은 미결 — 슬라이스 9와 묶어 설계) ②타 PC 클론 실행 가능 요건(정적 감사 blocker 0 — README가 남은 몫).
+- **다음 행동**: ① D4 귀속 결정(collect_web·collect_docs 슬라이스 편성 — 오너) → ② 5-C(MCP 타임아웃 — 오너 몫)·슬라이스 9(README + BiblioMind.git 통합 방식 설계) → ③ 슬라이스 5(S3 생성기)·10(통합 검증).
 
 ### 한 줄 요약
 
