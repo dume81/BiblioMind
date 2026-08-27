@@ -37,7 +37,8 @@
 - **M5 완주(2026-08-27)**: Codex 표면 **21/21문** — 합격선 **6 달성 + 1 오너판정대기**(부정 대조 E군 — 판정 주체 규정). 정본 = `M5-JUDGMENT.md`(§3 사초·§3-b 검증 실행·감사 정정·§4-b 최종 판정표). 기록 감사 패널이 잡은 blocker·major는 §3-b로 해소. **DB는 실자료로 복원 완료**(132n·207r·headquarters 유지·buildId `20260827T200950`) — 예시 그래프 아님. 검증 스크립트 import 회귀 2건 수리(GraphRAG_1st `044f4f7`).
 - **M5 완료 확정(2026-08-27 오너 "승인.")**: E군 만점 확정 + 인용 격차 5건 해명 수용 → 합격선 **7/7 = "완료"**(`M5-JUDGMENT.md` §4-c) → **슬라이스 1 ✅**(ROADMAP 갱신 — 판정축 M1~M5 완결). 기록 = DECISIONS.md 말미.
 - **공개 push 완료(2026-08-27 오너 A안)**: 3렌즈 감사(blocker 0) → GraphRAG_1st ff 병합·push(origin/main=`044f4f7`, 39커밋 백업) + bibliomind push. **오너 방향 확정 2건**: ①최종 프로덕트는 `dume81/BiblioMind.git`으로 통합(방식은 미결 — 슬라이스 9와 묶어 설계) ②타 PC 클론 실행 가능 요건(정적 감사 blocker 0 — README가 남은 몫).
-- **다음 행동**: ① D4 귀속 결정(collect_web·collect_docs 슬라이스 편성 — 오너) → ② 5-C(MCP 타임아웃 — 오너 몫)·슬라이스 9(README + BiblioMind.git 통합 방식 설계) → ③ 슬라이스 5(S3 생성기)·10(통합 검증).
+- **슬라이스 8.5 ✅ 완료(2026-08-27 오너 A안 → 같은 턴 완주)**: D4 해소 — `collect_web`·`collect_docs` 표면 2종으로 **설계 15종 전 도구 가동**. TDD·3렌즈 반박 패널(major 3 반영: robots 차단=실패 판정·blocked force 거짓 안내 제거·§4.1 5건 상한)·왕복 e2e 7/7·테스트 **580**·TECH-SPEC **v2.13**. 커밋 `0304334`(phase2-scaffolding 로컬 — **push는 오너 승인 대기**).
+- **다음 행동**: ① 슬라이스 8.5 커밋 main 병합·push 승인(오너 — 선택) → ② 5-C(MCP 타임아웃 — 오너 몫, 슬라이스 5 선행)·슬라이스 9(README + BiblioMind.git 통합 방식 설계) → ③ 슬라이스 5(S3 생성기)·10(통합 검증).
 
 ### 한 줄 요약
 
