@@ -1314,3 +1314,19 @@ Q6는 정본 사전(결정론적 정규화)으로 엔진 호출 0회에 해결�
 - **품질 루프 관측**: 미해결 충돌 13→**12**(headquarters·리디안솔루션.description 해소, **신규 1건** — `GRC K-PACK.full_name`: 약칭 병합이 드러낸 것) · 유사 이름 쌍 12→**8**. 전부 재빌드 요약에 상시 노출.
 - **Q7 판정**: 신 p04가 시점 규율 준수(현재-상태 속성에 시점부 값 0건·설립 Event에 "설립 당시 기준" note·시점 속성 22/22 보존) — **수리·수용**. 나머지 대기 자료 22건은 생성 시점부터 v3 지시문 적용.
 - **되돌리기**: `Rejected/20260822211905_readians_p04.kg.rej1.json`(구 산출물 이력 보존) 수동 복원 + 재빌드 1회.
+
+## 2026-08-26: 다음 슬라이스 택일 — 8(부속·스키마 도구) 채택 (오너 회신 "8")
+
+- **결정**: 슬라이스 5(잔여 5-C — 오너 액션·엔진 소모)보다 슬라이스 8을 먼저 진행. 근거 = 집계자 단독 완결 가능·엔진 0회·Q13 자연 해소·"챗이 조종석" 구멍 축소. 5-C는 M5와 함께 오너 여유 시간에.
+- **범위**: ROADMAP:25 문면 그대로 — source_remove + schema_get/update + kg_status 완성. **D4(collect_web·collect_docs 귀속)는 범위 확장이므로 별건 결정으로 유지**(대기열 ⑵).
+- **미채택**: 5 먼저 — 이사님 참여가 선행이라 즉시 착수 불가.
+
+## 2026-08-26: 슬라이스 8 완료 — 부속·스키마 도구 (3렌즈 반박 패널 반영)
+
+- **합격선 7/7 [실측]**: 도구 13종 tools/list(직전 10) · toolShape 13/13 · remove 격리 18케이스 · schema 11케이스 · status 5케이스 · kg_status 실환경(Input 28·승인 6·Neo4j 132·207·buildId 일치·허브 꺼짐→부분 성공+복구 안내) · hub:e2e 9/9 · 테스트 519→**559**(기존 무수정 — 개정 명시분 toolShape·smoke 제외) · 린트 통과.
+- **패널 blocker 2건 반영**: ①`findLedgerByInput` 첫 매치 재사용은 리다이렉트 쌍둥이(같은 file 공유 복수 키) 앞에서 recollect_ok·block 양쪽 의미가 깨짐 → **원장 전수 처리**(file·final_hash 동치 일괄) + 크롤러 2차 dedupe가 blocked도 대조(차단 전파) ②kg_status는 인자가 없어 toolShape의 "없는 것을 가리키는 인자" 장치가 불능 → 테스트 심 `NEO4J_URI=''`(unconfigured 분기 = §4.3-15 정상 산출) + smoke.test 무격리 실호출 파손 지점 선제 개정.
+- **주요 설계 확정**: 키 복원 순서(프론트매터 source_hash 파싱→차단→삭제 — "파일명으론 차단 키 없음"이라던 집계자 전제를 두 렌즈가 §2.4.3 미참조로 독립 반박) · 부분 실패 계약(전부 성공 시에만 원장 변경·재실행 멱등) · rej 앵커 정규식(startsWith 오폭 실증) · `schema_update` destructiveHint **true**(SDK 1차 출처 "false = additive-only") · set_instructions 빈 배열 거부 + 이전 지시문 diff 동봉 · kg_status DB count는 **도메인+세션 주입**(표면에 Cypher 반입 금지 — D3 무관 합법 위치) · GET `/api/health`(hub.connectedCount() 단일 구현·조기 반환 배치).
+- **미채택**: ①표면 직접 DB 조회 — 표면 파일 Cypher 0줄 관례 유지 ②destructiveHint false(스키마 렌즈의 조건부 안) — 표면 렌즈가 SDK 문면으로 반박 ③crawl 차단 분기의 fetch 주입 하네스 신설 — 과규모, 원장 수준 TDD + 한계 기재로 갈음.
+- **미등재 한계 2건(정직 기재)**: ①crawl의 blocked-쌍둥이 분기(4줄)는 단위 테스트가 직접 안 밟는다(fetch 주입 지점 없음 — 5-A argv 선례와 같은 유형) ②source_remove의 실자료 실행은 하지 않았다(파괴적 — 격리 검증만. 실사용 첫 회가 실검증이 된다).
+- **별건 등재**: Q14(first_seen 기록 코드 부재 — 스펙-실물 괴리) · Q15(review_reject 재빌드 후 graph.refresh 미푸시 — 표면 3곳 중 1곳 누락) · Q13은 schema_update 구현으로 자연 해소.
+- **일회성 스크립트 관찰**: kg_status를 단발 node로 부르면 드라이버 keep-alive로 프로세스가 안 죽는다 — 상주 MCP 서버에선 정상, 결함 아님(closeDriver는 테스트용 제공됨).

@@ -32,7 +32,8 @@
 - **Q7 ✅ 수리·수용**(오너 B안 · 재검수 승인 2026-08-26 · TECH-SPEC **v2.11** · 스키마 **v3**): 시점 규율 지시문 2줄(Event 단일화 — `_as_of` 접미는 반박 패널 블로커로 미채택) → p04 반려(rej1) → claude 재생성 → **오너 승인·재빌드 완료**. 그래프 = **132노드·207관계**(buildId `20260826T234342`). 신 p04는 시점 규율 준수(headquarters에 과거 값 0·설립 Event에 "설립 당시 기준" note·시점 22/22 보존). 대기 22건은 생성 시점부터 v3 적용.
 - **Q6 재개봉 3건 → 해소**: 신 p04의 약칭 `Product/R-TAPs`·`R-DACS`·`K-Pack`을 canonical_entities 변형으로 등재(씨앗·런타임) — 병합 후 약칭 잔존 노드 0. **미해결 충돌 12건·유사 이름 쌍 8건이 재빌드 요약에 상시 노출 중**(품질 루프 — 신규 1건 `GRC K-PACK.full_name`은 약칭 병합이 드러낸 것).
 - **신설 큐**: Q11(관계 속성 병합) · Q12(registerNewTypes updated_at) · Q13(review_reject 안내문). 정본 = MAINTENANCE-PLAN 말미(큐 가드에 "오너 승인 시 예외" 단서 추가됨).
-- **다음 행동**: ① **p04 재검수 게이트 회신**(오너 — 승인 시 사전 변형 3건 등재 + approve + 재빌드까지 한 번에) → ② 슬라이스 5(선행 5-C) vs 슬라이스 8 택일 → ③ D4 귀속 결정. M5·5-C는 오너 몫 defer 유지.
+- ~~다음 행동①②~~ **완료(2026-08-26 같은 날)**: p04 게이트 승인·집행 완료 + 오너 "8" 택일 → **슬라이스 8 완료(합격선 7/7)** — MCP 도구 **13종** 가동(`source_remove`·`schema_get`·`schema_update` 신설 + `kg_status` 실수치 완성), GET `/api/health` 신설, `hub:e2e` 9/9, 테스트 **559**. TECH-SPEC **v2.12**. 3렌즈 반박 패널 blocker 2건(쌍둥이 원장 전수 처리·kg_status 테스트 심) 반영. 신설 큐 Q14(first_seen 미기록)·Q15(reject 후 refresh 미푸시), Q13은 자연 해소.
+- **다음 행동**: ① **D4 귀속 결정**(collect_web·collect_docs — 잔여 미구현 2종의 슬라이스 편성, 오너) → ② 슬라이스 9(README) 또는 5-C(오너 몫) → M5. 상세 순서는 ROADMAP.
 
 ### 한 줄 요약
 
