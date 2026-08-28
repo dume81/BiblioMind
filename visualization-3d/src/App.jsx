@@ -4,6 +4,7 @@ import { usePushChannel } from './hooks/usePushChannel.js';
 import { buildRenderData } from './lib/renderData.js';
 import { normalizeCanonicalGraph } from './lib/canonicalGraph.js';
 import { resolveQueryHighlight, buildHighlightSnapshot } from './lib/queryHighlight.js';
+import { DEFAULT_NODE_LIMIT, DEFAULT_RELATIONSHIP_LIMIT } from './lib/neo4jQueryDefaults.js';
 import { DataSourceCard } from './components/DataSourceCard.jsx';
 import { GraphCard } from './components/GraphCard.jsx';
 import { HighlightPanel } from './components/HighlightPanel.jsx';
@@ -90,7 +91,8 @@ function KnowledgeGraph() {
   // Neo4j 로드 (자동 전환·재조회·배너 버튼 공용) — 기존 검증→원자 교체 파이프라인 재사용.
   // query를 meta에 보관해 graph.refresh 재조회가 사용자의 preset·limit을 그대로 쓰게 한다(§7.7).
   const loadFromNeo4j = useCallback((query) => {
-    const effectiveQuery = query || { presetId: 'overview' };
+    const effectiveQuery = query
+      || { presetId: 'overview', nodeLimit: DEFAULT_NODE_LIMIT, relationshipLimit: DEFAULT_RELATIONSHIP_LIMIT };
     return load('neo4j', async () => {
       let res;
       try {

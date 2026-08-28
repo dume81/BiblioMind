@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { Button, Badge } from './ui.jsx';
 import { normalizeCanonicalGraph } from '../lib/canonicalGraph.js';
+import { DEFAULT_NODE_LIMIT, DEFAULT_RELATIONSHIP_LIMIT } from '../lib/neo4jQueryDefaults.js';
 
 // 서버가 보내는 일반화된 오류 코드 → 사용자용 안전한 메시지.
 // URI·계정·원시 오류·Cypher는 클라이언트에 절대 노출되지 않는다.
@@ -22,8 +23,8 @@ function messageForCode(code) {
 export function Neo4jInput({ onLoad, isLoading }) {
   const [status, setStatus] = useState({ state: 'checking' }); // checking | ready | disabled | unconfigured | unavailable
   const [presetId, setPresetId] = useState('');
-  const [nodeLimit, setNodeLimit] = useState(300);
-  const [relationshipLimit, setRelationshipLimit] = useState(600);
+  const [nodeLimit, setNodeLimit] = useState(DEFAULT_NODE_LIMIT);
+  const [relationshipLimit, setRelationshipLimit] = useState(DEFAULT_RELATIONSHIP_LIMIT);
   const abortRef = useRef(null);
 
   useEffect(() => {
