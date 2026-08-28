@@ -5,7 +5,9 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { REPO_ROOT } from './paths.js';
 
-const LINE_RE = /^\s*([A-Za-z_][A-Za-z0-9_]*)\s*=\s*(.*)$/;
+// `=` 뒤 공백을 여기서 먹지 않는다(`\s*` 금지) — 먹으면 `KEY= # 주석`(빈 값+주석)과
+// `KEY=#값`(값)을 parseValue가 구별할 수 없어 주석이 값으로 로드된다(2026-08-28 사고).
+const LINE_RE = /^\s*([A-Za-z_][A-Za-z0-9_]*)\s*=(.*)$/;
 
 /**
  * KEY=VALUE 한 줄의 값 부분을 정리한다.
@@ -19,7 +21,8 @@ function parseValue(raw) {
   const trimmed = raw.trim();
   const quoted = trimmed.match(/^"(.*)"$/) || trimmed.match(/^'(.*)'$/);
   if (quoted) return quoted[1];
-  return trimmed.replace(/\s+#.*$/, '').trim();
+  // raw 기준으로 제거 — trim() 후에는 `KEY= # 주석`의 선행 공백이 사라져 주석이 값이 된다(2026-08-28 사고).
+  return raw.replace(/\s+#.*$/, '').trim();
 }
 
 /**
