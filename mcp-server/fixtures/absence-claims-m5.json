@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "purpose": "M5(Codex 표면 21문) 회차에서 모델이 \"그래프에 없다\"고 답한 주장 9건. check-absence.js가 Aura 직접 조회로 역검증한다.",
+  "capturedStamp": "M5 회차 (2026-08-27)",
+  "note": "C2(사비토-마코모 직접 관계 부재)는 두 노드 간 검사라 이 도구의 relAbsent(단일 노드 인접 유형) 형식으로 표현 불가 — 판정 로그의 수동 Cypher 보충 검사로 처리했다.",
+  "nodeAbsent": [
+    { "name": "무잔", "claim": "E1 — 노드 부재" },
+    { "name": "키부츠지", "claim": "E1 — 노드 부재(다른 표기)" },
+    { "name": "귀멸의 칼날", "claim": "D1 — 작품명 노드 부재" },
+    { "name": "귀멸", "claim": "D1 — 작품명 축약 부재" }
+  ],
+  "propAbsent": [
+    { "node": "일륜도", "prop": "설명", "claim": "A3 — 특징·용도(설명 계열) 속성 부재" },
+    { "node": "전집중 호흡", "prop": "설명", "claim": "A4 — 원리·효과(설명 계열) 속성 부재" },
+    { "node": "카마도 탄지로", "prop": "성격", "claim": "D2 — 성격 속성 부재 (M4 오탐 회귀 케이스: role=주인공은 성격이 아님 — '사실'이 정상)" },
+    { "node": "사부로 영감", "prop": "직업", "claim": "E3 — 직업 속성 부재" }
+  ],
+  "relAbsent": [
+    { "node": "카마도 탄지로", "pattern": "FATHER|PARENT|아버지", "claim": "E2 — 부자 관계 부재" },
+    { "node": "네즈코의 도깨비화", "pattern": "CAUSED_BY|HAS_AGENT", "claim": "B2 — 원인·행위자 관계 부재" }
+  ]
+}

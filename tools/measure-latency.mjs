@@ -5,7 +5,7 @@
 //   판정 지표 "질문→1층 표시" = t2 - t0
 //   내역: 모델 판단 시간(t1-t0) + 시스템 시간(t2-t1)
 //
-// 사용: node bibliomind/tools/measure-latency.mjs [--all] [--since <ISO|YYYY-MM-DD>] [--fresh A3,D1] [--continuous B1]
+// 사용: node tools/measure-latency.mjs [--all] [--since <ISO|YYYY-MM-DD>] [--fresh A3,D1] [--continuous B1]
 //   --all        평가 세트 21문 외의 호출도 포함
 //   --since      그 시각 **이후**의 질문만 — 회차 분리용. 없으면 과거 판정 회차가 한 표에 섞인다.
 //                **로컬 시각으로 해석한다**(예: 2026-08-22T16:00). 픽스처의 capturedStamp는 UTC이므로 혼동 주의.
@@ -22,12 +22,16 @@
 // (/clear가 같은 파일 안에서 일어나면 자동 분류가 틀릴 수 있다 — 그때는 --fresh로 명시할 것.)
 
 import { readFileSync, readdirSync, existsSync } from 'node:fs';
-import { join } from 'node:path';
+import { join, resolve } from 'node:path';
 import { homedir } from 'node:os';
+import { fileURLToPath } from 'node:url';
+import { claudeProjectDirName } from '../scripts/lib/claude-project-dir.js';
 
+// 이 저장소 위치에서 동적 산출(통합 2026-08-28) — PC·폴더명 하드코딩은 타 환경에서 조용히 빈 결과가 된다.
+const REPO = resolve(fileURLToPath(new URL('..', import.meta.url)));
 const PROJECT_DIRS = [
-  'C--Users-DUME-Desktop-Claude-Code-Workspace-GraphRAG-1st',
-  'C--Users-DUME-Desktop-Claude-Code-Workspace-GraphRAG-1st-mcp-server',
+  claudeProjectDirName(REPO),
+  claudeProjectDirName(join(REPO, 'mcp-server')),
 ];
 const ROOT = join(homedir(), '.claude', 'projects');
 

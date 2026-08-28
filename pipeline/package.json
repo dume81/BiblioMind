@@ -1,0 +1,32 @@
+{
+  "name": "@bibliomind/pipeline",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    "./generate": "./src/generate/index.js",
+    "./review": "./src/review/index.js",
+    "./crawl": "./src/crawl/index.js",
+    "./extract": "./src/extract/index.js",
+    "./inject": "./src/inject/index.js",
+    "./remove": "./src/remove/index.js",
+    "./schema": "./src/schema/index.js",
+    "./status": "./src/status/index.js",
+    "./*": "./src/*.js"
+  },
+  "scripts": {
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "@bibliomind/shared": "*",
+    "gray-matter": "^4.0.3",
+    "neo4j-driver": "^5.28.0",
+    "robots-parser": "^3.0.1",
+    "tesseract.js": "^7.0.0",
+    "tldts": "^7.4.10",
+    "unpdf": "^1.8.1"
+  },
+  "devDependencies": {
+    "vitest": "^3.2.0"
+  }
+}

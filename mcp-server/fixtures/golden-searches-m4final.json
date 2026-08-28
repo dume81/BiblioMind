@@ -1,0 +1,2345 @@
+{
+  "schemaVersion": 1,
+  "capturedStamp": "20260822T092312",
+  "purpose": "mcp-server\\fixtures\\golden-searches-m4final.json — 20260822T092312 캡처. 개선 전 기준선은 mcp-server/fixtures/golden-searches.json이며 이 파일이 그 대조본이다.",
+  "capturedAt": "2026-08-22T09:23:44.399Z",
+  "gitHead": "07121c1c868f9cb59e50393d627a018e50f3ca7a",
+  "graphSnapshot": {
+    "nodeCount": 29,
+    "relCount": 55,
+    "relTypeCount": 48
+  },
+  "comparison": {
+    "source": "KG_Demon Slayer_Draft_01.json",
+    "nodeCount": {
+      "example": 29,
+      "aura": 29,
+      "match": true
+    },
+    "relCount": {
+      "example": 55,
+      "aura": 55,
+      "match": true
+    },
+    "nodeNamesIdentical": true,
+    "relTypesIdentical": true,
+    "missingInAura": [],
+    "extraInAura": []
+  },
+  "determinism": {
+    "passes": 2,
+    "identical": true,
+    "caseCount": 25,
+    "anchoredCaseCount": 25
+  },
+  "cases": [
+    {
+      "id": "S01",
+      "keywords": [
+        "귀살대"
+      ],
+      "note": "A1 — T1 기대",
+      "seeds": [
+        {
+          "keyword": "귀살대",
+          "tier": "T1",
+          "matched": [
+            "n1"
+          ]
+        }
+      ],
+      "unmatched": [],
+      "layer1": {
+        "nodeCount": 5,
+        "relCount": 4,
+        "truncated": false,
+        "nodeKgids": [
+          "n_21c9be116785d969",
+          "n_410ab76c472627d5",
+          "n_59971802b6be1c8d",
+          "n_94e28cbc43bb5264",
+          "n_bcfe481dc38bafcd"
+        ],
+        "relKgids": [
+          "r_10e8956f291ddb10",
+          "r_12769db77c4d7c0d",
+          "r_12c97f3e7fa436f4",
+          "r_410898f1ef2198ca"
+        ]
+      },
+      "ftWarning": null
+    },
+    {
+      "id": "S02",
+      "keywords": [
+        "우로코다키 사콘지"
+      ],
+      "note": "A2 — T1 확정",
+      "seeds": [
+        {
+          "keyword": "우로코다키 사콘지",
+          "tier": "T1",
+          "matched": [
+            "n1"
+          ]
+        }
+      ],
+      "unmatched": [],
+      "layer1": {
+        "nodeCount": 5,
+        "relCount": 4,
+        "truncated": false,
+        "nodeKgids": [
+          "n_201c9d60ca4c154d",
+          "n_3434e0cb8037a682",
+          "n_410ab76c472627d5",
+          "n_94e28cbc43bb5264",
+          "n_bcfe481dc38bafcd"
+        ],
+        "relKgids": [
+          "r_02040d14d8917036",
+          "r_12769db77c4d7c0d",
+          "r_40e752dfce4211d2",
+          "r_acef4fd3ddaf7365"
+        ]
+      },
+      "ftWarning": null
+    },
+    {
+      "id": "S03",
+      "keywords": [
+        "일륜도"
+      ],
+      "note": "A3 정상 표기 — T1 적중(반증 실행 근거)",
+      "seeds": [
+        {
+          "keyword": "일륜도",
+          "tier": "T1",
+          "matched": [
+            "n1"
+          ]
+        }
+      ],
+      "unmatched": [],
+      "layer1": {
+        "nodeCount": 3,
+        "relCount": 2,
+        "truncated": false,
+        "nodeKgids": [
+          "n_69fdefdb99c1eb70",
+          "n_acec44b628d14f03",
+          "n_bcfe481dc38bafcd"
+        ],
+        "relKgids": [
+          "r_f93a98f9c3db0d39",
+          "r_fed8ce82e1407251"
+        ]
+      },
+      "ftWarning": null
+    },
+    {
+      "id": "S04",
+      "keywords": [
+        "전집중 호흡"
+      ],
+      "note": "A4 — T1 확정",
+      "seeds": [
+        {
+          "keyword": "전집중 호흡",
+          "tier": "T1",
+          "matched": [
+            "n1"
+          ]
+        }
+      ],
+      "unmatched": [],
+      "layer1": {
+        "nodeCount": 2,
+        "relCount": 1,
+        "truncated": false,
+        "nodeKgids": [
+          "n_700a6ca5b3fe2e1c",
+          "n_bcfe481dc38bafcd"
+        ],
+        "relKgids": [
+          "r_a067949ec5406e56"
+        ]
+      },
+      "ftWarning": null
+    },
+    {
+      "id": "S05",
+      "keywords": [
+        "다이쇼 시대"
+      ],
+      "note": "A5 — T1",
+      "seeds": [
+        {
+          "keyword": "다이쇼 시대",
+          "tier": "T1",
+          "matched": [
+            "n1"
+          ]
+        }
+      ],
+      "unmatched": [],
+      "layer1": {
+        "nodeCount": 3,
+        "relCount": 2,
+        "truncated": false,
+        "nodeKgids": [
+          "n_1e23a0f1a3222262",
+          "n_4e6cc220ae32e813",
+          "n_fa1fdde672bd8ffa"
+        ],
+        "relKgids": [
+          "r_125d0e3abcc203ba",
+          "r_e172e68024820e87"
+        ]
+      },
+      "ftWarning": null
+    },
+    {
+      "id": "S06",
+      "keywords": [
+        "탄지로"
+      ],
+      "note": "B1/D2/E2 — T2 확정",
+      "seeds": [
+        {
+          "keyword": "탄지로",
+          "tier": "T2",
+          "matched": [
+            "n1",
+            "n2",
+            "n3"
+          ]
+        }
+      ],
+      "unmatched": [],
+      "layer1": {
+        "nodeCount": 20,
+        "relCount": 31,
+        "truncated": false,
+        "nodeKgids": [
+          "n_201c9d60ca4c154d",
+          "n_21c9be116785d969",
+          "n_3434e0cb8037a682",
+          "n_3448e826962da0ba",
+          "n_410ab76c472627d5",
+          "n_4e6cc220ae32e813",
+          "n_52af4bd9bafac3cc",
+          "n_691d4dc82874a1c3",
+          "n_69fdefdb99c1eb70",
+          "n_700a6ca5b3fe2e1c",
+          "n_752a0e7eb5742bdc",
+          "n_919e71101b67e602",
+          "n_94e28cbc43bb5264",
+          "n_a45effd08fb519bd",
+          "n_acec44b628d14f03",
+          "n_bcfe481dc38bafcd",
+          "n_c325e495eec4196d",
+          "n_dfbeb1b97bd58efe",
+          "n_fa1fdde672bd8ffa",
+          "n_ff05f49a3957a1ec"
+        ],
+        "relKgids": [
+          "r_02040d14d8917036",
+          "r_09e98920371ed8f8",
+          "r_0ce5d03ed63d02dd",
+          "r_10e8956f291ddb10",
+          "r_123b420b69496048",
+          "r_26bf692dfb478c0d",
+          "r_34ac98119eebe118",
+          "r_3cd04c01697173bc",
+          "r_40e752dfce4211d2",
+          "r_4244c3f3140c43c6",
+          "r_44ab675342cf31d3",
+          "r_46719f2c6d020bdc",
+          "r_59590bdcdb5b328c",
+          "r_770e091be4d99836",
+          "r_781b98d80c6bfc1d",
+          "r_8ed7a38fb5eecf56",
+          "r_91b308e4671e840c",
+          "r_9da3dde8648034ff",
+          "r_a067949ec5406e56",
+          "r_a21074ddde3b1ca4",
+          "r_b7a466f857f612d0",
+          "r_b8489cac6204dce5",
+          "r_ba8c1b6fc855bc91",
+          "r_d3f46d754f38b30d",
+          "r_e67263e6d5cd33e7",
+          "r_eb61ac6f4d207133",
+          "r_eef9eea81f20c9e0",
+          "r_f1052cd73732eb2f",
+          "r_f299ba287591ac83",
+          "r_f3231bb8f522f448",
+          "r_fed8ce82e1407251"
+        ]
+      },
+      "ftWarning": null
+    },
+    {
+      "id": "S07",
+      "keywords": [
+        "네즈코"
+      ],
+      "note": "B2 — T2. 오탐(하가네즈카 호타루) 관찰 지점",
+      "seeds": [
+        {
+          "keyword": "네즈코",
+          "tier": "T2",
+          "matched": [
+            "n1",
+            "n2",
+            "n3",
+            "n4"
+          ]
+        }
+      ],
+      "unmatched": [],
+      "layer1": {
+        "nodeCount": 11,
+        "relCount": 18,
+        "truncated": false,
+        "nodeKgids": [
+          "n_1be68e8ea0ddbf02",
+          "n_3448e826962da0ba",
+          "n_4e6cc220ae32e813",
+          "n_52af4bd9bafac3cc",
+          "n_59971802b6be1c8d",
+          "n_691d4dc82874a1c3",
+          "n_9208e6424d0d1cb6",
+          "n_a45effd08fb519bd",
+          "n_bcfe481dc38bafcd",
+          "n_bf66ca5b78cc47f0",
+          "n_dfbeb1b97bd58efe"
+        ],
+        "relKgids": [
+          "r_2096a34491e3540d",
+          "r_36ca9e0960c353f1",
+          "r_3dd03b9980ff3f93",
+          "r_409f29af97d93e2a",
+          "r_4aab86bb5359a000",
+          "r_770e091be4d99836",
+          "r_781b98d80c6bfc1d",
+          "r_9da3dde8648034ff",
+          "r_a25a54808f4feb79",
+          "r_b7a466f857f612d0",
+          "r_bddd8da63c41ad0f",
+          "r_c9ec072f1e9d8b56",
+          "r_d667c1bd5cf19ecc",
+          "r_e5e1d06b8aaca5d4",
+          "r_e67263e6d5cd33e7",
+          "r_e8c99269eb91234f",
+          "r_eef9eea81f20c9e0",
+          "r_f299ba287591ac83"
+        ]
+      },
+      "ftWarning": null
+    },
+    {
+      "id": "S08",
+      "keywords": [
+        "기유"
+      ],
+      "note": "B3 — T2 확정",
+      "seeds": [
+        {
+          "keyword": "기유",
+          "tier": "T2",
+          "matched": [
+            "n1",
+            "n2"
+          ]
+        }
+      ],
+      "unmatched": [],
+      "layer1": {
+        "nodeCount": 6,
+        "relCount": 7,
+        "truncated": false,
+        "nodeKgids": [
+          "n_1be68e8ea0ddbf02",
+          "n_691d4dc82874a1c3",
+          "n_9208e6424d0d1cb6",
+          "n_a45effd08fb519bd",
+          "n_bcfe481dc38bafcd",
+          "n_dfbeb1b97bd58efe"
+        ],
+        "relKgids": [
+          "r_2096a34491e3540d",
+          "r_26bf692dfb478c0d",
+          "r_409f29af97d93e2a",
+          "r_781b98d80c6bfc1d",
+          "r_a25a54808f4feb79",
+          "r_c9ec072f1e9d8b56",
+          "r_e8c99269eb91234f"
+        ]
+      },
+      "ftWarning": null
+    },
+    {
+      "id": "S09",
+      "keywords": [
+        "호타루"
+      ],
+      "note": "B4 — T2 확정",
+      "seeds": [
+        {
+          "keyword": "호타루",
+          "tier": "T2",
+          "matched": [
+            "n1"
+          ]
+        }
+      ],
+      "unmatched": [],
+      "layer1": {
+        "nodeCount": 3,
+        "relCount": 3,
+        "truncated": false,
+        "nodeKgids": [
+          "n_69fdefdb99c1eb70",
+          "n_acec44b628d14f03",
+          "n_bcfe481dc38bafcd"
+        ],
+        "relKgids": [
+          "r_91b308e4671e840c",
+          "r_f3231bb8f522f448",
+          "r_f93a98f9c3db0d39"
+        ]
+      },
+      "ftWarning": null
+    },
+    {
+      "id": "S10",
+      "keywords": [
+        "최종선별"
+      ],
+      "note": "B5 — T2",
+      "seeds": [
+        {
+          "keyword": "최종선별",
+          "tier": "T2",
+          "matched": [
+            "n1"
+          ]
+        }
+      ],
+      "unmatched": [],
+      "layer1": {
+        "nodeCount": 5,
+        "relCount": 4,
+        "truncated": false,
+        "nodeKgids": [
+          "n_201c9d60ca4c154d",
+          "n_21c9be116785d969",
+          "n_3448e826962da0ba",
+          "n_94e28cbc43bb5264",
+          "n_bcfe481dc38bafcd"
+        ],
+        "relKgids": [
+          "r_410898f1ef2198ca",
+          "r_4244c3f3140c43c6",
+          "r_59590bdcdb5b328c",
+          "r_fb3bb155cfeea295"
+        ]
+      },
+      "ftWarning": null
+    },
+    {
+      "id": "S11",
+      "keywords": [
+        "사비토"
+      ],
+      "note": "C2 — T1 확정",
+      "seeds": [
+        {
+          "keyword": "사비토",
+          "tier": "T1",
+          "matched": [
+            "n1"
+          ]
+        }
+      ],
+      "unmatched": [],
+      "layer1": {
+        "nodeCount": 2,
+        "relCount": 1,
+        "truncated": false,
+        "nodeKgids": [
+          "n_919e71101b67e602",
+          "n_bcfe481dc38bafcd"
+        ],
+        "relKgids": [
+          "r_44ab675342cf31d3"
+        ]
+      },
+      "ftWarning": null
+    },
+    {
+      "id": "S12",
+      "keywords": [
+        "마코모"
+      ],
+      "note": "C2 — T1 확정",
+      "seeds": [
+        {
+          "keyword": "마코모",
+          "tier": "T1",
+          "matched": [
+            "n1"
+          ]
+        }
+      ],
+      "unmatched": [],
+      "layer1": {
+        "nodeCount": 2,
+        "relCount": 1,
+        "truncated": false,
+        "nodeKgids": [
+          "n_752a0e7eb5742bdc",
+          "n_bcfe481dc38bafcd"
+        ],
+        "relKgids": [
+          "r_09e98920371ed8f8"
+        ]
+      },
+      "ftWarning": null
+    },
+    {
+      "id": "S13",
+      "keywords": [
+        "카마도 가족"
+      ],
+      "note": "C3 — T1 확정",
+      "seeds": [
+        {
+          "keyword": "카마도 가족",
+          "tier": "T1",
+          "matched": [
+            "n1"
+          ]
+        }
+      ],
+      "unmatched": [],
+      "layer1": {
+        "nodeCount": 4,
+        "relCount": 3,
+        "truncated": false,
+        "nodeKgids": [
+          "n_4e6cc220ae32e813",
+          "n_52af4bd9bafac3cc",
+          "n_691d4dc82874a1c3",
+          "n_bcfe481dc38bafcd"
+        ],
+        "relKgids": [
+          "r_2c7f3750e5777c04",
+          "r_e5e1d06b8aaca5d4",
+          "r_eb61ac6f4d207133"
+        ]
+      },
+      "ftWarning": null
+    },
+    {
+      "id": "S14",
+      "keywords": [
+        "재갈"
+      ],
+      "note": "C4",
+      "seeds": [
+        {
+          "keyword": "재갈",
+          "tier": "T1",
+          "matched": [
+            "n1"
+          ]
+        }
+      ],
+      "unmatched": [],
+      "layer1": {
+        "nodeCount": 2,
+        "relCount": 1,
+        "truncated": false,
+        "nodeKgids": [
+          "n_1be68e8ea0ddbf02",
+          "n_9208e6424d0d1cb6"
+        ],
+        "relKgids": [
+          "r_c9ec072f1e9d8b56"
+        ]
+      },
+      "ftWarning": null
+    },
+    {
+      "id": "S15",
+      "keywords": [
+        "도깨비"
+      ],
+      "note": "B2 보조 — T1 기대",
+      "seeds": [
+        {
+          "keyword": "도깨비",
+          "tier": "T1",
+          "matched": [
+            "n1"
+          ]
+        }
+      ],
+      "unmatched": [],
+      "layer1": {
+        "nodeCount": 5,
+        "relCount": 4,
+        "truncated": false,
+        "nodeKgids": [
+          "n_59971802b6be1c8d",
+          "n_691d4dc82874a1c3",
+          "n_70e15ea2b7ce0196",
+          "n_94e28cbc43bb5264",
+          "n_bf66ca5b78cc47f0"
+        ],
+        "relKgids": [
+          "r_12c97f3e7fa436f4",
+          "r_3dd03b9980ff3f93",
+          "r_4aab86bb5359a000",
+          "r_7f9dcef0a8e3e5f1"
+        ]
+      },
+      "ftWarning": null
+    },
+    {
+      "id": "S16",
+      "keywords": [
+        "사부로 영감"
+      ],
+      "note": "E3 — 시드 적중·속성 부재",
+      "seeds": [
+        {
+          "keyword": "사부로 영감",
+          "tier": "T1",
+          "matched": [
+            "n1"
+          ]
+        }
+      ],
+      "unmatched": [],
+      "layer1": {
+        "nodeCount": 2,
+        "relCount": 2,
+        "truncated": false,
+        "nodeKgids": [
+          "n_bcfe481dc38bafcd",
+          "n_ff05f49a3957a1ec"
+        ],
+        "relKgids": [
+          "r_3cd04c01697173bc",
+          "r_46719f2c6d020bdc"
+        ]
+      },
+      "ftWarning": null
+    },
+    {
+      "id": "S17",
+      "keywords": [
+        "무잔"
+      ],
+      "note": "E1 — 부정 대조(unmatched 기대)",
+      "seeds": [],
+      "unmatched": [
+        "무잔"
+      ],
+      "layer1": {
+        "nodeCount": 0,
+        "relCount": 0,
+        "truncated": false,
+        "nodeKgids": [],
+        "relKgids": []
+      },
+      "ftWarning": null
+    },
+    {
+      "id": "S18",
+      "keywords": [
+        "혈귀"
+      ],
+      "note": "E1 정상 표기 — 부재 기대",
+      "seeds": [],
+      "unmatched": [
+        "혈귀"
+      ],
+      "layer1": {
+        "nodeCount": 0,
+        "relCount": 0,
+        "truncated": false,
+        "nodeKgids": [],
+        "relKgids": []
+      },
+      "ftWarning": null
+    },
+    {
+      "id": "S19",
+      "keywords": [
+        "일륨도"
+      ],
+      "note": "손상 프로브 — 거짓 부재 1호(A3). 개선 후 반전 기대",
+      "seeds": [],
+      "unmatched": [
+        "일륨도"
+      ],
+      "layer1": {
+        "nodeCount": 0,
+        "relCount": 0,
+        "truncated": false,
+        "nodeKgids": [],
+        "relKgids": []
+      },
+      "ftWarning": null
+    },
+    {
+      "id": "S20",
+      "keywords": [
+        "혐귀"
+      ],
+      "note": "손상 프로브 — 대상 자체 부재. 개선 후에도 불변 기대",
+      "seeds": [],
+      "unmatched": [
+        "혐귀"
+      ],
+      "layer1": {
+        "nodeCount": 0,
+        "relCount": 0,
+        "truncated": false,
+        "nodeKgids": [],
+        "relKgids": []
+      },
+      "ftWarning": null
+    },
+    {
+      "id": "M01",
+      "keywords": [
+        "탄지로",
+        "귀살대"
+      ],
+      "note": "C1",
+      "seeds": [
+        {
+          "keyword": "탄지로",
+          "tier": "T2",
+          "matched": [
+            "n1",
+            "n2",
+            "n3"
+          ]
+        },
+        {
+          "keyword": "귀살대",
+          "tier": "T1",
+          "matched": [
+            "n4"
+          ]
+        }
+      ],
+      "unmatched": [],
+      "layer1": {
+        "nodeCount": 21,
+        "relCount": 34,
+        "truncated": false,
+        "nodeKgids": [
+          "n_201c9d60ca4c154d",
+          "n_21c9be116785d969",
+          "n_3434e0cb8037a682",
+          "n_3448e826962da0ba",
+          "n_410ab76c472627d5",
+          "n_4e6cc220ae32e813",
+          "n_52af4bd9bafac3cc",
+          "n_59971802b6be1c8d",
+          "n_691d4dc82874a1c3",
+          "n_69fdefdb99c1eb70",
+          "n_700a6ca5b3fe2e1c",
+          "n_752a0e7eb5742bdc",
+          "n_919e71101b67e602",
+          "n_94e28cbc43bb5264",
+          "n_a45effd08fb519bd",
+          "n_acec44b628d14f03",
+          "n_bcfe481dc38bafcd",
+          "n_c325e495eec4196d",
+          "n_dfbeb1b97bd58efe",
+          "n_fa1fdde672bd8ffa",
+          "n_ff05f49a3957a1ec"
+        ],
+        "relKgids": [
+          "r_02040d14d8917036",
+          "r_09e98920371ed8f8",
+          "r_0ce5d03ed63d02dd",
+          "r_10e8956f291ddb10",
+          "r_123b420b69496048",
+          "r_12769db77c4d7c0d",
+          "r_12c97f3e7fa436f4",
+          "r_26bf692dfb478c0d",
+          "r_34ac98119eebe118",
+          "r_3cd04c01697173bc",
+          "r_40e752dfce4211d2",
+          "r_410898f1ef2198ca",
+          "r_4244c3f3140c43c6",
+          "r_44ab675342cf31d3",
+          "r_46719f2c6d020bdc",
+          "r_59590bdcdb5b328c",
+          "r_770e091be4d99836",
+          "r_781b98d80c6bfc1d",
+          "r_8ed7a38fb5eecf56",
+          "r_91b308e4671e840c",
+          "r_9da3dde8648034ff",
+          "r_a067949ec5406e56",
+          "r_a21074ddde3b1ca4",
+          "r_b7a466f857f612d0",
+          "r_b8489cac6204dce5",
+          "r_ba8c1b6fc855bc91",
+          "r_d3f46d754f38b30d",
+          "r_e67263e6d5cd33e7",
+          "r_eb61ac6f4d207133",
+          "r_eef9eea81f20c9e0",
+          "r_f1052cd73732eb2f",
+          "r_f299ba287591ac83",
+          "r_f3231bb8f522f448",
+          "r_fed8ce82e1407251"
+        ]
+      },
+      "ftWarning": null
+    },
+    {
+      "id": "M02",
+      "keywords": [
+        "사비토",
+        "마코모"
+      ],
+      "note": "C2",
+      "seeds": [
+        {
+          "keyword": "사비토",
+          "tier": "T1",
+          "matched": [
+            "n1"
+          ]
+        },
+        {
+          "keyword": "마코모",
+          "tier": "T1",
+          "matched": [
+            "n2"
+          ]
+        }
+      ],
+      "unmatched": [],
+      "layer1": {
+        "nodeCount": 3,
+        "relCount": 2,
+        "truncated": false,
+        "nodeKgids": [
+          "n_752a0e7eb5742bdc",
+          "n_919e71101b67e602",
+          "n_bcfe481dc38bafcd"
+        ],
+        "relKgids": [
+          "r_09e98920371ed8f8",
+          "r_44ab675342cf31d3"
+        ]
+      },
+      "ftWarning": null
+    },
+    {
+      "id": "M03",
+      "keywords": [
+        "네즈코",
+        "재갈"
+      ],
+      "note": "C4",
+      "seeds": [
+        {
+          "keyword": "네즈코",
+          "tier": "T2",
+          "matched": [
+            "n1",
+            "n2",
+            "n3",
+            "n4"
+          ]
+        },
+        {
+          "keyword": "재갈",
+          "tier": "T1",
+          "matched": [
+            "n5"
+          ]
+        }
+      ],
+      "unmatched": [],
+      "layer1": {
+        "nodeCount": 11,
+        "relCount": 18,
+        "truncated": false,
+        "nodeKgids": [
+          "n_1be68e8ea0ddbf02",
+          "n_3448e826962da0ba",
+          "n_4e6cc220ae32e813",
+          "n_52af4bd9bafac3cc",
+          "n_59971802b6be1c8d",
+          "n_691d4dc82874a1c3",
+          "n_9208e6424d0d1cb6",
+          "n_a45effd08fb519bd",
+          "n_bcfe481dc38bafcd",
+          "n_bf66ca5b78cc47f0",
+          "n_dfbeb1b97bd58efe"
+        ],
+        "relKgids": [
+          "r_2096a34491e3540d",
+          "r_36ca9e0960c353f1",
+          "r_3dd03b9980ff3f93",
+          "r_409f29af97d93e2a",
+          "r_4aab86bb5359a000",
+          "r_770e091be4d99836",
+          "r_781b98d80c6bfc1d",
+          "r_9da3dde8648034ff",
+          "r_a25a54808f4feb79",
+          "r_b7a466f857f612d0",
+          "r_bddd8da63c41ad0f",
+          "r_c9ec072f1e9d8b56",
+          "r_d667c1bd5cf19ecc",
+          "r_e5e1d06b8aaca5d4",
+          "r_e67263e6d5cd33e7",
+          "r_e8c99269eb91234f",
+          "r_eef9eea81f20c9e0",
+          "r_f299ba287591ac83"
+        ]
+      },
+      "ftWarning": null
+    },
+    {
+      "id": "M04",
+      "keywords": [
+        "우로코다키 사콘지",
+        "탄지로"
+      ],
+      "note": "C5",
+      "seeds": [
+        {
+          "keyword": "우로코다키 사콘지",
+          "tier": "T1",
+          "matched": [
+            "n4"
+          ]
+        },
+        {
+          "keyword": "탄지로",
+          "tier": "T2",
+          "matched": [
+            "n1",
+            "n2",
+            "n3"
+          ]
+        }
+      ],
+      "unmatched": [],
+      "layer1": {
+        "nodeCount": 20,
+        "relCount": 33,
+        "truncated": false,
+        "nodeKgids": [
+          "n_201c9d60ca4c154d",
+          "n_21c9be116785d969",
+          "n_3434e0cb8037a682",
+          "n_3448e826962da0ba",
+          "n_410ab76c472627d5",
+          "n_4e6cc220ae32e813",
+          "n_52af4bd9bafac3cc",
+          "n_691d4dc82874a1c3",
+          "n_69fdefdb99c1eb70",
+          "n_700a6ca5b3fe2e1c",
+          "n_752a0e7eb5742bdc",
+          "n_919e71101b67e602",
+          "n_94e28cbc43bb5264",
+          "n_a45effd08fb519bd",
+          "n_acec44b628d14f03",
+          "n_bcfe481dc38bafcd",
+          "n_c325e495eec4196d",
+          "n_dfbeb1b97bd58efe",
+          "n_fa1fdde672bd8ffa",
+          "n_ff05f49a3957a1ec"
+        ],
+        "relKgids": [
+          "r_02040d14d8917036",
+          "r_09e98920371ed8f8",
+          "r_0ce5d03ed63d02dd",
+          "r_10e8956f291ddb10",
+          "r_123b420b69496048",
+          "r_12769db77c4d7c0d",
+          "r_26bf692dfb478c0d",
+          "r_34ac98119eebe118",
+          "r_3cd04c01697173bc",
+          "r_40e752dfce4211d2",
+          "r_4244c3f3140c43c6",
+          "r_44ab675342cf31d3",
+          "r_46719f2c6d020bdc",
+          "r_59590bdcdb5b328c",
+          "r_770e091be4d99836",
+          "r_781b98d80c6bfc1d",
+          "r_8ed7a38fb5eecf56",
+          "r_91b308e4671e840c",
+          "r_9da3dde8648034ff",
+          "r_a067949ec5406e56",
+          "r_a21074ddde3b1ca4",
+          "r_acef4fd3ddaf7365",
+          "r_b7a466f857f612d0",
+          "r_b8489cac6204dce5",
+          "r_ba8c1b6fc855bc91",
+          "r_d3f46d754f38b30d",
+          "r_e67263e6d5cd33e7",
+          "r_eb61ac6f4d207133",
+          "r_eef9eea81f20c9e0",
+          "r_f1052cd73732eb2f",
+          "r_f299ba287591ac83",
+          "r_f3231bb8f522f448",
+          "r_fed8ce82e1407251"
+        ]
+      },
+      "ftWarning": null
+    },
+    {
+      "id": "M05",
+      "keywords": [
+        "네즈코",
+        "도깨비"
+      ],
+      "note": "B2",
+      "seeds": [
+        {
+          "keyword": "네즈코",
+          "tier": "T2",
+          "matched": [
+            "n1",
+            "n2",
+            "n3",
+            "n4"
+          ]
+        },
+        {
+          "keyword": "도깨비",
+          "tier": "T1",
+          "matched": [
+            "n5"
+          ]
+        }
+      ],
+      "unmatched": [],
+      "layer1": {
+        "nodeCount": 13,
+        "relCount": 20,
+        "truncated": false,
+        "nodeKgids": [
+          "n_1be68e8ea0ddbf02",
+          "n_3448e826962da0ba",
+          "n_4e6cc220ae32e813",
+          "n_52af4bd9bafac3cc",
+          "n_59971802b6be1c8d",
+          "n_691d4dc82874a1c3",
+          "n_70e15ea2b7ce0196",
+          "n_9208e6424d0d1cb6",
+          "n_94e28cbc43bb5264",
+          "n_a45effd08fb519bd",
+          "n_bcfe481dc38bafcd",
+          "n_bf66ca5b78cc47f0",
+          "n_dfbeb1b97bd58efe"
+        ],
+        "relKgids": [
+          "r_12c97f3e7fa436f4",
+          "r_2096a34491e3540d",
+          "r_36ca9e0960c353f1",
+          "r_3dd03b9980ff3f93",
+          "r_409f29af97d93e2a",
+          "r_4aab86bb5359a000",
+          "r_770e091be4d99836",
+          "r_781b98d80c6bfc1d",
+          "r_7f9dcef0a8e3e5f1",
+          "r_9da3dde8648034ff",
+          "r_a25a54808f4feb79",
+          "r_b7a466f857f612d0",
+          "r_bddd8da63c41ad0f",
+          "r_c9ec072f1e9d8b56",
+          "r_d667c1bd5cf19ecc",
+          "r_e5e1d06b8aaca5d4",
+          "r_e67263e6d5cd33e7",
+          "r_e8c99269eb91234f",
+          "r_eef9eea81f20c9e0",
+          "r_f299ba287591ac83"
+        ]
+      },
+      "ftWarning": null
+    }
+  ],
+  "anchoredCases": [
+    {
+      "id": "S01",
+      "question": "귀살대에 대해 알려줘.",
+      "seeds": [
+        {
+          "keyword": "귀살대",
+          "tier": "T1",
+          "matched": [
+            "n1"
+          ]
+        }
+      ],
+      "unmatched": [],
+      "layer1": {
+        "nodeCount": 5,
+        "relCount": 4,
+        "truncated": false,
+        "nodeKgids": [
+          "n_21c9be116785d969",
+          "n_410ab76c472627d5",
+          "n_59971802b6be1c8d",
+          "n_94e28cbc43bb5264",
+          "n_bcfe481dc38bafcd"
+        ],
+        "relKgids": [
+          "r_10e8956f291ddb10",
+          "r_12769db77c4d7c0d",
+          "r_12c97f3e7fa436f4",
+          "r_410898f1ef2198ca"
+        ]
+      },
+      "ftWarning": null
+    },
+    {
+      "id": "S02",
+      "question": "우로코다키 사콘지에 대해 알려줘.",
+      "seeds": [
+        {
+          "keyword": "우로코다키 사콘지",
+          "tier": "T1",
+          "matched": [
+            "n1"
+          ]
+        }
+      ],
+      "unmatched": [],
+      "layer1": {
+        "nodeCount": 5,
+        "relCount": 4,
+        "truncated": false,
+        "nodeKgids": [
+          "n_201c9d60ca4c154d",
+          "n_3434e0cb8037a682",
+          "n_410ab76c472627d5",
+          "n_94e28cbc43bb5264",
+          "n_bcfe481dc38bafcd"
+        ],
+        "relKgids": [
+          "r_02040d14d8917036",
+          "r_12769db77c4d7c0d",
+          "r_40e752dfce4211d2",
+          "r_acef4fd3ddaf7365"
+        ]
+      },
+      "ftWarning": null
+    },
+    {
+      "id": "S03",
+      "question": "일륜도에 대해 알려줘.",
+      "seeds": [
+        {
+          "keyword": "일륜도",
+          "tier": "T1",
+          "matched": [
+            "n1"
+          ]
+        }
+      ],
+      "unmatched": [],
+      "layer1": {
+        "nodeCount": 3,
+        "relCount": 2,
+        "truncated": false,
+        "nodeKgids": [
+          "n_69fdefdb99c1eb70",
+          "n_acec44b628d14f03",
+          "n_bcfe481dc38bafcd"
+        ],
+        "relKgids": [
+          "r_f93a98f9c3db0d39",
+          "r_fed8ce82e1407251"
+        ]
+      },
+      "ftWarning": null
+    },
+    {
+      "id": "S04",
+      "question": "전집중 호흡에 대해 알려줘.",
+      "seeds": [
+        {
+          "keyword": "전집중 호흡",
+          "tier": "T1",
+          "matched": [
+            "n1"
+          ]
+        }
+      ],
+      "unmatched": [],
+      "layer1": {
+        "nodeCount": 2,
+        "relCount": 1,
+        "truncated": false,
+        "nodeKgids": [
+          "n_700a6ca5b3fe2e1c",
+          "n_bcfe481dc38bafcd"
+        ],
+        "relKgids": [
+          "r_a067949ec5406e56"
+        ]
+      },
+      "ftWarning": null
+    },
+    {
+      "id": "S05",
+      "question": "다이쇼 시대에 대해 알려줘.",
+      "seeds": [
+        {
+          "keyword": "다이쇼 시대",
+          "tier": "T1",
+          "matched": [
+            "n1"
+          ]
+        }
+      ],
+      "unmatched": [],
+      "layer1": {
+        "nodeCount": 3,
+        "relCount": 2,
+        "truncated": false,
+        "nodeKgids": [
+          "n_1e23a0f1a3222262",
+          "n_4e6cc220ae32e813",
+          "n_fa1fdde672bd8ffa"
+        ],
+        "relKgids": [
+          "r_125d0e3abcc203ba",
+          "r_e172e68024820e87"
+        ]
+      },
+      "ftWarning": null
+    },
+    {
+      "id": "S06",
+      "question": "탄지로에 대해 알려줘.",
+      "seeds": [
+        {
+          "keyword": "탄지로",
+          "tier": "T2",
+          "matched": [
+            "n1",
+            "n2",
+            "n3"
+          ]
+        }
+      ],
+      "unmatched": [],
+      "layer1": {
+        "nodeCount": 20,
+        "relCount": 31,
+        "truncated": false,
+        "nodeKgids": [
+          "n_201c9d60ca4c154d",
+          "n_21c9be116785d969",
+          "n_3434e0cb8037a682",
+          "n_3448e826962da0ba",
+          "n_410ab76c472627d5",
+          "n_4e6cc220ae32e813",
+          "n_52af4bd9bafac3cc",
+          "n_691d4dc82874a1c3",
+          "n_69fdefdb99c1eb70",
+          "n_700a6ca5b3fe2e1c",
+          "n_752a0e7eb5742bdc",
+          "n_919e71101b67e602",
+          "n_94e28cbc43bb5264",
+          "n_a45effd08fb519bd",
+          "n_acec44b628d14f03",
+          "n_bcfe481dc38bafcd",
+          "n_c325e495eec4196d",
+          "n_dfbeb1b97bd58efe",
+          "n_fa1fdde672bd8ffa",
+          "n_ff05f49a3957a1ec"
+        ],
+        "relKgids": [
+          "r_02040d14d8917036",
+          "r_09e98920371ed8f8",
+          "r_0ce5d03ed63d02dd",
+          "r_10e8956f291ddb10",
+          "r_123b420b69496048",
+          "r_26bf692dfb478c0d",
+          "r_34ac98119eebe118",
+          "r_3cd04c01697173bc",
+          "r_40e752dfce4211d2",
+          "r_4244c3f3140c43c6",
+          "r_44ab675342cf31d3",
+          "r_46719f2c6d020bdc",
+          "r_59590bdcdb5b328c",
+          "r_770e091be4d99836",
+          "r_781b98d80c6bfc1d",
+          "r_8ed7a38fb5eecf56",
+          "r_91b308e4671e840c",
+          "r_9da3dde8648034ff",
+          "r_a067949ec5406e56",
+          "r_a21074ddde3b1ca4",
+          "r_b7a466f857f612d0",
+          "r_b8489cac6204dce5",
+          "r_ba8c1b6fc855bc91",
+          "r_d3f46d754f38b30d",
+          "r_e67263e6d5cd33e7",
+          "r_eb61ac6f4d207133",
+          "r_eef9eea81f20c9e0",
+          "r_f1052cd73732eb2f",
+          "r_f299ba287591ac83",
+          "r_f3231bb8f522f448",
+          "r_fed8ce82e1407251"
+        ]
+      },
+      "ftWarning": null
+    },
+    {
+      "id": "S07",
+      "question": "네즈코에 대해 알려줘.",
+      "seeds": [
+        {
+          "keyword": "네즈코",
+          "tier": "T2",
+          "matched": [
+            "n1",
+            "n2",
+            "n3",
+            "n4"
+          ]
+        }
+      ],
+      "unmatched": [],
+      "layer1": {
+        "nodeCount": 11,
+        "relCount": 18,
+        "truncated": false,
+        "nodeKgids": [
+          "n_1be68e8ea0ddbf02",
+          "n_3448e826962da0ba",
+          "n_4e6cc220ae32e813",
+          "n_52af4bd9bafac3cc",
+          "n_59971802b6be1c8d",
+          "n_691d4dc82874a1c3",
+          "n_9208e6424d0d1cb6",
+          "n_a45effd08fb519bd",
+          "n_bcfe481dc38bafcd",
+          "n_bf66ca5b78cc47f0",
+          "n_dfbeb1b97bd58efe"
+        ],
+        "relKgids": [
+          "r_2096a34491e3540d",
+          "r_36ca9e0960c353f1",
+          "r_3dd03b9980ff3f93",
+          "r_409f29af97d93e2a",
+          "r_4aab86bb5359a000",
+          "r_770e091be4d99836",
+          "r_781b98d80c6bfc1d",
+          "r_9da3dde8648034ff",
+          "r_a25a54808f4feb79",
+          "r_b7a466f857f612d0",
+          "r_bddd8da63c41ad0f",
+          "r_c9ec072f1e9d8b56",
+          "r_d667c1bd5cf19ecc",
+          "r_e5e1d06b8aaca5d4",
+          "r_e67263e6d5cd33e7",
+          "r_e8c99269eb91234f",
+          "r_eef9eea81f20c9e0",
+          "r_f299ba287591ac83"
+        ]
+      },
+      "ftWarning": null
+    },
+    {
+      "id": "S08",
+      "question": "기유에 대해 알려줘.",
+      "seeds": [
+        {
+          "keyword": "기유",
+          "tier": "T2",
+          "matched": [
+            "n1",
+            "n2"
+          ]
+        }
+      ],
+      "unmatched": [],
+      "layer1": {
+        "nodeCount": 6,
+        "relCount": 7,
+        "truncated": false,
+        "nodeKgids": [
+          "n_1be68e8ea0ddbf02",
+          "n_691d4dc82874a1c3",
+          "n_9208e6424d0d1cb6",
+          "n_a45effd08fb519bd",
+          "n_bcfe481dc38bafcd",
+          "n_dfbeb1b97bd58efe"
+        ],
+        "relKgids": [
+          "r_2096a34491e3540d",
+          "r_26bf692dfb478c0d",
+          "r_409f29af97d93e2a",
+          "r_781b98d80c6bfc1d",
+          "r_a25a54808f4feb79",
+          "r_c9ec072f1e9d8b56",
+          "r_e8c99269eb91234f"
+        ]
+      },
+      "ftWarning": null
+    },
+    {
+      "id": "S09",
+      "question": "호타루에 대해 알려줘.",
+      "seeds": [
+        {
+          "keyword": "호타루",
+          "tier": "T2",
+          "matched": [
+            "n1"
+          ]
+        }
+      ],
+      "unmatched": [],
+      "layer1": {
+        "nodeCount": 3,
+        "relCount": 3,
+        "truncated": false,
+        "nodeKgids": [
+          "n_69fdefdb99c1eb70",
+          "n_acec44b628d14f03",
+          "n_bcfe481dc38bafcd"
+        ],
+        "relKgids": [
+          "r_91b308e4671e840c",
+          "r_f3231bb8f522f448",
+          "r_f93a98f9c3db0d39"
+        ]
+      },
+      "ftWarning": null
+    },
+    {
+      "id": "S10",
+      "question": "최종선별에 대해 알려줘.",
+      "seeds": [
+        {
+          "keyword": "최종선별",
+          "tier": "T2",
+          "matched": [
+            "n1"
+          ]
+        }
+      ],
+      "unmatched": [],
+      "layer1": {
+        "nodeCount": 5,
+        "relCount": 4,
+        "truncated": false,
+        "nodeKgids": [
+          "n_201c9d60ca4c154d",
+          "n_21c9be116785d969",
+          "n_3448e826962da0ba",
+          "n_94e28cbc43bb5264",
+          "n_bcfe481dc38bafcd"
+        ],
+        "relKgids": [
+          "r_410898f1ef2198ca",
+          "r_4244c3f3140c43c6",
+          "r_59590bdcdb5b328c",
+          "r_fb3bb155cfeea295"
+        ]
+      },
+      "ftWarning": null
+    },
+    {
+      "id": "S11",
+      "question": "사비토에 대해 알려줘.",
+      "seeds": [
+        {
+          "keyword": "사비토",
+          "tier": "T1",
+          "matched": [
+            "n1"
+          ]
+        }
+      ],
+      "unmatched": [],
+      "layer1": {
+        "nodeCount": 2,
+        "relCount": 1,
+        "truncated": false,
+        "nodeKgids": [
+          "n_919e71101b67e602",
+          "n_bcfe481dc38bafcd"
+        ],
+        "relKgids": [
+          "r_44ab675342cf31d3"
+        ]
+      },
+      "ftWarning": null
+    },
+    {
+      "id": "S12",
+      "question": "마코모에 대해 알려줘.",
+      "seeds": [
+        {
+          "keyword": "마코모",
+          "tier": "T1",
+          "matched": [
+            "n1"
+          ]
+        }
+      ],
+      "unmatched": [],
+      "layer1": {
+        "nodeCount": 2,
+        "relCount": 1,
+        "truncated": false,
+        "nodeKgids": [
+          "n_752a0e7eb5742bdc",
+          "n_bcfe481dc38bafcd"
+        ],
+        "relKgids": [
+          "r_09e98920371ed8f8"
+        ]
+      },
+      "ftWarning": null
+    },
+    {
+      "id": "S13",
+      "question": "카마도 가족에 대해 알려줘.",
+      "seeds": [
+        {
+          "keyword": "카마도 가족",
+          "tier": "T1",
+          "matched": [
+            "n1"
+          ]
+        }
+      ],
+      "unmatched": [],
+      "layer1": {
+        "nodeCount": 4,
+        "relCount": 3,
+        "truncated": false,
+        "nodeKgids": [
+          "n_4e6cc220ae32e813",
+          "n_52af4bd9bafac3cc",
+          "n_691d4dc82874a1c3",
+          "n_bcfe481dc38bafcd"
+        ],
+        "relKgids": [
+          "r_2c7f3750e5777c04",
+          "r_e5e1d06b8aaca5d4",
+          "r_eb61ac6f4d207133"
+        ]
+      },
+      "ftWarning": null
+    },
+    {
+      "id": "S14",
+      "question": "재갈에 대해 알려줘.",
+      "seeds": [
+        {
+          "keyword": "재갈",
+          "tier": "T1",
+          "matched": [
+            "n1"
+          ]
+        }
+      ],
+      "unmatched": [],
+      "layer1": {
+        "nodeCount": 2,
+        "relCount": 1,
+        "truncated": false,
+        "nodeKgids": [
+          "n_1be68e8ea0ddbf02",
+          "n_9208e6424d0d1cb6"
+        ],
+        "relKgids": [
+          "r_c9ec072f1e9d8b56"
+        ]
+      },
+      "ftWarning": null
+    },
+    {
+      "id": "S15",
+      "question": "도깨비에 대해 알려줘.",
+      "seeds": [
+        {
+          "keyword": "도깨비",
+          "tier": "T1",
+          "matched": [
+            "n1"
+          ]
+        }
+      ],
+      "unmatched": [],
+      "layer1": {
+        "nodeCount": 5,
+        "relCount": 4,
+        "truncated": false,
+        "nodeKgids": [
+          "n_59971802b6be1c8d",
+          "n_691d4dc82874a1c3",
+          "n_70e15ea2b7ce0196",
+          "n_94e28cbc43bb5264",
+          "n_bf66ca5b78cc47f0"
+        ],
+        "relKgids": [
+          "r_12c97f3e7fa436f4",
+          "r_3dd03b9980ff3f93",
+          "r_4aab86bb5359a000",
+          "r_7f9dcef0a8e3e5f1"
+        ]
+      },
+      "ftWarning": null
+    },
+    {
+      "id": "S16",
+      "question": "사부로 영감에 대해 알려줘.",
+      "seeds": [
+        {
+          "keyword": "사부로 영감",
+          "tier": "T1",
+          "matched": [
+            "n1"
+          ]
+        }
+      ],
+      "unmatched": [],
+      "layer1": {
+        "nodeCount": 2,
+        "relCount": 2,
+        "truncated": false,
+        "nodeKgids": [
+          "n_bcfe481dc38bafcd",
+          "n_ff05f49a3957a1ec"
+        ],
+        "relKgids": [
+          "r_3cd04c01697173bc",
+          "r_46719f2c6d020bdc"
+        ]
+      },
+      "ftWarning": null
+    },
+    {
+      "id": "S17",
+      "question": "무잔에 대해 알려줘.",
+      "seeds": [],
+      "unmatched": [
+        "무잔"
+      ],
+      "layer1": {
+        "nodeCount": 0,
+        "relCount": 0,
+        "truncated": false,
+        "nodeKgids": [],
+        "relKgids": []
+      },
+      "ftWarning": null
+    },
+    {
+      "id": "S18",
+      "question": "혈귀에 대해 알려줘.",
+      "seeds": [],
+      "unmatched": [
+        "혈귀"
+      ],
+      "layer1": {
+        "nodeCount": 0,
+        "relCount": 0,
+        "truncated": false,
+        "nodeKgids": [],
+        "relKgids": []
+      },
+      "ftWarning": null
+    },
+    {
+      "id": "S19",
+      "question": "일륜도가 뭐야?",
+      "seeds": [
+        {
+          "keyword": "일륜도",
+          "tier": "T1",
+          "restoredFrom": "일륨도",
+          "matched": [
+            "n1"
+          ]
+        }
+      ],
+      "unmatched": [],
+      "layer1": {
+        "nodeCount": 3,
+        "relCount": 2,
+        "truncated": false,
+        "nodeKgids": [
+          "n_69fdefdb99c1eb70",
+          "n_acec44b628d14f03",
+          "n_bcfe481dc38bafcd"
+        ],
+        "relKgids": [
+          "r_f93a98f9c3db0d39",
+          "r_fed8ce82e1407251"
+        ]
+      },
+      "ftWarning": null
+    },
+    {
+      "id": "S20",
+      "question": "혈귀가 뭐야?",
+      "seeds": [],
+      "unmatched": [
+        "혐귀"
+      ],
+      "layer1": {
+        "nodeCount": 0,
+        "relCount": 0,
+        "truncated": false,
+        "nodeKgids": [],
+        "relKgids": []
+      },
+      "ftWarning": null
+    },
+    {
+      "id": "M01",
+      "question": "탄지로와 귀살대에 대해 알려줘.",
+      "seeds": [
+        {
+          "keyword": "탄지로",
+          "tier": "T2",
+          "matched": [
+            "n1",
+            "n2",
+            "n3"
+          ]
+        },
+        {
+          "keyword": "귀살대",
+          "tier": "T1",
+          "matched": [
+            "n4"
+          ]
+        }
+      ],
+      "unmatched": [],
+      "layer1": {
+        "nodeCount": 21,
+        "relCount": 34,
+        "truncated": false,
+        "nodeKgids": [
+          "n_201c9d60ca4c154d",
+          "n_21c9be116785d969",
+          "n_3434e0cb8037a682",
+          "n_3448e826962da0ba",
+          "n_410ab76c472627d5",
+          "n_4e6cc220ae32e813",
+          "n_52af4bd9bafac3cc",
+          "n_59971802b6be1c8d",
+          "n_691d4dc82874a1c3",
+          "n_69fdefdb99c1eb70",
+          "n_700a6ca5b3fe2e1c",
+          "n_752a0e7eb5742bdc",
+          "n_919e71101b67e602",
+          "n_94e28cbc43bb5264",
+          "n_a45effd08fb519bd",
+          "n_acec44b628d14f03",
+          "n_bcfe481dc38bafcd",
+          "n_c325e495eec4196d",
+          "n_dfbeb1b97bd58efe",
+          "n_fa1fdde672bd8ffa",
+          "n_ff05f49a3957a1ec"
+        ],
+        "relKgids": [
+          "r_02040d14d8917036",
+          "r_09e98920371ed8f8",
+          "r_0ce5d03ed63d02dd",
+          "r_10e8956f291ddb10",
+          "r_123b420b69496048",
+          "r_12769db77c4d7c0d",
+          "r_12c97f3e7fa436f4",
+          "r_26bf692dfb478c0d",
+          "r_34ac98119eebe118",
+          "r_3cd04c01697173bc",
+          "r_40e752dfce4211d2",
+          "r_410898f1ef2198ca",
+          "r_4244c3f3140c43c6",
+          "r_44ab675342cf31d3",
+          "r_46719f2c6d020bdc",
+          "r_59590bdcdb5b328c",
+          "r_770e091be4d99836",
+          "r_781b98d80c6bfc1d",
+          "r_8ed7a38fb5eecf56",
+          "r_91b308e4671e840c",
+          "r_9da3dde8648034ff",
+          "r_a067949ec5406e56",
+          "r_a21074ddde3b1ca4",
+          "r_b7a466f857f612d0",
+          "r_b8489cac6204dce5",
+          "r_ba8c1b6fc855bc91",
+          "r_d3f46d754f38b30d",
+          "r_e67263e6d5cd33e7",
+          "r_eb61ac6f4d207133",
+          "r_eef9eea81f20c9e0",
+          "r_f1052cd73732eb2f",
+          "r_f299ba287591ac83",
+          "r_f3231bb8f522f448",
+          "r_fed8ce82e1407251"
+        ]
+      },
+      "ftWarning": null
+    },
+    {
+      "id": "M02",
+      "question": "사비토와 마코모에 대해 알려줘.",
+      "seeds": [
+        {
+          "keyword": "사비토",
+          "tier": "T1",
+          "matched": [
+            "n1"
+          ]
+        },
+        {
+          "keyword": "마코모",
+          "tier": "T1",
+          "matched": [
+            "n2"
+          ]
+        }
+      ],
+      "unmatched": [],
+      "layer1": {
+        "nodeCount": 3,
+        "relCount": 2,
+        "truncated": false,
+        "nodeKgids": [
+          "n_752a0e7eb5742bdc",
+          "n_919e71101b67e602",
+          "n_bcfe481dc38bafcd"
+        ],
+        "relKgids": [
+          "r_09e98920371ed8f8",
+          "r_44ab675342cf31d3"
+        ]
+      },
+      "ftWarning": null
+    },
+    {
+      "id": "M03",
+      "question": "네즈코와 재갈에 대해 알려줘.",
+      "seeds": [
+        {
+          "keyword": "네즈코",
+          "tier": "T2",
+          "matched": [
+            "n1",
+            "n2",
+            "n3",
+            "n4"
+          ]
+        },
+        {
+          "keyword": "재갈",
+          "tier": "T1",
+          "matched": [
+            "n5"
+          ]
+        }
+      ],
+      "unmatched": [],
+      "layer1": {
+        "nodeCount": 11,
+        "relCount": 18,
+        "truncated": false,
+        "nodeKgids": [
+          "n_1be68e8ea0ddbf02",
+          "n_3448e826962da0ba",
+          "n_4e6cc220ae32e813",
+          "n_52af4bd9bafac3cc",
+          "n_59971802b6be1c8d",
+          "n_691d4dc82874a1c3",
+          "n_9208e6424d0d1cb6",
+          "n_a45effd08fb519bd",
+          "n_bcfe481dc38bafcd",
+          "n_bf66ca5b78cc47f0",
+          "n_dfbeb1b97bd58efe"
+        ],
+        "relKgids": [
+          "r_2096a34491e3540d",
+          "r_36ca9e0960c353f1",
+          "r_3dd03b9980ff3f93",
+          "r_409f29af97d93e2a",
+          "r_4aab86bb5359a000",
+          "r_770e091be4d99836",
+          "r_781b98d80c6bfc1d",
+          "r_9da3dde8648034ff",
+          "r_a25a54808f4feb79",
+          "r_b7a466f857f612d0",
+          "r_bddd8da63c41ad0f",
+          "r_c9ec072f1e9d8b56",
+          "r_d667c1bd5cf19ecc",
+          "r_e5e1d06b8aaca5d4",
+          "r_e67263e6d5cd33e7",
+          "r_e8c99269eb91234f",
+          "r_eef9eea81f20c9e0",
+          "r_f299ba287591ac83"
+        ]
+      },
+      "ftWarning": null
+    },
+    {
+      "id": "M04",
+      "question": "우로코다키 사콘지와 탄지로에 대해 알려줘.",
+      "seeds": [
+        {
+          "keyword": "우로코다키 사콘지",
+          "tier": "T1",
+          "matched": [
+            "n4"
+          ]
+        },
+        {
+          "keyword": "탄지로",
+          "tier": "T2",
+          "matched": [
+            "n1",
+            "n2",
+            "n3"
+          ]
+        }
+      ],
+      "unmatched": [],
+      "layer1": {
+        "nodeCount": 20,
+        "relCount": 33,
+        "truncated": false,
+        "nodeKgids": [
+          "n_201c9d60ca4c154d",
+          "n_21c9be116785d969",
+          "n_3434e0cb8037a682",
+          "n_3448e826962da0ba",
+          "n_410ab76c472627d5",
+          "n_4e6cc220ae32e813",
+          "n_52af4bd9bafac3cc",
+          "n_691d4dc82874a1c3",
+          "n_69fdefdb99c1eb70",
+          "n_700a6ca5b3fe2e1c",
+          "n_752a0e7eb5742bdc",
+          "n_919e71101b67e602",
+          "n_94e28cbc43bb5264",
+          "n_a45effd08fb519bd",
+          "n_acec44b628d14f03",
+          "n_bcfe481dc38bafcd",
+          "n_c325e495eec4196d",
+          "n_dfbeb1b97bd58efe",
+          "n_fa1fdde672bd8ffa",
+          "n_ff05f49a3957a1ec"
+        ],
+        "relKgids": [
+          "r_02040d14d8917036",
+          "r_09e98920371ed8f8",
+          "r_0ce5d03ed63d02dd",
+          "r_10e8956f291ddb10",
+          "r_123b420b69496048",
+          "r_12769db77c4d7c0d",
+          "r_26bf692dfb478c0d",
+          "r_34ac98119eebe118",
+          "r_3cd04c01697173bc",
+          "r_40e752dfce4211d2",
+          "r_4244c3f3140c43c6",
+          "r_44ab675342cf31d3",
+          "r_46719f2c6d020bdc",
+          "r_59590bdcdb5b328c",
+          "r_770e091be4d99836",
+          "r_781b98d80c6bfc1d",
+          "r_8ed7a38fb5eecf56",
+          "r_91b308e4671e840c",
+          "r_9da3dde8648034ff",
+          "r_a067949ec5406e56",
+          "r_a21074ddde3b1ca4",
+          "r_acef4fd3ddaf7365",
+          "r_b7a466f857f612d0",
+          "r_b8489cac6204dce5",
+          "r_ba8c1b6fc855bc91",
+          "r_d3f46d754f38b30d",
+          "r_e67263e6d5cd33e7",
+          "r_eb61ac6f4d207133",
+          "r_eef9eea81f20c9e0",
+          "r_f1052cd73732eb2f",
+          "r_f299ba287591ac83",
+          "r_f3231bb8f522f448",
+          "r_fed8ce82e1407251"
+        ]
+      },
+      "ftWarning": null
+    },
+    {
+      "id": "M05",
+      "question": "네즈코와 도깨비에 대해 알려줘.",
+      "seeds": [
+        {
+          "keyword": "네즈코",
+          "tier": "T2",
+          "matched": [
+            "n1",
+            "n2",
+            "n3",
+            "n4"
+          ]
+        },
+        {
+          "keyword": "도깨비",
+          "tier": "T1",
+          "matched": [
+            "n5"
+          ]
+        }
+      ],
+      "unmatched": [],
+      "layer1": {
+        "nodeCount": 13,
+        "relCount": 20,
+        "truncated": false,
+        "nodeKgids": [
+          "n_1be68e8ea0ddbf02",
+          "n_3448e826962da0ba",
+          "n_4e6cc220ae32e813",
+          "n_52af4bd9bafac3cc",
+          "n_59971802b6be1c8d",
+          "n_691d4dc82874a1c3",
+          "n_70e15ea2b7ce0196",
+          "n_9208e6424d0d1cb6",
+          "n_94e28cbc43bb5264",
+          "n_a45effd08fb519bd",
+          "n_bcfe481dc38bafcd",
+          "n_bf66ca5b78cc47f0",
+          "n_dfbeb1b97bd58efe"
+        ],
+        "relKgids": [
+          "r_12c97f3e7fa436f4",
+          "r_2096a34491e3540d",
+          "r_36ca9e0960c353f1",
+          "r_3dd03b9980ff3f93",
+          "r_409f29af97d93e2a",
+          "r_4aab86bb5359a000",
+          "r_770e091be4d99836",
+          "r_781b98d80c6bfc1d",
+          "r_7f9dcef0a8e3e5f1",
+          "r_9da3dde8648034ff",
+          "r_a25a54808f4feb79",
+          "r_b7a466f857f612d0",
+          "r_bddd8da63c41ad0f",
+          "r_c9ec072f1e9d8b56",
+          "r_d667c1bd5cf19ecc",
+          "r_e5e1d06b8aaca5d4",
+          "r_e67263e6d5cd33e7",
+          "r_e8c99269eb91234f",
+          "r_eef9eea81f20c9e0",
+          "r_f299ba287591ac83"
+        ]
+      },
+      "ftWarning": null
+    }
+  ],
+  "t2RawScores": {
+    "귀살대": {
+      "topScore": 2.8398935794830322,
+      "hits": [
+        {
+          "name": "귀살대",
+          "kgid": "n_94e28cbc43bb5264",
+          "score": 2.8398935794830322,
+          "ratioToTop": 1
+        },
+        {
+          "name": "귀살대의 최종선별",
+          "kgid": "n_21c9be116785d969",
+          "score": 1.8754010200500488,
+          "ratioToTop": 0.6604
+        }
+      ],
+      "wouldCutAt50": []
+    },
+    "우로코다키 사콘지": {
+      "topScore": 6.78278923034668,
+      "hits": [
+        {
+          "name": "우로코다키 사콘지",
+          "kgid": "n_410ab76c472627d5",
+          "score": 6.78278923034668,
+          "ratioToTop": 1
+        }
+      ],
+      "wouldCutAt50": []
+    },
+    "일륜도": {
+      "topScore": 3.423694133758545,
+      "hits": [
+        {
+          "name": "일륜도",
+          "kgid": "n_acec44b628d14f03",
+          "score": 3.423694133758545,
+          "ratioToTop": 1
+        }
+      ],
+      "wouldCutAt50": []
+    },
+    "전집중 호흡": {
+      "topScore": 4.550478935241699,
+      "hits": [
+        {
+          "name": "전집중 호흡",
+          "kgid": "n_700a6ca5b3fe2e1c",
+          "score": 4.550478935241699,
+          "ratioToTop": 1
+        }
+      ],
+      "wouldCutAt50": []
+    },
+    "다이쇼 시대": {
+      "topScore": 4.550478935241699,
+      "hits": [
+        {
+          "name": "다이쇼 시대",
+          "kgid": "n_1e23a0f1a3222262",
+          "score": 4.550478935241699,
+          "ratioToTop": 1
+        }
+      ],
+      "wouldCutAt50": []
+    },
+    "탄지로": {
+      "topScore": 1.9531221389770508,
+      "hits": [
+        {
+          "name": "카마도 탄지로",
+          "kgid": "n_bcfe481dc38bafcd",
+          "score": 1.9531221389770508,
+          "ratioToTop": 1
+        },
+        {
+          "name": "탄지로의 수련",
+          "kgid": "n_201c9d60ca4c154d",
+          "score": 1.9531221389770508,
+          "ratioToTop": 1
+        },
+        {
+          "name": "네즈코의 탄지로 공격",
+          "kgid": "n_a45effd08fb519bd",
+          "score": 1.621459722518921,
+          "ratioToTop": 0.8302
+        }
+      ],
+      "wouldCutAt50": []
+    },
+    "네즈코": {
+      "topScore": 1.6334404945373535,
+      "hits": [
+        {
+          "name": "카마도 네즈코",
+          "kgid": "n_691d4dc82874a1c3",
+          "score": 1.6334404945373535,
+          "ratioToTop": 1
+        },
+        {
+          "name": "네즈코의 도깨비화",
+          "kgid": "n_bf66ca5b78cc47f0",
+          "score": 1.356063723564148,
+          "ratioToTop": 0.8302
+        },
+        {
+          "name": "네즈코의 탄지로 공격",
+          "kgid": "n_a45effd08fb519bd",
+          "score": 1.356063723564148,
+          "ratioToTop": 0.8302
+        },
+        {
+          "name": "기유가 네즈코에게 재갈을 물린 사건",
+          "kgid": "n_1be68e8ea0ddbf02",
+          "score": 1.0122729539871216,
+          "ratioToTop": 0.6197
+        },
+        {
+          "name": "하가네즈카 호타루",
+          "kgid": "n_69fdefdb99c1eb70",
+          "score": 0.6401695013046265,
+          "ratioToTop": 0.3919
+        }
+      ],
+      "wouldCutAt50": [
+        "하가네즈카 호타루"
+      ]
+    },
+    "기유": {
+      "topScore": 1.1295030117034912,
+      "hits": [
+        {
+          "name": "토미오카 기유",
+          "kgid": "n_dfbeb1b97bd58efe",
+          "score": 1.1295030117034912,
+          "ratioToTop": 1
+        },
+        {
+          "name": "기유가 네즈코에게 재갈을 물린 사건",
+          "kgid": "n_1be68e8ea0ddbf02",
+          "score": 0.6999737024307251,
+          "ratioToTop": 0.6197
+        }
+      ],
+      "wouldCutAt50": []
+    },
+    "호타루": {
+      "topScore": 2.260929822921753,
+      "hits": [
+        {
+          "name": "하가네즈카 호타루",
+          "kgid": "n_69fdefdb99c1eb70",
+          "score": 2.260929822921753,
+          "ratioToTop": 1
+        }
+      ],
+      "wouldCutAt50": []
+    },
+    "최종선별": {
+      "topScore": 3.39139461517334,
+      "hits": [
+        {
+          "name": "귀살대의 최종선별",
+          "kgid": "n_21c9be116785d969",
+          "score": 3.39139461517334,
+          "ratioToTop": 1
+        }
+      ],
+      "wouldCutAt50": []
+    },
+    "사비토": {
+      "topScore": 3.423694133758545,
+      "hits": [
+        {
+          "name": "사비토",
+          "kgid": "n_919e71101b67e602",
+          "score": 3.423694133758545,
+          "ratioToTop": 1
+        }
+      ],
+      "wouldCutAt50": []
+    },
+    "마코모": {
+      "topScore": 3.423694133758545,
+      "hits": [
+        {
+          "name": "마코모",
+          "kgid": "n_752a0e7eb5742bdc",
+          "score": 3.423694133758545,
+          "ratioToTop": 1
+        }
+      ],
+      "wouldCutAt50": []
+    },
+    "카마도 가족": {
+      "topScore": 3.179314613342285,
+      "hits": [
+        {
+          "name": "카마도 가족",
+          "kgid": "n_52af4bd9bafac3cc",
+          "score": 3.179314613342285,
+          "ratioToTop": 1
+        },
+        {
+          "name": "카마도 가족 몰살 사건",
+          "kgid": "n_4e6cc220ae32e813",
+          "score": 2.589338779449463,
+          "ratioToTop": 0.8144
+        },
+        {
+          "name": "카마도 네즈코",
+          "kgid": "n_691d4dc82874a1c3",
+          "score": 1.7246544361114502,
+          "ratioToTop": 0.5425
+        },
+        {
+          "name": "카마도 탄지로",
+          "kgid": "n_bcfe481dc38bafcd",
+          "score": 1.7246544361114502,
+          "ratioToTop": 0.5425
+        }
+      ],
+      "wouldCutAt50": []
+    },
+    "재갈": {
+      "topScore": 1.6294469833374023,
+      "hits": [
+        {
+          "name": "재갈",
+          "kgid": "n_9208e6424d0d1cb6",
+          "score": 1.6294469833374023,
+          "ratioToTop": 1
+        },
+        {
+          "name": "기유가 네즈코에게 재갈을 물린 사건",
+          "kgid": "n_1be68e8ea0ddbf02",
+          "score": 0.6999737024307251,
+          "ratioToTop": 0.4296
+        }
+      ],
+      "wouldCutAt50": [
+        "기유가 네즈코에게 재갈을 물린 사건"
+      ]
+    },
+    "도깨비": {
+      "topScore": 2.8398935794830322,
+      "hits": [
+        {
+          "name": "도깨비",
+          "kgid": "n_59971802b6be1c8d",
+          "score": 2.8398935794830322,
+          "ratioToTop": 1
+        },
+        {
+          "name": "네즈코의 도깨비화",
+          "kgid": "n_bf66ca5b78cc47f0",
+          "score": 1.8754010200500488,
+          "ratioToTop": 0.6604
+        }
+      ],
+      "wouldCutAt50": []
+    },
+    "사부로 영감": {
+      "topScore": 4.550478935241699,
+      "hits": [
+        {
+          "name": "사부로 영감",
+          "kgid": "n_ff05f49a3957a1ec",
+          "score": 4.550478935241699,
+          "ratioToTop": 1
+        }
+      ],
+      "wouldCutAt50": []
+    },
+    "무잔": {
+      "hits": []
+    },
+    "혈귀": {
+      "hits": []
+    },
+    "일륨도": {
+      "hits": []
+    },
+    "혐귀": {
+      "hits": []
+    }
+  }
+}

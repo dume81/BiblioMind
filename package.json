@@ -1,0 +1,33 @@
+{
+  "name": "graphrag-1st",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=22.12"
+  },
+  "workspaces": [
+    "shared",
+    "pipeline",
+    "mcp-server",
+    "visualization-3d"
+  ],
+  "scripts": {
+    "setup": "node scripts/setup.js",
+    "dev:all": "npm run dev:full -w visualization-3d",
+    "dev:viz": "npm run dev -w visualization-3d",
+    "dev:api": "npm run dev:api -w visualization-3d",
+    "mcp:stdio": "node mcp-server/src/index.js",
+    "mcp:inspect": "npx -y @modelcontextprotocol/inspector node mcp-server/src/index.js",
+    "mcp:smoke": "npx -y @modelcontextprotocol/inspector --cli node mcp-server/src/index.js --method tools/list",
+    "lint": "eslint shared pipeline mcp-server scripts && npm run lint -w visualization-3d",
+    "test": "npm test --workspaces --if-present && node --test \"scripts/**/*.test.js\"",
+    "hub:e2e": "node scripts/hub-e2e.js",
+    "review:e2e": "node scripts/review-e2e.js",
+    "rebuild:e2e": "node scripts/rebuild-e2e.js"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.30.0",
+    "eslint": "^9.30.0",
+    "globals": "^16.3.0"
+  }
+}

@@ -1,0 +1,43 @@
+#!/bin/sh
+# 커밋 전 가드 (2026-08-22 A1 — 재발 방지 기전 결정 2).
+#
+# 왜 .git/hooks가 아니라 .githooks인가: .git/ 아래는 버전 관리가 되지 않아
+# 저장소를 새로 클론하면 훅이 따라오지 않는다. 이 폴더는 커밋되며
+# `npm run setup`이 core.hooksPath를 여기로 가리켜 활성화한다(멱등).
+#
+# 커버 범위의 한계(정직하게): 이 훅은 오프라인 가드만 돌린다.
+# 살아 있는 Aura를 요구하는 검사(runSearch 내부 상수·분기)는 여기서 잡히지 않는다.
+# 근거·목록은 bibliomind/docs/PREVENTION-MECHANISM.md §4.
+#
+# 긴급 우회는 git 자체 수단(--no-verify)을 쓴다. 우회했다면 그 사실을 커밋 메시지에 남길 것.
+
+set -e
+cd "$(git rev-parse --show-toplevel)"
+
+printf '[pre-commit] 가드 실행 중 (실측 ~4초)\n'
+
+printf '  1/2 테스트... '
+if npm test >/tmp/bm-precommit-test.log 2>&1; then
+  printf '통과\n'
+else
+  printf '실패\n\n'
+  # tail은 쓰지 않는다 — 워크스페이스가 여러 개라 마지막 30줄이 "통과한 다른 패키지"인
+  # 경우가 많다(2026-08-22 실측: 깨진 곳은 mcp-server인데 시각화 191건 통과 화면만 나왔다).
+  # 실패 지점만 뽑는다.
+  grep -aE 'FAIL|AssertionError|×|✗|Tests .*failed|Test Files .*failed' /tmp/bm-precommit-test.log | head -20
+  printf '\n  전체 출력: /tmp/bm-precommit-test.log\n'
+  printf '[pre-commit] 커밋을 중단합니다 — 위 테스트를 먼저 고치세요.\n'
+  exit 1
+fi
+
+printf '  2/2 키워드 계측기(known-answer + mustNotDetect)... '
+if node scripts/check-keywords.js >/tmp/bm-precommit-kw.log 2>&1; then
+  printf '통과\n'
+else
+  printf '실패\n\n'
+  cat /tmp/bm-precommit-kw.log
+  printf '\n[pre-commit] 커밋을 중단합니다 — 계측기가 회귀를 보고했습니다.\n'
+  exit 1
+fi
+
+printf '[pre-commit] 통과\n'

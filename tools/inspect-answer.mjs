@@ -1,22 +1,26 @@
 // 판정 보조 — 특정 질문의 도구 내역(시드·계층·1층 규모·인용 검증)을 대화 기록에서 추출한다.
 // 이사님이 챗 화면에서 "사용함 도구"를 펼치지 않아도 ②시드 계층이 확정 판정된다.
 //
-// 사용: node bibliomind/tools/inspect-answer.mjs "우로코다키"
+// 사용: node tools/inspect-answer.mjs "우로코다키"
 
 import { readFileSync, readdirSync, existsSync, statSync } from 'node:fs';
-import { join } from 'node:path';
+import { join, resolve } from 'node:path';
 import { homedir } from 'node:os';
+import { fileURLToPath } from 'node:url';
+import { claudeProjectDirName } from '../scripts/lib/claude-project-dir.js';
 
 const needle = process.argv[2];
 if (!needle) {
-  console.error('사용법: node bibliomind/tools/inspect-answer.mjs "질문 일부"');
+  console.error('사용법: node tools/inspect-answer.mjs "질문 일부"');
   process.exit(1);
 }
 
 const ROOT = join(homedir(), '.claude', 'projects');
+// 이 저장소 위치에서 동적 산출(통합 2026-08-28) — PC·폴더명 하드코딩은 타 환경에서 조용히 빈 결과가 된다.
+const REPO = resolve(fileURLToPath(new URL('..', import.meta.url)));
 const DIRS = [
-  'C--Users-DUME-Desktop-Claude-Code-Workspace-GraphRAG-1st',
-  'C--Users-DUME-Desktop-Claude-Code-Workspace-GraphRAG-1st-mcp-server',
+  claudeProjectDirName(REPO),
+  claudeProjectDirName(join(REPO, 'mcp-server')),
 ];
 
 const files = [];

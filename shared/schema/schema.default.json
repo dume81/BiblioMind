@@ -1,0 +1,445 @@
+{
+  "schema_version": 3,
+  "updated_at": "2026-08-26T23:55:00+09:00",
+  "policy": "reuse_first_auto_extend",
+  "node_labels": [
+    {
+      "label": "Person",
+      "ko": "인물",
+      "desc": "실존·가상 인물",
+      "origin": "seed"
+    },
+    {
+      "label": "Organization",
+      "ko": "조직",
+      "desc": "단체·기관·기업·부대",
+      "origin": "seed"
+    },
+    {
+      "label": "Family",
+      "ko": "가문/가족",
+      "desc": "혈연·가문 집단",
+      "origin": "seed"
+    },
+    {
+      "label": "Place",
+      "ko": "장소",
+      "desc": "지리적 장소·지역·건물",
+      "origin": "seed"
+    },
+    {
+      "label": "Event",
+      "ko": "사건",
+      "desc": "일어난 일·행사·시험·사고",
+      "origin": "seed"
+    },
+    {
+      "label": "TimePeriod",
+      "ko": "시대/기간",
+      "desc": "시대·연대·기간",
+      "origin": "seed"
+    },
+    {
+      "label": "Species",
+      "ko": "종족",
+      "desc": "생물종·종족",
+      "origin": "seed"
+    },
+    {
+      "label": "Object",
+      "ko": "사물",
+      "desc": "물건·도구·물질",
+      "origin": "seed"
+    },
+    {
+      "label": "Weapon",
+      "ko": "무기",
+      "desc": "무기류",
+      "origin": "seed"
+    },
+    {
+      "label": "Technique",
+      "ko": "기술",
+      "desc": "기술·기법·능력·호흡법",
+      "origin": "seed"
+    },
+    {
+      "label": "Mission",
+      "ko": "임무",
+      "desc": "임무·과업",
+      "origin": "seed"
+    },
+    {
+      "label": "Training",
+      "ko": "수련/훈련",
+      "desc": "수련·교육 과정",
+      "origin": "seed"
+    },
+    {
+      "label": "MediaRange",
+      "ko": "매체 범위",
+      "desc": "화수·권수 등 매체 구간",
+      "origin": "seed"
+    },
+    {
+      "label": "StorySegment",
+      "ko": "이야기 구간",
+      "desc": "서사 구간 단위",
+      "origin": "seed"
+    },
+    {
+      "label": "Concept",
+      "ko": "개념",
+      "desc": "추상 개념·이론·용어·제도·프로세스",
+      "origin": "seed"
+    },
+    {
+      "label": "Work",
+      "ko": "작품/문헌",
+      "desc": "책·작품·문서·매체 산출물",
+      "origin": "seed"
+    },
+    {
+      "label": "Product",
+      "ko": "제품/솔루션",
+      "desc": "상용 소프트웨어 제품·솔루션·플랫폼·모듈",
+      "origin": "manual"
+    }
+  ],
+  "node_label_name_rule": "^[A-Z][A-Za-z0-9]{1,39}$",
+  "core_relationships": [
+    {
+      "type": "IS_A",
+      "ko": "분류(~의 일종)",
+      "origin": "seed"
+    },
+    {
+      "type": "MEMBER_OF",
+      "ko": "소속",
+      "origin": "seed"
+    },
+    {
+      "type": "PART_OF",
+      "ko": "부분-전체",
+      "origin": "seed"
+    },
+    {
+      "type": "LOCATED_IN",
+      "ko": "위치",
+      "origin": "seed"
+    },
+    {
+      "type": "OCCURRED_DURING",
+      "ko": "발생 시기",
+      "origin": "seed"
+    },
+    {
+      "type": "PARTICIPATED_IN",
+      "ko": "참여",
+      "origin": "seed"
+    },
+    {
+      "type": "USES",
+      "ko": "사용",
+      "origin": "seed"
+    },
+    {
+      "type": "HAS_AGENT",
+      "ko": "사건의 행위 주체",
+      "origin": "seed"
+    },
+    {
+      "type": "HAS_TARGET",
+      "ko": "사건의 대상",
+      "origin": "seed"
+    },
+    {
+      "type": "HAS_INSTRUMENT",
+      "ko": "사건의 수단·도구",
+      "origin": "seed"
+    },
+    {
+      "type": "CAUSED",
+      "ko": "원인",
+      "origin": "seed"
+    },
+    {
+      "type": "RESULTED_IN",
+      "ko": "결과",
+      "origin": "seed"
+    },
+    {
+      "type": "PRECEDES",
+      "ko": "시간 선행",
+      "origin": "seed"
+    },
+    {
+      "type": "KNOWS",
+      "ko": "인지·친분",
+      "origin": "seed"
+    },
+    {
+      "type": "RELATED_TO",
+      "ko": "기타 연관(최후 수단)",
+      "origin": "seed"
+    }
+  ],
+  "extended_relationships": [],
+  "relationship_name_rule": "^[A-Z][A-Z0-9_]{1,39}$",
+  "instructions_ko": [
+    "노드 name은 원문 언어의 표기를 유지한다(한국어 자료는 한국어).",
+    "고유명사는 자료에 등장하는 가장 완전한 정식 명칭으로 통일한다(별명·약칭 금지). 같은 대상은 반드시 같은 name으로 쓴다.",
+    "모든 노드는 properties.name(비어있지 않은 문자열)을 반드시 갖는다.",
+    "속성 값은 문자열·숫자·불리언 또는 같은 타입만 담은 배열로 쓴다(중첩 객체 금지).",
+    "kgid, name_key, reviewed_files, input_files는 시스템 예약 속성명이므로 어떤 노드·관계 속성에도 쓰지 않는다.",
+    "판매·배포되는 소프트웨어 제품·솔루션·플랫폼·모듈은 Product로 한다. Object(물건)나 Concept(개념)로 쓰지 않는다.",
+    "Concept는 제품·조직·장소·사건 어디에도 속하지 않는 추상 개념에만 쓴다.",
+    "널리 통용되는 제품 약어가 있으면 name은 약어로 하고 전체 명칭은 full_name 속성에 둔다(예: name=\"SAP GRC\", full_name=\"SAP Governance, Risk and Compliance\").",
+    "현재 상태를 나타내는 속성(주소·직책·규모 등)에는 자료가 현재 값으로 제시한 값만 쓴다. 특정 시점이 붙은 값(예: '설립 당시')은 그 속성에 쓰지 않는다.",
+    "시점이 붙은 값은 버리지 않는다 — 해당 사건(Event) 노드의 속성으로 기록한다(예: 설립 당시 본점 주소 → 설립 Event의 location과 year)."
+  ],
+  "canonical_entities": [
+    {
+      "canonical": {
+        "label": "Organization",
+        "name": "리디안솔루션(주)"
+      },
+      "variants": [
+        {
+          "label": "Organization",
+          "name": "리디안솔루션"
+        }
+      ],
+      "note": "법인 정식 명칭으로 통일. 이 분리가 거짓 부재 2건의 직접 원인이었다."
+    },
+    {
+      "canonical": {
+        "label": "Product",
+        "name": "SAP GRC"
+      },
+      "variants": [
+        {
+          "label": "Concept",
+          "name": "SAP GRC"
+        },
+        {
+          "label": "Object",
+          "name": "SAP GRC"
+        },
+        {
+          "label": "Concept",
+          "name": "SAP Governance, Risk and Compliance"
+        }
+      ],
+      "note": "약어를 정본으로, 전체명은 full_name 속성에 보존"
+    },
+    {
+      "canonical": {
+        "label": "Product",
+        "name": "SAP BTP"
+      },
+      "variants": [
+        {
+          "label": "Concept",
+          "name": "SAP BTP"
+        },
+        {
+          "label": "Object",
+          "name": "SAP BTP"
+        },
+        {
+          "label": "Concept",
+          "name": "SAP Business Technology Platform"
+        }
+      ],
+      "note": "동일"
+    },
+    {
+      "canonical": {
+        "label": "Product",
+        "name": "SAP CPI"
+      },
+      "variants": [
+        {
+          "label": "Object",
+          "name": "SAP CPI"
+        },
+        {
+          "label": "Concept",
+          "name": "SAP Cloud Platform Integration"
+        }
+      ],
+      "note": "동일"
+    },
+    {
+      "canonical": {
+        "label": "Product",
+        "name": "SAP SAC"
+      },
+      "variants": [
+        {
+          "label": "Concept",
+          "name": "SAP SAC"
+        },
+        {
+          "label": "Object",
+          "name": "SAP SAC"
+        }
+      ]
+    },
+    {
+      "canonical": {
+        "label": "Product",
+        "name": "SAP GTS"
+      },
+      "variants": [
+        {
+          "label": "Concept",
+          "name": "SAP GTS"
+        },
+        {
+          "label": "Object",
+          "name": "SAP GTS"
+        }
+      ]
+    },
+    {
+      "canonical": {
+        "label": "Product",
+        "name": "SAP ESG"
+      },
+      "variants": [
+        {
+          "label": "Concept",
+          "name": "SAP ESG"
+        },
+        {
+          "label": "Object",
+          "name": "SAP ESG"
+        }
+      ]
+    },
+    {
+      "canonical": {
+        "label": "Product",
+        "name": "FTA R-TAPs"
+      },
+      "variants": [
+        {
+          "label": "Object",
+          "name": "FTA R-TAPs"
+        },
+        {
+          "label": "Object",
+          "name": "R-TAPs"
+        },
+        {
+          "label": "Work",
+          "name": "R-TAPs"
+        },
+        {
+          "label": "Product",
+          "name": "R-TAPs"
+        }
+      ],
+      "note": "같은 자체 솔루션이 3개 노드로 갈라져 있었다(Object/Object/Work) / 2026-08-26 신 p04(스키마 v3)가 약칭 R-TAPs 산출 — Q6 재개봉분 등재"
+    },
+    {
+      "canonical": {
+        "label": "Product",
+        "name": "GRC K-PACK"
+      },
+      "variants": [
+        {
+          "label": "Object",
+          "name": "GRC K-PACK"
+        },
+        {
+          "label": "Product",
+          "name": "K-Pack"
+        }
+      ],
+      "note": "2026-08-26 신 p04(스키마 v3)가 약칭 K-Pack 산출 — Q6 재개봉분 등재"
+    },
+    {
+      "canonical": {
+        "label": "Product",
+        "name": "BTP R-DACs"
+      },
+      "variants": [
+        {
+          "label": "Object",
+          "name": "BTP R-DACs"
+        },
+        {
+          "label": "Product",
+          "name": "R-DACS"
+        }
+      ],
+      "note": "2026-08-26 신 p04(스키마 v3)가 약칭 R-DACS 산출 — Q6 재개봉분 등재"
+    },
+    {
+      "canonical": {
+        "label": "Product",
+        "name": "SAC Planning Package"
+      },
+      "variants": [
+        {
+          "label": "Object",
+          "name": "SAC Planning Package"
+        }
+      ]
+    },
+    {
+      "canonical": {
+        "label": "Product",
+        "name": "ReadiFlow"
+      },
+      "variants": [
+        {
+          "label": "Object",
+          "name": "ReadiFlow"
+        }
+      ]
+    },
+    {
+      "canonical": {
+        "label": "Concept",
+        "name": "Cloud"
+      },
+      "variants": [
+        {
+          "label": "Object",
+          "name": "Cloud"
+        }
+      ],
+      "note": "클라우드는 제품이 아니라 영역·개념"
+    },
+    {
+      "canonical": {
+        "label": "Technique",
+        "name": "SAP ABAP/4"
+      },
+      "variants": [
+        {
+          "label": "Concept",
+          "name": "SAP ABAP/4"
+        }
+      ],
+      "note": "개발언어이므로 기술"
+    },
+    {
+      "canonical": {
+        "label": "Concept",
+        "name": "FTA 원산지 판정"
+      },
+      "variants": [
+        {
+          "label": "Concept",
+          "name": "원산지 판정"
+        }
+      ]
+    }
+  ],
+  "property_overrides": []
+}

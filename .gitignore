@@ -1,0 +1,21 @@
+# 참조용 외부 저장소 사본 — 결과물이 아니므로 push하지 않는다
+ai_knowledge_graph-main/
+react-force-graph-master/
+
+# 개발 도구 세션 설정 — 결과물과 무관
+.claude/
+
+# 의존성·산출물
+node_modules/
+dist/
+coverage/
+
+# ★ 사용자 데이터 전체 — Input/Generated/Reviewed/Rejected/원장/스키마/런타임/임시 (PRD 위생 원칙)
+data/
+
+# 환경 변수 — 자격증명·키
+.env
+.env.*
+!.env.example
+
+*.log

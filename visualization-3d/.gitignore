@@ -1,0 +1,14 @@
+node_modules
+dist
+coverage
+
+# 개선 작업 전 원복용 소스 스냅샷
+_backup
+
+# 로컬 환경 변수 — 실제 자격증명은 절대 커밋하지 않는다
+.env
+.env.local
+.env.*.local
+
+.vercel
+*.log

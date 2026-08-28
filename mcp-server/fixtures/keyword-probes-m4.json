@@ -1,0 +1,274 @@
+{
+  "schemaVersion": 1,
+  "mode": "survey",
+  "purpose": "판정 회차에서 모델이 실제로 생성한 (question, keywords) 쌍. known-answer 픽스처(keyword-probes.json)와 달리 정답이 미리 정해져 있지 않은 조사용이다.",
+  "capturedAt": "2026-08-22T09:25:27.730Z",
+  "since": "2026-08-22T16:45",
+  "note": "검사: node scripts/check-keywords.js --fixture <이 파일>. survey 모드는 \"손상 의심인데 복원도 안 됐고 시드도 0건\"인 건만 실패로 센다.",
+  "expectedDamaged": [],
+  "probes": [
+    {
+      "ts": "2026-08-22T07:49:17.881Z",
+      "question": "일륜도가 뭐야?",
+      "questionSource": "tool-arg",
+      "keywords": [
+        "일륜도"
+      ],
+      "seedCount": 1,
+      "seedTiers": [
+        "일륜도:T1"
+      ],
+      "restoredFrom": [],
+      "unmatched": []
+    },
+    {
+      "ts": "2026-08-22T07:53:07.024Z",
+      "question": "탄지로는 어디 소속이야?",
+      "questionSource": "tool-arg",
+      "keywords": [
+        "탄지로"
+      ],
+      "seedCount": 3,
+      "seedTiers": [
+        "탄지로:T2"
+      ],
+      "restoredFrom": [],
+      "unmatched": []
+    },
+    {
+      "ts": "2026-08-22T07:53:47.857Z",
+      "question": "네즈코는 어떻게 도깨비가 됐어?",
+      "questionSource": "tool-arg",
+      "keywords": [
+        "네즈코",
+        "도깨비"
+      ],
+      "seedCount": 5,
+      "seedTiers": [
+        "네즈코:T2",
+        "도깨비:T1"
+      ],
+      "restoredFrom": [],
+      "unmatched": []
+    },
+    {
+      "ts": "2026-08-22T07:54:17.535Z",
+      "question": "호타루는 무엇을 다루는 사람이야?",
+      "questionSource": "tool-arg",
+      "keywords": [
+        "호타루"
+      ],
+      "seedCount": 1,
+      "seedTiers": [
+        "호타루:T2"
+      ],
+      "restoredFrom": [],
+      "unmatched": []
+    },
+    {
+      "ts": "2026-08-22T07:54:32.958Z",
+      "question": "네즈코와 재갈은 무슨 관련이 있어?",
+      "questionSource": "tool-arg",
+      "keywords": [
+        "네즈코",
+        "재갈"
+      ],
+      "seedCount": 5,
+      "seedTiers": [
+        "네즈코:T2",
+        "재갈:T1"
+      ],
+      "restoredFrom": [],
+      "unmatched": []
+    },
+    {
+      "ts": "2026-08-22T08:10:12.042Z",
+      "question": "일륜도가 뭐야?",
+      "questionSource": "tool-arg",
+      "keywords": [
+        "일륜도"
+      ],
+      "seedCount": 1,
+      "seedTiers": [
+        "일륜도:T1"
+      ],
+      "restoredFrom": [],
+      "unmatched": []
+    },
+    {
+      "ts": "2026-08-22T08:17:28.034Z",
+      "question": "탄지로는 어디 소속이야?",
+      "questionSource": "tool-arg",
+      "keywords": [
+        "탄지로"
+      ],
+      "seedCount": 3,
+      "seedTiers": [
+        "탄지로:T2"
+      ],
+      "restoredFrom": [],
+      "unmatched": []
+    },
+    {
+      "ts": "2026-08-22T08:32:45.290Z",
+      "question": "네즈코는 어떻게 도깨비가 됐어?",
+      "questionSource": "tool-arg",
+      "keywords": [
+        "네즈코"
+      ],
+      "seedCount": 4,
+      "seedTiers": [
+        "네즈코:T2"
+      ],
+      "restoredFrom": [],
+      "unmatched": []
+    },
+    {
+      "ts": "2026-08-22T08:36:23.567Z",
+      "question": "호타루는 무엇을 다루는 사람이야?",
+      "questionSource": "tool-arg",
+      "keywords": [
+        "호타루"
+      ],
+      "seedCount": 1,
+      "seedTiers": [
+        "호타루:T2"
+      ],
+      "restoredFrom": [],
+      "unmatched": []
+    },
+    {
+      "ts": "2026-08-22T08:59:45.081Z",
+      "question": "네즈코와 재갈은 무슨 관련이 있어?",
+      "questionSource": "tool-arg",
+      "keywords": [
+        "네즈코",
+        "재갈"
+      ],
+      "seedCount": 5,
+      "seedTiers": [
+        "네즈코:T2",
+        "재갈:T1"
+      ],
+      "restoredFrom": [],
+      "unmatched": []
+    },
+    {
+      "ts": "2026-08-22T09:03:23.776Z",
+      "question": "귀멸의 칼날 주인공이 누구야?",
+      "questionSource": "tool-arg",
+      "keywords": [
+        "귀멸의 칼날"
+      ],
+      "seedCount": 0,
+      "seedTiers": [],
+      "restoredFrom": [],
+      "unmatched": [
+        "귀멸의 칼날"
+      ]
+    },
+    {
+      "ts": "2026-08-22T09:03:32.821Z",
+      "question": "귀멸의 칼날 주인공이 누구야?",
+      "questionSource": "tool-arg",
+      "keywords": [
+        "귀멸"
+      ],
+      "seedCount": 0,
+      "seedTiers": [],
+      "restoredFrom": [],
+      "unmatched": [
+        "귀멸"
+      ]
+    },
+    {
+      "ts": "2026-08-22T09:06:51.136Z",
+      "question": "탄지로는 어떤 성격이야?",
+      "questionSource": "tool-arg",
+      "keywords": [
+        "탄지로"
+      ],
+      "seedCount": 3,
+      "seedTiers": [
+        "탄지로:T2"
+      ],
+      "restoredFrom": [],
+      "unmatched": []
+    },
+    {
+      "ts": "2026-08-22T09:10:18.797Z",
+      "question": "네즈코와 탄지로는 남매야?",
+      "questionSource": "tool-arg",
+      "keywords": [
+        "네즈코",
+        "탄지로"
+      ],
+      "seedCount": 7,
+      "seedTiers": [
+        "네즈코:T2",
+        "탄지로:T2"
+      ],
+      "restoredFrom": [],
+      "unmatched": []
+    },
+    {
+      "ts": "2026-08-22T09:13:59.917Z",
+      "question": "무잔은 누구야?",
+      "questionSource": "tool-arg",
+      "keywords": [
+        "무잔"
+      ],
+      "seedCount": 0,
+      "seedTiers": [],
+      "restoredFrom": [],
+      "unmatched": [
+        "무잔"
+      ]
+    },
+    {
+      "ts": "2026-08-22T09:14:14.231Z",
+      "question": "무잔은 누구야?",
+      "questionSource": "tool-arg",
+      "keywords": [
+        "키부츠지"
+      ],
+      "seedCount": 0,
+      "seedTiers": [],
+      "restoredFrom": [],
+      "unmatched": [
+        "키부츠지"
+      ]
+    },
+    {
+      "ts": "2026-08-22T09:17:10.371Z",
+      "question": "탄지로의 아버지 이름은 뭐야?",
+      "questionSource": "tool-arg",
+      "keywords": [
+        "탄지로",
+        "아버지"
+      ],
+      "seedCount": 3,
+      "seedTiers": [
+        "탄지로:T2"
+      ],
+      "restoredFrom": [],
+      "unmatched": [
+        "아버지"
+      ]
+    },
+    {
+      "ts": "2026-08-22T09:21:08.087Z",
+      "question": "사부로 영감의 직업은 뭐야?",
+      "questionSource": "tool-arg",
+      "keywords": [
+        "사부로"
+      ],
+      "seedCount": 1,
+      "seedTiers": [
+        "사부로:T2"
+      ],
+      "restoredFrom": [],
+      "unmatched": []
+    }
+  ]
+}

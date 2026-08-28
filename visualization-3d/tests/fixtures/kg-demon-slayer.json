@@ -1,0 +1,619 @@
+{
+  "nodes": [
+    {
+      "id": "0",
+      "label": "TimePeriod",
+      "properties": {
+        "name": "다이쇼 시대"
+      }
+    },
+    {
+      "id": "1",
+      "label": "Person",
+      "properties": {
+        "name": "카마도 탄지로",
+        "role": "주인공"
+      }
+    },
+    {
+      "id": "2",
+      "label": "Family",
+      "properties": {
+        "name": "카마도 가족"
+      }
+    },
+    {
+      "id": "3",
+      "label": "Place",
+      "properties": {
+        "name": "마을"
+      }
+    },
+    {
+      "id": "4",
+      "label": "Person",
+      "properties": {
+        "name": "사부로 영감"
+      }
+    },
+    {
+      "id": "5",
+      "label": "Species",
+      "properties": {
+        "name": "도깨비",
+        "description": "사람을 잡아먹는 존재"
+      }
+    },
+    {
+      "id": "6",
+      "label": "Species",
+      "properties": {
+        "name": "인간"
+      }
+    },
+    {
+      "id": "7",
+      "label": "Person",
+      "properties": {
+        "name": "카마도 네즈코",
+        "state": "도깨비로 변함"
+      }
+    },
+    {
+      "id": "8",
+      "label": "Person",
+      "properties": {
+        "name": "토미오카 기유",
+        "occupation": "검객"
+      }
+    },
+    {
+      "id": "9",
+      "label": "Organization",
+      "properties": {
+        "name": "귀살대",
+        "purpose": "도깨비 사냥"
+      }
+    },
+    {
+      "id": "10",
+      "label": "Person",
+      "properties": {
+        "name": "우로코다키 사콘지",
+        "role": "귀살대 육성자"
+      }
+    },
+    {
+      "id": "11",
+      "label": "Place",
+      "properties": {
+        "name": "사기리 산"
+      }
+    },
+    {
+      "id": "12",
+      "label": "Person",
+      "properties": {
+        "name": "사비토",
+        "description": "소년"
+      }
+    },
+    {
+      "id": "13",
+      "label": "Person",
+      "properties": {
+        "name": "마코모",
+        "description": "소녀"
+      }
+    },
+    {
+      "id": "14",
+      "label": "Technique",
+      "properties": {
+        "name": "전집중 호흡"
+      }
+    },
+    {
+      "id": "15",
+      "label": "Event",
+      "properties": {
+        "name": "귀살대의 최종선별",
+        "event_type": "선발 시험"
+      }
+    },
+    {
+      "id": "16",
+      "label": "Person",
+      "properties": {
+        "name": "하가네즈카 호타루",
+        "occupation": "대장장이"
+      }
+    },
+    {
+      "id": "17",
+      "label": "Weapon",
+      "properties": {
+        "name": "일륜도"
+      }
+    },
+    {
+      "id": "18",
+      "label": "Mission",
+      "properties": {
+        "name": "첫 번째 임무",
+        "sequence": 1
+      }
+    },
+    {
+      "id": "19",
+      "label": "Event",
+      "properties": {
+        "name": "카마도 가족 몰살 사건"
+      }
+    },
+    {
+      "id": "20",
+      "label": "Event",
+      "properties": {
+        "name": "네즈코의 도깨비화"
+      }
+    },
+    {
+      "id": "21",
+      "label": "Event",
+      "properties": {
+        "name": "네즈코의 탄지로 공격"
+      }
+    },
+    {
+      "id": "22",
+      "label": "Training",
+      "properties": {
+        "name": "탄지로의 수련",
+        "duration_years": 2,
+        "difficulty": "혹독함"
+      }
+    },
+    {
+      "id": "23",
+      "label": "Object",
+      "properties": {
+        "name": "재갈"
+      }
+    },
+    {
+      "id": "24",
+      "label": "MediaRange",
+      "properties": {
+        "name": "만화 1~13화",
+        "medium": "만화",
+        "start": 1,
+        "end": 13,
+        "unit": "화"
+      }
+    },
+    {
+      "id": "25",
+      "label": "MediaRange",
+      "properties": {
+        "name": "단행본 1~2권",
+        "medium": "단행본",
+        "start": 1,
+        "end": 2,
+        "unit": "권"
+      }
+    },
+    {
+      "id": "26",
+      "label": "MediaRange",
+      "properties": {
+        "name": "애니메이션 1~5화",
+        "medium": "애니메이션",
+        "start": 1,
+        "end": 5,
+        "unit": "화"
+      }
+    },
+    {
+      "id": "27",
+      "label": "Event",
+      "properties": {
+        "name": "기유가 네즈코에게 재갈을 물린 사건"
+      }
+    },
+    {
+      "id": "28",
+      "label": "StorySegment",
+      "properties": {
+        "name": "만화 1~13화·단행본 1~2권·애니메이션 1~5화 해당 이야기 구간"
+      }
+    }
+  ],
+  "relationships": [
+    {
+      "type": "HAS_MEDIA_COVERAGE",
+      "start_node_id": "28",
+      "end_node_id": "24",
+      "properties": {}
+    },
+    {
+      "type": "HAS_MEDIA_COVERAGE",
+      "start_node_id": "28",
+      "end_node_id": "25",
+      "properties": {}
+    },
+    {
+      "type": "HAS_MEDIA_COVERAGE",
+      "start_node_id": "28",
+      "end_node_id": "26",
+      "properties": {}
+    },
+    {
+      "type": "SET_DURING",
+      "start_node_id": "28",
+      "end_node_id": "0",
+      "properties": {}
+    },
+    {
+      "type": "FEATURES",
+      "start_node_id": "28",
+      "end_node_id": "1",
+      "properties": {
+        "role": "주인공"
+      }
+    },
+    {
+      "type": "MEMBER_OF",
+      "start_node_id": "1",
+      "end_node_id": "2",
+      "properties": {}
+    },
+    {
+      "type": "MEMBER_OF",
+      "start_node_id": "7",
+      "end_node_id": "2",
+      "properties": {}
+    },
+    {
+      "type": "OLDER_BROTHER_OF",
+      "start_node_id": "1",
+      "end_node_id": "7",
+      "properties": {}
+    },
+    {
+      "type": "TRAVELED_TO",
+      "start_node_id": "1",
+      "end_node_id": "3",
+      "properties": {
+        "purpose": "숯 판매",
+        "traveling_alone": true
+      }
+    },
+    {
+      "type": "SOLD_AT",
+      "start_node_id": "1",
+      "end_node_id": "3",
+      "properties": {
+        "item": "숯"
+      }
+    },
+    {
+      "type": "HELPED_RESIDENTS_OF",
+      "start_node_id": "1",
+      "end_node_id": "3",
+      "properties": {}
+    },
+    {
+      "type": "WARNED",
+      "start_node_id": "4",
+      "end_node_id": "1",
+      "properties": {
+        "warning": "밤에는 사람을 잡아먹는 도깨비가 나타남"
+      }
+    },
+    {
+      "type": "HOSTED",
+      "start_node_id": "4",
+      "end_node_id": "1",
+      "properties": {
+        "duration": "하룻밤"
+      }
+    },
+    {
+      "type": "PREYS_ON",
+      "start_node_id": "5",
+      "end_node_id": "6",
+      "properties": {
+        "time": "밤",
+        "asserted_by": "사부로 영감"
+      }
+    },
+    {
+      "type": "OCCURRED_DURING",
+      "start_node_id": "19",
+      "end_node_id": "0",
+      "properties": {}
+    },
+    {
+      "type": "TARGETED",
+      "start_node_id": "19",
+      "end_node_id": "2",
+      "properties": {}
+    },
+    {
+      "type": "DISCOVERED",
+      "start_node_id": "1",
+      "end_node_id": "19",
+      "properties": {
+        "time": "귀가 후"
+      }
+    },
+    {
+      "type": "SURVIVED",
+      "start_node_id": "7",
+      "end_node_id": "19",
+      "properties": {
+        "status": "유일한 생존자"
+      }
+    },
+    {
+      "type": "HAS_SUBJECT",
+      "start_node_id": "20",
+      "end_node_id": "7",
+      "properties": {}
+    },
+    {
+      "type": "RESULTED_IN",
+      "start_node_id": "20",
+      "end_node_id": "5",
+      "properties": {
+        "result": "네즈코가 도깨비가 됨"
+      }
+    },
+    {
+      "type": "IS_A",
+      "start_node_id": "7",
+      "end_node_id": "5",
+      "properties": {
+        "state": "도깨비화 이후"
+      }
+    },
+    {
+      "type": "ATTEMPTED_TO_TAKE_FOR_TREATMENT",
+      "start_node_id": "1",
+      "end_node_id": "7",
+      "properties": {
+        "destination": "의사",
+        "purpose": "구하기 위해"
+      }
+    },
+    {
+      "type": "HAS_ATTACKER",
+      "start_node_id": "21",
+      "end_node_id": "7",
+      "properties": {
+        "state": "흉폭해짐"
+      }
+    },
+    {
+      "type": "HAS_TARGET",
+      "start_node_id": "21",
+      "end_node_id": "1",
+      "properties": {}
+    },
+    {
+      "type": "STOPPED",
+      "start_node_id": "8",
+      "end_node_id": "21",
+      "properties": {}
+    },
+    {
+      "type": "RESCUED",
+      "start_node_id": "8",
+      "end_node_id": "1",
+      "properties": {
+        "from": "네즈코의 공격"
+      }
+    },
+    {
+      "type": "ATTEMPTED_TO_ELIMINATE",
+      "start_node_id": "8",
+      "end_node_id": "7",
+      "properties": {
+        "initial_intention": true
+      }
+    },
+    {
+      "type": "PROTECTED",
+      "start_node_id": "7",
+      "end_node_id": "1",
+      "properties": {
+        "condition": "굶주린 상태"
+      }
+    },
+    {
+      "type": "SPARED",
+      "start_node_id": "8",
+      "end_node_id": "7",
+      "properties": {
+        "reason": "네즈코가 굶주린 상태에서도 탄지로를 지키려 했기 때문"
+      }
+    },
+    {
+      "type": "REFERRED_TO",
+      "start_node_id": "1",
+      "end_node_id": "10",
+      "properties": {
+        "referred_by": "토미오카 기유"
+      }
+    },
+    {
+      "type": "HAS_AGENT",
+      "start_node_id": "27",
+      "end_node_id": "8",
+      "properties": {}
+    },
+    {
+      "type": "HAS_TARGET",
+      "start_node_id": "27",
+      "end_node_id": "7",
+      "properties": {}
+    },
+    {
+      "type": "HAS_INSTRUMENT",
+      "start_node_id": "27",
+      "end_node_id": "23",
+      "properties": {}
+    },
+    {
+      "type": "HUNTS",
+      "start_node_id": "9",
+      "end_node_id": "5",
+      "properties": {}
+    },
+    {
+      "type": "TRAINER_FOR",
+      "start_node_id": "10",
+      "end_node_id": "9",
+      "properties": {}
+    },
+    {
+      "type": "LIVES_AT",
+      "start_node_id": "10",
+      "end_node_id": "11",
+      "properties": {}
+    },
+    {
+      "type": "ARRIVED_AT",
+      "start_node_id": "1",
+      "end_node_id": "11",
+      "properties": {}
+    },
+    {
+      "type": "HAS_TRAINEE",
+      "start_node_id": "22",
+      "end_node_id": "1",
+      "properties": {}
+    },
+    {
+      "type": "HAS_INSTRUCTOR",
+      "start_node_id": "22",
+      "end_node_id": "10",
+      "properties": {}
+    },
+    {
+      "type": "TAKES_PLACE_AT",
+      "start_node_id": "22",
+      "end_node_id": "11",
+      "properties": {}
+    },
+    {
+      "type": "ADVISED",
+      "start_node_id": "12",
+      "end_node_id": "1",
+      "properties": {
+        "context": "수련"
+      }
+    },
+    {
+      "type": "ADVISED",
+      "start_node_id": "13",
+      "end_node_id": "1",
+      "properties": {
+        "context": "수련"
+      }
+    },
+    {
+      "type": "LEARNED",
+      "start_node_id": "1",
+      "end_node_id": "14",
+      "properties": {
+        "result": "올바른 사용법을 익힘",
+        "advisors": [
+          "사비토",
+          "마코모"
+        ]
+      }
+    },
+    {
+      "type": "PRECEDES",
+      "start_node_id": "22",
+      "end_node_id": "15",
+      "properties": {}
+    },
+    {
+      "type": "SELECTION_FOR",
+      "start_node_id": "15",
+      "end_node_id": "9",
+      "properties": {}
+    },
+    {
+      "type": "PASSED",
+      "start_node_id": "1",
+      "end_node_id": "15",
+      "properties": {}
+    },
+    {
+      "type": "JOINED",
+      "start_node_id": "1",
+      "end_node_id": "9",
+      "properties": {
+        "after_event": "귀살대의 최종선별"
+      }
+    },
+    {
+      "type": "DEDICATED_SWORDSMITH_FOR",
+      "start_node_id": "16",
+      "end_node_id": "1",
+      "properties": {}
+    },
+    {
+      "type": "MET",
+      "start_node_id": "1",
+      "end_node_id": "16",
+      "properties": {}
+    },
+    {
+      "type": "PROVIDED",
+      "start_node_id": "16",
+      "end_node_id": "17",
+      "properties": {
+        "recipient": "카마도 탄지로"
+      }
+    },
+    {
+      "type": "RECEIVED",
+      "start_node_id": "1",
+      "end_node_id": "17",
+      "properties": {}
+    },
+    {
+      "type": "PRECEDES",
+      "start_node_id": "15",
+      "end_node_id": "18",
+      "properties": {}
+    },
+    {
+      "type": "DEPARTED_FOR",
+      "start_node_id": "1",
+      "end_node_id": "18",
+      "properties": {}
+    },
+    {
+      "type": "DEPARTED_FOR",
+      "start_node_id": "7",
+      "end_node_id": "18",
+      "properties": {
+        "after": "오랜 잠에서 깨어남"
+      }
+    },
+    {
+      "type": "ACCOMPANIED",
+      "start_node_id": "7",
+      "end_node_id": "1",
+      "properties": {
+        "mission": "첫 번째 임무"
+      }
+    }
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "name": "@bibliomind/mcp-server",
+  "version": "0.1.0",
+  "private": true,
+  "description": "BiblioMind MCP stdio server (bibliomind-mcp-server)",
+  "type": "module",
+  "main": "src/index.js",
+  "engines": {
+    "node": ">=22.12"
+  },
+  "scripts": {
+    "start": "node src/index.js",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "@bibliomind/shared": "*",
+    "@modelcontextprotocol/sdk": "^1.30.0",
+    "neo4j-driver": "^5.28.0",
+    "zod": "^4.1.0",
+    "@bibliomind/pipeline": "*"
+  },
+  "devDependencies": {
+    "vitest": "^3.2.0"
+  }
+}
