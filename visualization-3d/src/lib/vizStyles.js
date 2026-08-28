@@ -99,10 +99,17 @@ export const VIZ_STYLES = [
   },
   {
     id: 'textNodes',
-    label: '텍스트 노드',
+    label: '노드 이름 표시',
     description: '구체 대신 노드 이름 텍스트가 노드가 됩니다.',
     referenceExample: 'text-nodes',
     flags: { textAsNode: true },
+  },
+  {
+    id: 'linkLabels',
+    label: '관계 라벨 표시',
+    description: '그래프 크기와 무관하게 모든 관계 라벨을 표시합니다.',
+    referenceExample: 'text-links',
+    flags: { alwaysLinkLabels: true },
   },
   {
     id: 'customShapes',
@@ -209,13 +216,6 @@ export const VIZ_STYLES = [
       linkDirectionalArrowLength: 6.5,
       linkDirectionalArrowRelPos: 1,
     }),
-  },
-  {
-    id: 'linkLabels',
-    label: '관계 라벨 항상 표시',
-    description: '그래프 크기와 무관하게 모든 관계 라벨을 표시합니다.',
-    referenceExample: 'text-links',
-    flags: { alwaysLinkLabels: true },
   },
   {
     id: 'dagMode',
