@@ -150,8 +150,8 @@ Phase 0.1에서 **가장 먼저 요청 유형을 판별**하고, 아래 표에 �
 
 ## 현재 위치
 
-> **Phase 3 — 슬라이스 0~4·6~8·8.5 완료 + 판정축(M1~M5) 완결**(슬라이스 1 ✅ — M5 Codex 21문 합격선 7/7, 2026-08-27 오너 승인) + **5-C 완료**(Codex `tool_timeout_sec=900` 오너 집행·왕복 확인 — Claude Code는 기본값 충분 판명) + **MCP 도구 15종 전 가동**(슬라이스 8.5 — D4 해소).
-> 남은 순서(2026-08-27 오너 A 결정): **슬라이스 5(S3 생성기 검증·측정 — 착수는 차기 세션·재개 절차는 SESSION-STATE 🔜 절)** → 슬라이스 9(README + BiblioMind.git 통합 방식 설계) → 슬라이스 10(통합 검증 = MVP 완료) → Phase N.
+> **Phase 4 — 품질/테스트 (2026-08-28 진입)**: Phase 3 완결 — **전 슬라이스(0~10) ✅ + 성공 기준 9/9 전항 달성 + 오너 "승인" = MVP 1차 완성 선언**(판정 정본 = docs/MVP-VERIFICATION.md). Phase 4 하위 작업 = 4.1 엣지 케이스 · 4.2 로딩/에러/빈 상태 · 4.3 코드 리뷰 · 4.4 보안 점검 · 4.5 성능 · 4.6 접근성(+시스템 유형 필수: 실패·재시도·멱등성 점검) — 게이트 = 오너의 "배포 가능" 승인.
+> 병행 일상 운영: 검수 대기 처리·자료 수집·개선 큐(Q1·Q2·Q3·Q5·Q9·Q11·Q12·Q14·Q15 — 정본 MAINTENANCE-PLAN 말미. M5 동결은 해제됨 — 검색 로직 변경만 기준선 재측정 선행).
 > **정본 7종**: 판정 실기록 = docs/spike-judgment-log.md · M4 실기록 = docs/M4-JUDGMENT-LOG.md(재판정 = M4-REJUDGMENT.md) · **M5 실기록 = docs/M5-JUDGMENT.md** · 유지보수 정본 = docs/MAINTENANCE-PLAN.md · 재발 방지 기전 = docs/PREVENTION-MECHANISM.md · 결정 이력 = docs/DECISIONS.md · 이어받기 스냅샷 = docs/SESSION-STATE.md.
 > **저장소 통합 완료(2026-08-28 오너 B안)**: 정본 = **`dume81/BiblioMind.git` 단일**(main `9b9455d` — 코드 루트 + docs/). 클론→install→setup→테스트 584→도구 15종 실증. 코드 세부 이력 보관 = GraphRAG_1st.git@`719f280`. **세션 루트 = 로컬 `bibliomind/` 폴더**(.mcp.json 자동 적용). 슬라이스 9 잔여 = README 17항.
 > **상시 규칙 8조 발효 중**(2026-08-22) — 정본은 워크스페이스 루트 `CLAUDE.md` 말미, 최우선 규칙은 `~/.claude/CLAUDE.md`(사용자 전역). 이 PROCESS.md는 **범위·게이트 충돌 시 8조보다 우선**한다.
