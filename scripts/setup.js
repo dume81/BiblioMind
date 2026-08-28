@@ -147,4 +147,6 @@ console.log('\nCodex(데스크탑 앱·CLI 공용): %USERPROFILE%\\.codex\\confi
 console.log('  [mcp_servers.bibliomind]');
 console.log('  command = "node"');
 console.log(`  args = ['${serverEntry}']`);
+// Codex 도구 타임아웃 기본 60초 vs kg_generate 최악 10분 — 이 줄이 빠지면 생성 도구 전건 타임아웃 (DECISIONS 2026-08-27 5-C)
+console.log('  tool_timeout_sec = 900');
 console.log('\n등록 직후 자가검증: npm run mcp:smoke  (Tools 목록에 kg_status가 보이면 정상)');

@@ -59,7 +59,7 @@ npm run dev:all
 
 **Claude Code**: 이 저장소 폴더를 프로젝트 루트로 열면 끝입니다(`.mcp.json` 자동 적용). 다른 위치에서 열어야 한다면 `npm run setup`이 출력하는 절대경로 등록 명령을 사용하세요.
 
-**Codex(ChatGPT 데스크탑 앱의 Codex 또는 Codex CLI)**: `%USERPROFILE%\.codex\config.toml`(macOS/Linux는 `~/.codex/config.toml`)에 추가 후 재시작 — 정확한 경로는 `npm run setup` 결과표가 출력해 주며, 거기에 **`tool_timeout_sec = 900` 한 줄을 꼭 더하세요**:
+**Codex(ChatGPT 데스크탑 앱의 Codex 또는 Codex CLI)**: `%USERPROFILE%\.codex\config.toml`(macOS/Linux는 `~/.codex/config.toml`)에 추가 후 재시작 — `npm run setup` 결과표가 아래 블록을 사용자 환경의 절대경로와 **`tool_timeout_sec = 900`까지 포함해** 출력해 주니 그대로 복붙하면 됩니다:
 
 ```toml
 [mcp_servers.bibliomind]
