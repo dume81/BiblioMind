@@ -10,7 +10,8 @@
 
 ## 요구 사항
 
-- [Node.js](https://nodejs.org) **22.12+**
+- [Node.js](https://nodejs.org) **22.12+** (Windows는 `winget install OpenJS.NodeJS.LTS`로도 설치 가능)
+- [Git](https://git-scm.com) — 아래 클론 명령에 필요합니다. **Windows에는 기본 설치돼 있지 않으니** 없으면 설치하세요(`winget install Git.Git`)
 - 크롬(3D 시각화 화면)
 - 챗 클라이언트: **Claude Code**(CLI/데스크탑) 또는 **Codex 데스크탑/CLI** — **ChatGPT 웹·모바일 앱은 로컬 MCP 서버에 연결할 수 없어 지원되지 않습니다.**
 - 네트워크: **아웃바운드 TCP 7687** 허용 필요(Neo4j Aura 접속 — 회사망·방화벽 환경 주의)
@@ -24,7 +25,13 @@
 | MCP 등록 | 챗 ↔ 파이프라인 연결 | 필수 (아래 3단계) |
 | [Jina Reader](https://jina.ai/reader) 무료 키 | 웹 수집 속도·한도 개선 | 선택 (없어도 저율로 동작) |
 
-OCR 별도 설치는 필요 없습니다(브라우저 없이 도는 WASM 엔진 내장).
+OCR 별도 설치는 필요 없습니다(WASM — 웹 기술로 만든 내장 엔진이라 추가 프로그램이 필요 없습니다).
+
+> **엔진 CLI 설치·로그인 (KG 생성을 쓸 때)**: 둘 중 **하나만 있어도 됩니다** — 본인 구독에 맞는 쪽을 설치하세요.
+> - Codex(ChatGPT Plus/Pro 구독): `npm install -g @openai/codex` → `codex login`
+> - Claude(Claude 구독): `npm install -g @anthropic-ai/claude-code` → `claude` 실행 후 로그인 안내를 따름
+>
+> 설치 여부는 `npm run setup` 결과표가 알려줍니다. **기본 시작 엔진은 codex**이므로, Claude만 설치했다면 `.env`의 `KG_ENGINE=claude`로 바꾸거나 생성 시 챗에서 엔진을 지정하세요(아래 "KG 생성" 참조).
 
 ## 1단계 — Neo4j AuraDB 무료 인스턴스
 
@@ -47,7 +54,7 @@ npm run setup
 
 `npm run setup`은 몇 번을 실행해도 안전한 부트스트랩입니다 — 데이터 폴더·스키마 생성, `.env` 틀 복사, 훅 활성화까지 하고 남은 사용자 액션을 결과표로 알려줍니다.
 
-이어서 `.env` 파일을 열어 1단계 자격증명 .txt의 값 **4개 — 접속 URI·사용자명·비밀번호·데이터베이스명(`NEO4J_DATABASE`)** — 를 채우고, 다시 `npm run setup`으로 접속 확인이 ✓인지 보세요. (신형 콘솔은 데이터베이스명이 인스턴스별 생성명이라 이 값을 빠뜨리면 접속이 안 됩니다 — .txt에 있는 그대로 넣으세요.) 시각화 확인:
+이어서 `.env` 파일을 열어 1단계 자격증명 .txt의 값 **4개**를 같은 이름의 키에 채우세요 — **`NEO4J_URI` · `NEO4J_USERNAME` · `NEO4J_PASSWORD` · `NEO4J_DATABASE`** (.txt의 키 이름과 1:1입니다). 채운 뒤 다시 `npm run setup`으로 접속 확인이 ✓인지 보세요. (신형 콘솔은 데이터베이스명이 인스턴스별 생성명이라 이 값을 빠뜨리면 접속이 안 됩니다 — .txt에 있는 그대로 넣으세요.) 시각화 확인:
 
 ```bash
 npm run dev:all
@@ -58,6 +65,8 @@ npm run dev:all
 ## 3단계 — 챗 클라이언트에 MCP 등록
 
 **Claude Code**: 이 저장소 폴더를 프로젝트 루트로 열면 끝입니다(`.mcp.json` 자동 적용). 다른 위치에서 열어야 한다면 `npm run setup`이 출력하는 절대경로 등록 명령을 사용하세요.
+
+> **공통 권장 — 이 저장소 폴더에서 여세요**: 저장소의 `CLAUDE.md`/`AGENTS.md`에 "질문이 오면 먼저 그래프를 검색한다"는 질의 규칙이 들어 있고, 챗이 이 폴더를 작업 폴더로 열 때만 그 규칙이 로드됩니다. 다른 폴더에서 열면 도구는 붙어도 챗이 검색 없이 사전지식으로 답할 수 있습니다.
 
 **Codex(ChatGPT 데스크탑 앱의 Codex 또는 Codex CLI)**: `%USERPROFILE%\.codex\config.toml`(macOS/Linux는 `~/.codex/config.toml`)에 추가 후 재시작 — `npm run setup` 결과표가 아래 블록을 사용자 환경의 절대경로와 **`tool_timeout_sec = 900`까지 포함해** 출력해 주니 그대로 복붙하면 됩니다:
 
@@ -72,7 +81,7 @@ tool_timeout_sec = 900
 
 > **도구 승인 권장**: 도구 15종 중 **`source_remove`(자료 완전 제거)만 매번 확인**으로 두고 나머지는 "항상 허용"을 권장합니다 — **원본 자료가 사라지는 도구는 그것 하나뿐**입니다(`schema_update`도 파괴적으로 표시되지만 스키마 정리용이라 항상 허용해도 자료는 안전합니다).
 
-등록 확인: 챗에서 `kg_status`를 부르거나 `npm run mcp:smoke`(도구 목록 15종 자가검증).
+등록 확인: 챗에 **"kg_status 실행해"**라고 입력해 파이프라인 요약이 돌아오면 성공입니다. (`npm run mcp:smoke`는 서버 자체의 도구 15종 자가검증이라, 챗 쪽 등록 문제 — 경로 오타·재시작 누락 — 는 챗에서 불러봐야 확인됩니다.)
 
 ## 4단계 — 첫 데모 (예시 데이터)
 
@@ -90,6 +99,8 @@ node pipeline/bin/inject-example.js
 
 전부 챗에 말로 시키면 됩니다. 도구가 매 결과에 "다음 행동"을 안내합니다.
 
+> **화면이 필요한 단계**(검수 3D 표시·질문 하이라이트)에서는 `npm run dev:all`이 켜져 있어야 하고, 새로 부팅했으면 다시 켜야 합니다. 꺼져 있어도 수집·생성·승인·검색 자체는 동작하며, `kg_status`가 "허브 꺼짐"으로 알려줍니다.
+
 ### 1) 수집
 
 - **웹**: "collect_web으로 https://example.com 수집해줘" — 같은 도메인 안을 최대 10페이지(조절 가능) 수집합니다. robots.txt를 지키고, **같은 명령 재실행 = 기수집 스킵·이어서 수집**입니다.
@@ -99,6 +110,7 @@ node pipeline/bin/inject-example.js
 ### 2) KG 생성
 
 - "kg_generate로 대기 자료 2건 생성해줘" — 기본 1건씩 처리하고 "남은 대기 n건 — 다시 실행하면 이어서"를 안내합니다. **대량은 소분할이 안전합니다**: 2건 묶음 호출 실측 약 4분 36초였고, 최악(파일당 10분)까지 보장되는 묶음은 1건입니다.
+- **엔진 선택**: 기본 시작 엔진은 `codex`입니다(변경: `.env`의 `KG_ENGINE=claude`, 또는 그 실행만 "claude 엔진으로 생성해줘"). **설치되지 않은 엔진으로는 자동 전환되지 않습니다** — 전환은 사용량 한도 소진 때만 일어납니다.
 - **엔진 전환(failover)**: 구독 한도 소진 시 다른 엔진(codex↔claude)으로 자동 전환하고, 양쪽 다 소진이면 "회복 후 같은 명령 재실행"으로 이어집니다. 파일별 실제 생성 엔진은 결과 요약과 산출물 `meta.engine`에서 확인됩니다.
 - 생성 시 본문이 엔진(OpenAI/Anthropic) 클라우드로 전송됩니다 — 아래 "데이터와 프라이버시" 참조.
 
@@ -109,13 +121,14 @@ node pipeline/bin/inject-example.js
 
 ### 4) 그래프 반영
 
-- 검수를 마치면 "kg_rebuild 실행해" — 승인분 전체가 Neo4j에 반영됩니다(전체 재빌드·멱등, 실측 수 초~수십 초).
+- 검수를 마치면 "kg_rebuild 실행해" — 승인분 전체가 Neo4j에 반영됩니다(전체 재빌드 — 몇 번을 실행해도 같은 결과가 나오도록 설계돼 있어 안심하고 재실행해도 됩니다. 실측 수 초~수십 초).
 - 챗 두 곳(Claude Code·Codex)을 같이 쓰다 "다른 재빌드가 진행 중입니다 … 끝난 뒤 다시 실행하세요" 안내가 나오면 **정상 동작**입니다 — 두 챗이 같은 그래프를 동시에 다시 짓지 않게 막는 잠금입니다.
 
 ### 5) 질문
 
 - 그냥 물어보세요 — 챗이 `kg_search`로 그래프를 검색해 답하고 화면에 근거를 켭니다. 그래프에 없는 내용이면 "그래프에 없습니다"가 정답입니다(공백의 가시화가 품질 루프의 입력).
-- 자료 제거는 "source_remove로 ○○ 제거해줘"(재수집 허용/영구 차단 택일), 스키마 확인·다듬기는 `schema_get`/`schema_update`.
+- 화면의 강조를 끄고 싶으면 **"highlight_clear 실행해"**(또는 화면 우측 하이라이트 패널의 초기화 버튼).
+- 자료 제거는 "source_remove로 ○○ 제거해줘"(재수집 허용/영구 차단 택일). 그래프의 유형 사전(스키마 — 노드·관계 종류 목록)을 보거나 다듬으려면 `schema_get`/`schema_update`.
 
 ## 데이터와 프라이버시
 
@@ -125,7 +138,7 @@ node pipeline/bin/inject-example.js
 | KG 생성 시 자료 본문 | 선택한 엔진의 클라우드(OpenAI 또는 Anthropic)로 전송 |
 | 주입된 그래프 데이터 | **Neo4j Aura 클라우드에 저장** |
 
-엔진 쪽 데이터 취급(학습 사용 여부 등)은 계정·플랜별로 다르므로 공식 정책([OpenAI](https://openai.com/policies) · [Anthropic](https://www.anthropic.com/legal/privacy))에서 본인 계정 기준으로 확인하세요 — 본 문서 기준 확인일: 2026-08-28.
+엔진 쪽 데이터 취급(학습 사용 여부 등)은 계정·플랜별로 다르므로 공식 정책([OpenAI](https://openai.com/policies) · [Anthropic](https://www.anthropic.com/legal/privacy))에서 본인 계정 기준으로 확인하세요 — 본 문서 기준 확인일: 2026-08-28. **Codex 구독의 CLI 자동 호출 허용 범위는 2026-08 검증 기준**이며, 정책이 바뀌면 재검토 대상입니다.
 
 ## 백업과 복구
 
