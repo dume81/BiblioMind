@@ -153,6 +153,6 @@ Phase 0.1에서 **가장 먼저 요청 유형을 판별**하고, 아래 표에 �
 > **Phase 3 — 슬라이스 0~4·6~8·8.5 완료 + 판정축(M1~M5) 완결**(슬라이스 1 ✅ — M5 Codex 21문 합격선 7/7, 2026-08-27 오너 승인) + **5-C 완료**(Codex `tool_timeout_sec=900` 오너 집행·왕복 확인 — Claude Code는 기본값 충분 판명) + **MCP 도구 15종 전 가동**(슬라이스 8.5 — D4 해소).
 > 남은 순서(2026-08-27 오너 A 결정): **슬라이스 5(S3 생성기 검증·측정 — 착수는 차기 세션·재개 절차는 SESSION-STATE 🔜 절)** → 슬라이스 9(README + BiblioMind.git 통합 방식 설계) → 슬라이스 10(통합 검증 = MVP 완료) → Phase N.
 > **정본 7종**: 판정 실기록 = docs/spike-judgment-log.md · M4 실기록 = docs/M4-JUDGMENT-LOG.md(재판정 = M4-REJUDGMENT.md) · **M5 실기록 = docs/M5-JUDGMENT.md** · 유지보수 정본 = docs/MAINTENANCE-PLAN.md · 재발 방지 기전 = docs/PREVENTION-MECHANISM.md · 결정 이력 = docs/DECISIONS.md · 이어받기 스냅샷 = docs/SESSION-STATE.md.
-> **공개 push 상태(2026-08-27)**: 코드 `dume81/GraphRAG_1st.git` main=`0304334` · 문서 `dume81/BiblioMind.git` main=`b06e0a4`(+로컬 미push 문서 커밋 있음 — push는 오너 승인 후). **최종 통합 방향 = BiblioMind.git 단일화**(오너 확정 — 방식은 슬라이스 9에서 설계).
+> **저장소 통합 완료(2026-08-28 오너 B안)**: 정본 = **`dume81/BiblioMind.git` 단일**(main `9b9455d` — 코드 루트 + docs/). 클론→install→setup→테스트 584→도구 15종 실증. 코드 세부 이력 보관 = GraphRAG_1st.git@`719f280`. **세션 루트 = 로컬 `bibliomind/` 폴더**(.mcp.json 자동 적용). 슬라이스 9 잔여 = README 17항.
 > **상시 규칙 8조 발효 중**(2026-08-22) — 정본은 워크스페이스 루트 `CLAUDE.md` 말미, 최우선 규칙은 `~/.claude/CLAUDE.md`(사용자 전역). 이 PROCESS.md는 **범위·게이트 충돌 시 8조보다 우선**한다.
 > 사전 자료 검토 완료: req_node_relation.txt(KG 추출 프롬프트), KG_Demon Slayer_Draft_01.json(예시 그래프), 리디안_지식그래프/GraphRAG_1st(동작하는 3D 시각화 웹앱 — Vite+React+react-force-graph-3d, 테스트·린트·Vercel 배포 구성 보유)

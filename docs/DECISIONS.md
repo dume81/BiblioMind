@@ -1438,3 +1438,12 @@ Q6는 정본 사전(결정론적 정규화)으로 엔진 호출 0회에 해결�
 - **관찰(정직 기재)**: 반려본이 들여온 유형 3종은 스키마 v8에 잔존(등재는 생성 시점·반려 무롤백 — 설계 동작). 미사용 유형 정리는 검수 재개 후 `schema_update` 몫.
 - **push**: 오너 승인 — 문서 커밋(이 항목 포함) `dume81/BiblioMind.git`. 코드 저장소 변경 없음.
 - **다음**: 슬라이스 9 착수 — README 17항 + **BiblioMind.git 통합 방식 설계**(비가역 — 3렌즈 반박 패널 → 8요소 상신).
+
+## 2026-08-28: 저장소 통합 실행 완료 — 오너 B안(스냅샷 이식) · 클론 실행 실증
+
+- **오너 회신**: *"B. 스냅샷 이식으로 착수 실행해."* (3렌즈 설계 패널 — Git 렌즈는 A(이력 병합)·리스크 렌즈는 B로 갈렸고, 집계자 종합 추천 B를 오너 채택. 미채택 A의 사유: 로그 교차 가독성·revert 복잡 — blame 보존은 보관 저장소가 대체)
+- **집행 [실측]**: ①보관 이력 완결 — `719f280`(하드코딩 제거·스핀오프 세션 작업분·테스트 584 확인) → GraphRAG_1st.git main push ②이식 커밋 `0a73b6d` — 코드 전체를 BiblioMind 루트로: **CLAUDE.md 1벌 병합**(1부 프로젝트 규칙+2부 코딩 규칙·AGENTS.md 동기화), 루트 도해.html 삭제(docs본과 바이트 동일), KICKOFF→docs/, tools/ 2종 하드코딩→`claude-project-dir.js` 동적 산출, README 최소 정정 ③lockfile 동기화 3줄 ④위생 — 이식 diff 비밀 무적중·`data/`·`.env` 추적 0 ⑤**push: BiblioMind.git main `6d117fd`→`9b9455d`**(fast-forward·177파일·+36,394행 — 기존 링크 무손상).
+- **검증 [실측]**: ⑴통합 트리 — setup 멱등·테스트 584 전 통과 ⑵**새 클론 스모크 전항 통과** — GitHub 클론(`9b9455d`)→install→setup(✓9)→**테스트 584**→tools/list **15종** ⑶로컬 자산 이관 — `data/`(Input 28·Generated 8·Reviewed 7·스키마 v8)·`.env`(바이트 동일 확인 — 내용 미열람) 복사 후 통합 폴더 기준 kg_status가 실환경 전체 정확 보고(151n·226r·검수 대기 8).
+- **확정 배치**: 정본 저장소 = **dume81/BiblioMind.git 단일**(클론→install→setup→실행 성립). 코드 세부 이력 정본 = GraphRAG_1st.git@`719f280`(보관 — 아카이브 예정). 로컬 개발 사본 = `bibliomind/` 폴더(**이후 세션은 이 폴더를 루트로** — .mcp.json 자동 적용). 구 `GraphRAG_1st/` 폴더 = 동결(참조용 — Codex 경로 교체 확인 전 삭제 금지).
+- **남은 오너 액션 2건**: ①(필수) Codex config.toml 서버 경로를 bibliomind로 교체 + 재시작 — 방치 시 구 폴더의 스테일 서버가 낡은 data를 계속 봄 ②(선택) GitHub에서 GraphRAG_1st 아카이브.
+- **슬라이스 9 잔여**: README §1.15 17항 전면 작성 → 클론 스모크 재확인.
