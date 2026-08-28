@@ -1,40 +1,160 @@
 # 비블리오마인드(BiblioMind) — 로컬 GraphRAG 지식그래프 도구
 
-자료(웹·PDF·이미지)를 지식그래프로 만들어 Neo4j에 쌓고, 챗(Claude Code·Codex) 질문의 근거 경로를 **3D로 하이라이트**하는 로컬 도구입니다. 3D 앱은 `react-force-graph-3d` 기반 18종 시각화 스타일·유형/속성 하이라이트·관계 필터를 제공합니다. (셋업 가이드 전체 판은 작성 중 — `docs/ROADMAP.md` 슬라이스 9)
+자료(웹 페이지·PDF·이미지)를 **지식그래프**로 만들어 Neo4j AuraDB에 쌓고, 챗(Claude Code·Codex)에서 질문하면 **답의 근거 경로가 크롬 3D 화면에 하이라이트**되는 로컬 도구입니다. 챗이 조종석이고 브라우저는 화면입니다 — 수집부터 검색까지 전 과정을 챗 명령(MCP 도구 15종)으로 조작합니다.
 
-## 빠른 시작
+```
+자료 수집 → KG 생성(AI) → 검수(사람) → Neo4j 반영 → 챗 질문 → 3D 하이라이트
+```
 
-요구 사항: [Node.js](https://nodejs.org) 22.12+
+기획·설계 문서 전체는 [`docs/`](docs/)에 있습니다(PRD·TECH-SPEC·ROADMAP·DECISIONS — 문서 기반 개발).
+
+## 요구 사항
+
+- [Node.js](https://nodejs.org) **22.12+**
+- 크롬(3D 시각화 화면)
+- 챗 클라이언트: **Claude Code**(CLI/데스크탑) 또는 **Codex 데스크탑/CLI** — **ChatGPT 웹·모바일 앱은 로컬 MCP 서버에 연결할 수 없어 지원되지 않습니다.**
+- 네트워크: **아웃바운드 TCP 7687** 허용 필요(Neo4j Aura 접속 — 회사망·방화벽 환경 주의)
+
+## 1회성 준비물 (계정·키 — 최초 1번만)
+
+| 준비물 | 용도 | 필수 여부 |
+|---|---|---|
+| Neo4j AuraDB Free 인스턴스 | 그래프 저장소 | 필수 (아래 1단계) |
+| 엔진 CLI 로그인 — `codex` 또는 `claude` | KG 생성(AI 추출) | 생성 기능에 필수 (구독 계정) |
+| MCP 등록 | 챗 ↔ 파이프라인 연결 | 필수 (아래 3단계) |
+| [Jina Reader](https://jina.ai/reader) 무료 키 | 웹 수집 속도·한도 개선 | 선택 (없어도 저율로 동작) |
+
+OCR 별도 설치는 필요 없습니다(브라우저 없이 도는 WASM 엔진 내장).
+
+## 1단계 — Neo4j AuraDB 무료 인스턴스
+
+1. [console.neo4j.io](https://console.neo4j.io) 가입 → **AuraDB Free** 인스턴스 생성.
+2. 생성 직후 표시되는 **자격증명 파일(.txt)을 반드시 다운로드**해 보관하세요 — 비밀번호는 이 시점에만 보여줍니다.
+3. 인스턴스가 실행 상태가 되면 접속 URI(`neo4j+s://…`)를 확인합니다.
+
+> **Aura Free 정책 (중요)**
+> - **3일간 쓰기가 없으면 자동 일시정지**됩니다 — 읽기(검색)만 하는 것은 활동으로 인정되지 않습니다. 일시정지되면 콘솔에서 `Resume` 한 번으로 복구됩니다(데이터 무손실).
+> - **일시정지 상태로 30일이 지나면 인스턴스가 영구 삭제**됩니다. 단, 이 도구의 **원본 진실은 로컬 `data/Reviewed/`**이므로 인스턴스를 새로 만들고 `kg_rebuild` 한 번이면 그래프가 완전 복구됩니다(아래 "백업과 복구").
+
+## 2단계 — 클론과 설치
 
 ```bash
 git clone https://github.com/dume81/BiblioMind.git
 cd BiblioMind
 npm install
 npm run setup
+```
+
+`npm run setup`은 몇 번을 실행해도 안전한 부트스트랩입니다 — 데이터 폴더·스키마 생성, `.env` 틀 복사, 훅 활성화까지 하고 남은 사용자 액션을 결과표로 알려줍니다.
+
+이어서 `.env` 파일을 열어 1단계 자격증명 .txt의 값 **4개 — 접속 URI·사용자명·비밀번호·데이터베이스명(`NEO4J_DATABASE`)** — 를 채우고, 다시 `npm run setup`으로 접속 확인이 ✓인지 보세요. (신형 콘솔은 데이터베이스명이 인스턴스별 생성명이라 이 값을 빠뜨리면 접속이 안 됩니다 — .txt에 있는 그대로 넣으세요.) 시각화 확인:
+
+```bash
 npm run dev:all
 ```
 
-브라우저에서 `http://localhost:5173` 접속 → **JSON 파일** 탭에 샘플 데이터 `examples/KG_Demon Slayer_Draft_01.json`을 드래그 앤드 드롭하면 바로 3D 그래프가 나타납니다.
+크롬에서 `http://localhost:5173` 접속 — 그래프 화면이 뜨면 성공입니다.
 
-## 데이터 넣는 3가지 방법
+## 3단계 — 챗 클라이언트에 MCP 등록
 
-1. **JSON 붙여넣기** — `{ "nodes": [...], "relationships": [...] }` 형식 텍스트
-2. **JSON 파일** — 파일 선택 또는 드래그 앤드 드롭 (샘플: `examples/KG_Demon Slayer_Draft_01.json`)
-3. **Neo4j** — 선택 사항. 서버 전용 환경 변수 설정 필요 ([visualization-3d/README.md](visualization-3d/README.md)의 "Neo4j 설정" 참고 — Neo4j AuraDB 클라우드 URI 지원)
+**Claude Code**: 이 저장소 폴더를 프로젝트 루트로 열면 끝입니다(`.mcp.json` 자동 적용). 다른 위치에서 열어야 한다면 `npm run setup`이 출력하는 절대경로 등록 명령을 사용하세요.
 
-## 저장소 구성
+**Codex(ChatGPT 데스크탑 앱의 Codex 또는 Codex CLI)**: `%USERPROFILE%\.codex\config.toml`(macOS/Linux는 `~/.codex/config.toml`)에 추가 후 재시작 — 정확한 경로는 `npm run setup` 결과표가 출력해 주며, 거기에 **`tool_timeout_sec = 900` 한 줄을 꼭 더하세요**:
 
+```toml
+[mcp_servers.bibliomind]
+command = "node"
+args = ['<클론 경로>\mcp-server\src\index.js']
+tool_timeout_sec = 900
 ```
-visualization-3d/              앱 본체 (Vite + React + react-force-graph-3d)
-shared/ pipeline/ mcp-server/  비블리오마인드(BiblioMind) 파이프라인 패키지 — 개발 중
-examples/KG_Demon Slayer_Draft_01.json  샘플 지식 그래프 데이터 (귀멸의 칼날)
+
+> **타임아웃 상향(필수)**: KG 생성은 파일당 수 분(실측 최대 약 4분, 예산 10분)이 걸립니다. **Codex의 도구 타임아웃 기본값은 60초**라 위처럼 `tool_timeout_sec = 900`을 꼭 넣어야 합니다. Claude Code는 기본값(도구 실행 제한 약 28시간·stdio 유휴 30분)으로 충분해 별도 설정이 필요 없습니다.
+
+> **도구 승인 권장**: 도구 15종 중 **`source_remove`(자료 완전 제거)만 매번 확인**으로 두고 나머지는 "항상 허용"을 권장합니다 — **원본 자료가 사라지는 도구는 그것 하나뿐**입니다(`schema_update`도 파괴적으로 표시되지만 스키마 정리용이라 항상 허용해도 자료는 안전합니다).
+
+등록 확인: 챗에서 `kg_status`를 부르거나 `npm run mcp:smoke`(도구 목록 15종 자가검증).
+
+## 4단계 — 첫 데모 (예시 데이터)
+
+```bash
+node pipeline/bin/inject-example.js
 ```
 
-앱의 상세 문서 — 데이터 스키마, 시각화 스타일 18종, Neo4j 보안 경계, Vercel 배포 방법 — 는 [visualization-3d/README.md](visualization-3d/README.md)에 있습니다.
+예시 그래프(귀멸의 칼날, 29노드·55관계)가 주입됩니다. `npm run dev:all`을 켜 두고 챗에서:
+
+> "귀살대는 어떤 조직이야?"
+
+챗이 `kg_search`로 검색 결과 주변을 은은하게 켜고, 답변 후 인용을 제출하면(`kg_cite` — 챗이 자동 수행) **직접 근거가 밝게+파티클로 강조**됩니다 — 3상태 하이라이트(직접 근거 / 주변 / 무관 = 흐림). 데모가 끝나면 `kg_rebuild`로 본인 자료 그래프로 되돌립니다.
+
+## 사용 흐름 — 챗 명령 가이드
+
+전부 챗에 말로 시키면 됩니다. 도구가 매 결과에 "다음 행동"을 안내합니다.
+
+### 1) 수집
+
+- **웹**: "collect_web으로 https://example.com 수집해줘" — 같은 도메인 안을 최대 10페이지(조절 가능) 수집합니다. robots.txt를 지키고, **같은 명령 재실행 = 기수집 스킵·이어서 수집**입니다.
+- **문서**: "collect_docs로 C:\자료\보고서.pdf 추출해줘" — PDF·이미지(폴더째도 가능)를 **로컬에서만** 텍스트로 추출합니다. 본문이 이 기계를 벗어나지 않습니다. 이미지 OCR 언어팩(한+영)은 최초 1회만 온라인 다운로드 후 로컬 캐시됩니다.
+- **한계(베스트에포트)**: 텍스트 레이어 없는 스캔본·저화질 이미지는 추출 품질이 낮을 수 있습니다 — 결과에 품질 등급(ok/low/empty)이 표시되고, 빈 추출도 파일은 만들어져 재투입 판단이 가능합니다.
+
+### 2) KG 생성
+
+- "kg_generate로 대기 자료 2건 생성해줘" — 기본 1건씩 처리하고 "남은 대기 n건 — 다시 실행하면 이어서"를 안내합니다. **대량은 소분할이 안전합니다**: 2건 묶음 호출 실측 약 4분 36초였고, 최악(파일당 10분)까지 보장되는 묶음은 1건입니다.
+- **엔진 전환(failover)**: 구독 한도 소진 시 다른 엔진(codex↔claude)으로 자동 전환하고, 양쪽 다 소진이면 "회복 후 같은 명령 재실행"으로 이어집니다. 파일별 실제 생성 엔진은 결과 요약과 산출물 `meta.engine`에서 확인됩니다.
+- 생성 시 본문이 엔진(OpenAI/Anthropic) 클라우드로 전송됩니다 — 아래 "데이터와 프라이버시" 참조.
+
+### 3) 검수 (사람의 게이트)
+
+- "review_list 보여줘" → "N번 화면에 보여줘"(3D 표시) → **"승인"** 또는 **"반려: 사유"**.
+- **반려 판단 기준**: 하이라이트된 내용이 **원문과 다를 때만** 반려하세요. 검색이 경로를 못 찾는 것은 반려 사유가 아닙니다(검색 품질 이슈로 따로 다룸). 반려하면 자동 재생성 1회, 누적 3회면 보류됩니다.
+
+### 4) 그래프 반영
+
+- 검수를 마치면 "kg_rebuild 실행해" — 승인분 전체가 Neo4j에 반영됩니다(전체 재빌드·멱등, 실측 수 초~수십 초).
+- 챗 두 곳(Claude Code·Codex)을 같이 쓰다 "다른 재빌드가 진행 중입니다 … 끝난 뒤 다시 실행하세요" 안내가 나오면 **정상 동작**입니다 — 두 챗이 같은 그래프를 동시에 다시 짓지 않게 막는 잠금입니다.
+
+### 5) 질문
+
+- 그냥 물어보세요 — 챗이 `kg_search`로 그래프를 검색해 답하고 화면에 근거를 켭니다. 그래프에 없는 내용이면 "그래프에 없습니다"가 정답입니다(공백의 가시화가 품질 루프의 입력).
+- 자료 제거는 "source_remove로 ○○ 제거해줘"(재수집 허용/영구 차단 택일), 스키마 확인·다듬기는 `schema_get`/`schema_update`.
+
+## 데이터와 프라이버시
+
+| 데이터 | 어디로 가는가 |
+|---|---|
+| 문서 추출(PDF·이미지) | **로컬 전용** — 외부 전송 없음 (OCR 언어팩 최초 1회 다운로드만 온라인) |
+| KG 생성 시 자료 본문 | 선택한 엔진의 클라우드(OpenAI 또는 Anthropic)로 전송 |
+| 주입된 그래프 데이터 | **Neo4j Aura 클라우드에 저장** |
+
+엔진 쪽 데이터 취급(학습 사용 여부 등)은 계정·플랜별로 다르므로 공식 정책([OpenAI](https://openai.com/policies) · [Anthropic](https://www.anthropic.com/legal/privacy))에서 본인 계정 기준으로 확인하세요 — 본 문서 기준 확인일: 2026-08-28.
+
+## 백업과 복구
+
+**백업할 것(로컬)**: `data/Input/` · `data/Reviewed/` · `data/schema.json` · `data/ledger.json` — 이 넷이 원본 진실입니다. Neo4j 쪽은 언제든 재생 가능한 사본입니다.
+
+**Aura 인스턴스가 삭제됐을 때(30일 경과 등) 완전 복구 절차**:
+
+1. 콘솔에서 인스턴스 **새로 생성** → **새 자격증명 .txt 다운로드** (이 단계를 건너뛰면 접속 불가)
+2. `.env`의 Neo4j 값들을 새 자격증명으로 **전부 갱신**
+3. `npm run setup`으로 접속 ✓ 확인
+4. 챗에서 `kg_rebuild` — 승인분 전체가 재주입되어 그래프가 그대로 돌아옵니다
 
 ## 검증
 
 ```bash
-npm test       # 전 워크스페이스 Vitest 단위 테스트 (저장소 루트에서)
+npm test         # 전 워크스페이스 584케이스
 npm run lint
+npm run mcp:smoke  # MCP 도구 15종 목록 자가검증
 ```
+
+## 저장소 구성
+
+```
+shared/ pipeline/ mcp-server/   파이프라인 패키지
+visualization-3d/               3D 시각화 앱 (Vite + React) — 상세: visualization-3d/README.md
+                                (위 4개가 npm workspaces)
+docs/                           기획·설계 정본 (PRD·TECH-SPEC·ROADMAP·DECISIONS)
+tools/ scripts/                 판정·유지보수 도구
+examples/                       예시 지식그래프 데이터
+```
+
+코드의 통합 이전 세부 이력은 보관 저장소 [dume81/GraphRAG_1st](https://github.com/dume81/GraphRAG_1st)에 있습니다(2026-08-28 스냅샷 통합 — `docs/DECISIONS.md`).
